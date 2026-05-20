@@ -21,18 +21,23 @@
                     <span></span>
                 </button>
 
-                <a class="logo" href="/en/">
-                    Massage Studio Zitrus
-                    <span class="sr-only"> — Home</span>
-                </a>
-
-                <ul id="nav-list" class="nav-list">
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#team">Team</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+                <div id="nav-list" class="nav-list">
+                    <ul class="nav-group nav-left">
+                        <li><a href="#services">Prices</a></li>
+                        <li><a href="#team">Team</a></li>
+                    </ul>
+                    
+                    <ul class="nav-group nav-right">
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
             </nav>
+
+            <a href="/en/">
+                <img src="../img/logo.svg" alt="Zitrus Massage Studio Logo" class="logo-img" />
+                <span class="sr-only">Zitrus Massage Studio — Home</span>
+            </a>
 
             <div class="lang">
                 <a class="lang-link" id="lang-switch" href="/de/">DE</a>
@@ -118,6 +123,16 @@
             </div>
         </section>
 
+        <section id="gallery" class="section gallery">
+            <div class="container">
+                <h2>Gallery</h2>
+                <p class="muted">Take a virtual tour of our peaceful oasis and treatment spaces.</p>
+                <div style="padding: 3rem; background: var(--card); border-radius: var(--radius); text-align: center; border: 2px dashed rgba(0,0,0,0.05);">
+                    <p class="muted" style="margin: 0;">[ Gallery Assets Placeholder ]</p>
+                </div>
+            </div>
+        </section>
+
         <section id="contact" class="section contact">
             <div class="container">
                 <h2>Contact & Studio</h2>
@@ -146,5 +161,4 @@
     </footer>
 
 </body>
-
 </html>
