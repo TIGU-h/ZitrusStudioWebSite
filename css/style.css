@@ -1,0 +1,409 @@
+:root {
+    --bg: #f5efe7;
+    --card: #fbf9f6;
+    --text: #222222;
+    --muted: #6b6b64;
+    --accent: #a3b49a;
+    --accent-2: #c89b83;
+    --max-width: 1100px;
+    --radius: 12px;
+    --gap: 1rem;
+    --container-padding: 1rem;
+}
+
+html {
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+    font-size: clamp(1.4rem, 4vw, 2.4rem);
+    margin: 0 0 .5rem;
+}
+
+h2 {
+    font-size: clamp(1.1rem, 3.2vw, 1.6rem);
+}
+
+h3 {
+    font-size: 1rem;
+    margin: 0 0 .5rem;
+}
+
+p {
+    margin: 0 0 1rem;
+}
+
+.container {
+    max-width: var(--max-width);
+    padding: 0 var(--container-padding);
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   Header & Buttons (Кнопки по краях, Логотип строго по центру)
+   ========================================================================== */
+
+   
+.site-header {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(to bottom, rgba(219, 215, 215, 0.85), rgba(255, 255, 255, 0.6));
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(34, 34, 34, 0.04);
+    z-index: 100;
+    min-height: 70px;
+    transition: min-height 0.3s ease;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0.75rem 0;
+    transition: padding 0.3s ease;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+/* ІДЕАЛЬНЕ ЦЕНТРУВАННЯ ЛОГОТИПА З АВТО-СКЕЙЛІНГОМ */
+.logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* ОЦЕЙ РЯДОК: зміщує логотип назад рівно на половину його власної ширини та висоти */
+    transform: translate(-50%); 
+    
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+    z-index: 2;
+    font-size: clamp(1.1rem, 4.5vw, 2.1rem);
+    
+    /* Додатково центруємо текст всередині самої плашки логотипа */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    padding: 0.3em 1.2em;
+    transition: font-size 0.3s ease;
+}
+
+/* КНОПКА НАВІГАЦІЇ ЛІВОРУЧ */
+.nav-toggle {
+    position: fixed;
+    left: 10px;
+    top: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fff;
+    border: 2px solid var(--accent-2);
+    padding: 0.55rem;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 46px;
+    height: 46px;
+    z-index: 102;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    transition: left 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease, padding 0.3s ease;
+}
+
+.nav-toggle span {
+    display: block;
+    height: 3px;
+    background-color: var(--text);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+}
+
+/* Анімація хрестика на мобілках (46px кнопка) */
+.nav-toggle.active span:nth-child(1) { transform: translateY(11px) rotate(45deg); background-color: #000000; }
+.nav-toggle.active span:nth-child(2) { opacity: 0; transform: translateX(-11px); }
+.nav-toggle.active span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); background-color: #000000; }
+
+/* КНОПКА МОВ ПРАВОРУЧ */
+.lang {
+    position: fixed;
+    right: 10px;
+    top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 2px solid var(--accent-2);
+    border-radius: 12px;
+    width: 46px; 
+    height: 46px;
+    z-index: 102;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    transition: right 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease, padding 0.3s ease;
+    flex-shrink: 0; 
+}
+
+.lang-link {
+    /* Ховаємо активну мову на мобілці, бо ми на ній вже сидимо */
+    display: none; 
+    width: 100%;
+    height: 100%;
+    
+    /* Вмикаємо залізобетонний флекс для центрування літер по вертикалі й горизонталі */
+    align-items: center;
+    justify-content: center;
+    
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 700;
+    font-size: 0.85rem; /* Оптимальний розмір під твою меншу кнопку */
+    text-align: center;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+}
+
+/* На мобілці показуємо ТІЛЬКИ ту мову, яка НЕ є активною, щоб на неї можна було клікнути і перемикнути */
+.lang-link:not(.active) {
+    display: flex;
+    background: transparent;
+    color: var(--text);
+}
+
+/* ==========================================================================
+   Адаптивність під великі екрани (Планшети та ПК від 700px)
+   ========================================================================== */
+@media (min-width: 700px) {
+    .site-header {
+        min-height: 120px;
+    }
+
+    .header-inner {
+        padding: 2.2rem 0;
+    }
+
+    .logo {
+        font-size: 2.1rem;
+    }
+
+    /* Велика кнопка навігації ліворуч на ПК */
+    .nav-toggle {
+        left: 20px;
+        top: 30px;
+        width: 60px;
+        height: 60px;
+        padding: 1rem;
+    }
+
+    .nav-toggle span {
+        height: 4px;
+    }
+
+/* ІДЕАЛЬНИЙ ХРЕСТИК ДЛЯ ВЕЛИКОЇ КНОПКИ ЗІ СКЕЙЛОМ 1.2 */
+    .nav-toggle.active span:nth-child(1) { 
+        transform: translateY(10px) rotate(45deg) scaleX(1.2); 
+    }
+    .nav-toggle.active span:nth-child(2) { 
+        opacity: 0; 
+        transform: translateX(-10px); /* Для другого просто ховаємо */
+    }
+    .nav-toggle.active span:nth-child(3) { 
+        transform: translateY(-10px) rotate(-45deg) scaleX(1.2); 
+    }
+
+    /* Велика кнопка мов праворуч на ПК */
+    .lang {
+        right: 20px;
+        top: 30px;
+        width: auto;
+        height: 60px;
+        padding: 4px;
+        gap: 4px;
+    }
+
+    .lang-link {
+        display: flex;
+        font-size: 1.2rem;
+        padding: 0 1.1rem;
+        height: 100%;
+        border-radius: 8px;
+    }
+
+    .lang-link.active {
+        background: var(--accent);
+        color: #fff;
+    }
+}
+
+@media (min-width: 1100px) {
+    .logo {
+        font-size: 2.5rem;
+    }
+    .lang-link {
+        font-size: 1.3rem;
+    }
+}
+
+.sr-only {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
+
+/* Меню (виїзне для всіх екранів) */
+.nav-list {
+    list-style: none;
+    margin: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background: #FBF0D9;
+    backdrop-filter: blur(8px);
+    padding: 6.5rem 1rem 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+    
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 90;
+    
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, visibility 0.4s;
+}
+
+.nav-list a {
+    color: #000000;
+    font-size: 1.2rem;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.3s ease 0.15s, transform 0.3s ease 0.15s;
+    text-decoration: none;
+}
+
+.nav-list.show {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.nav-list.show a {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Контентні секції */
+.hero {
+    padding: 3.5rem 0;
+    background: linear-gradient(180deg, rgba(163, 180, 154, 0.06), transparent);
+}
+
+.hero .lead {
+    font-size: clamp(.95rem, 2.8vw, 1.15rem);
+    color: var(--muted);
+    max-width: 60ch;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--accent-2);
+    color: #fff;
+    padding: .65rem 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.section { padding: 2rem 0; }
+.muted { color: var(--muted); }
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+}
+
+.pricing-grid li {
+    background: var(--card);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(34, 34, 34, 0.04);
+}
+
+.pricing-grid h3 { margin: 0; }
+.meta { font-weight: 600; color: var(--accent-2); }
+
+.team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.card {
+    background: var(--card);
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.portrait { flex: 0 0 90px; }
+.card-body { flex: 1; }
+.specialty { color: var(--accent); font-weight: 600; margin: .25rem 0; }
+
+.contact address { font-style: normal; }
+.site-footer {
+    padding: 1.25rem 0;
+    border-top: 1px solid rgba(34, 34, 34, 0.04);
+    background: transparent;
+}
+
+.footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.footer-links a { text-decoration: none; color: var(--muted); }
+a:focus { outline: 3px solid rgba(163, 180, 154, 0.25); outline-offset: 2px; }
+
+@media(min-width: 700px) {
+    .nav-list {
+        width: 350px;
+        padding-left: 2rem;
+    }
+    .pricing-grid { grid-template-columns: repeat(4, 1fr); }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .footer-inner { flex-direction: row; justify-content: space-between; align-items: center; }
+}
