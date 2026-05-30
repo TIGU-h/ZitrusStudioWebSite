@@ -1,3 +1,15 @@
+// Hero Background Carousel Logic
+document.addEventListener('DOMContentLoaded', function () {
+    const bgSlides = document.querySelectorAll('#hero-carousel-bg .carousel-bg-slide');
+    let current = 0;
+    if (bgSlides.length > 1) {
+        setInterval(() => {
+            bgSlides[current].classList.remove('active');
+            current = (current + 1) % bgSlides.length;
+            bgSlides[current].classList.add('active');
+        }, 4000);
+    }
+});
 // Main JS for global interactions
 document.addEventListener('DOMContentLoaded', function () {
 

@@ -1,3 +1,31 @@
+/* --- Welcome Box Styling --- */
+.welcome-box {
+    background: rgba(251, 249, 246, 0.95);
+    border: 1.5px solid #e8e4de;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(163, 180, 154, 0.07);
+    padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+    margin: 0 auto 1.5rem auto;
+    max-width: 600px;
+    text-align: center;
+    transition: box-shadow 0.2s;
+    position: relative;
+}
+.welcome-box:hover {
+    box-shadow: 0 8px 32px rgba(163, 180, 154, 0.13);
+}
+.welcome-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--accent-2, #c89b83);
+    margin-bottom: 0.7rem;
+    letter-spacing: 0.01em;
+}
+.welcome-text {
+    font-size: 1.35rem;
+    color: var(--text);
+    line-height: 1.7;
+}
 /* ==========================================================================
    Base Settings & Variables
    ========================================================================== */
@@ -61,12 +89,9 @@ p {
 /* ==========================================================================
    Header & Core Navigation
    ========================================================================== */
-/* HEADER ANIMATION SETTINGS */
-/* --header-transition-time: controls the transition duration (in seconds) */
-/* --header-hide-distance: controls how far the header moves up when hidden (in px) */
 :root {
-    --header-transition-time: 0.4s; /* <--- transition time */
-    --header-hide-distance: 200%;  /* <--- hide distance */
+    --header-transition-time: 0.4s;
+    --header-hide-distance: 200%;
 }
 
 .site-header {
@@ -203,8 +228,8 @@ p {
     position: fixed;
     left: 0;
     top: 0;
-    width: 50%; /* Було 280px — тепер адаптивні 30% екрана */
-    min-width: 250px; /* Страховка, щоб на зовсім дрібних телефонах меню не стислося в тонку смужку */
+    width: 50%;
+    min-width: 250px;
     height: 100vh;
     background: #FBF0D9;
     backdrop-filter: blur(8px);
@@ -319,9 +344,6 @@ p {
     }
 }
 
-
-
-
 /* ==========================================================================
    Desktop Mode (From 992px)
    ========================================================================== */
@@ -331,7 +353,7 @@ p {
     }
 
     .header-inner {
-        padding-bottom: 0px; /* Вбиваємо гігантські планшетні відступи, які розпирали шапку */
+        padding-bottom: 0px;
     }
 
     .lang {
@@ -365,16 +387,13 @@ p {
         padding-top: 45px;
     }
 
-    /* Dynamic groups that scale with width */
     .nav-group {
         display: flex;
         flex-direction: row;
         width: 45%;
-        /* Gap scales aggressively with screen width */
         gap: clamp(0.5rem, 3.5vw, 4.5rem); 
     }
 
-    /* Responsive corridor for logo */
     .nav-left {
         justify-content: flex-end;
         padding-right: clamp(100px, 13vw, 150px);
@@ -387,34 +406,23 @@ p {
         padding-right: 0;
     }
 
-    /* Highly responsive button scaling */
     .nav-list a {
         opacity: 1;
         transform: none;
-        /* Font size dynamically scales from 0.95rem to 1.22rem */
         font-size: clamp(0.95rem, 1.2vw, 1.22rem);
         color: var(--text);
         letter-spacing: 0.07em;
         text-transform: uppercase;
         white-space: nowrap;
-        
-        /* Padding scales with screen width to prevent screen overflow */
         padding: clamp(0.6rem, 1vw, 1rem) clamp(1.2rem, 2vw, 2.2rem);
         border-radius: 18px;
         background: rgba(255, 255, 255, 0.85);
         box-shadow: 0 4px 18px rgba(163, 180, 154, 0.10);
         border: 2.5px solid transparent;
-        /* Dynamic margin handles small desktop screens perfectly */
         margin: 0 clamp(0.2rem, 0.6vw, 0.5em);
-        transition: 
-            color 0.22s cubic-bezier(.4,0,.2,1),
-            background 0.22s cubic-bezier(.4,0,.2,1),
-            border-color 0.22s cubic-bezier(.4,0,.2,1),
-            box-shadow 0.22s cubic-bezier(.4,0,.2,1);
+        transition: color 0.22s cubic-bezier(.4,0,.2,1), background 0.22s cubic-bezier(.4,0,.2,1), border-color 0.22s cubic-bezier(.4,0,.2,1), box-shadow 0.22s cubic-bezier(.4,0,.2,1);
         position: relative;
         outline: none;
-        
-        /* Adaptive base limits */
         min-width: clamp(100px, 11vw, 130px);
         min-height: clamp(46px, 5vw, 56px);
         display: flex;
@@ -441,6 +449,123 @@ p {
 }
 
 /* ==========================================================================
+   Carousel Styles & Hero Section
+   ========================================================================== */
+.hero {
+    position: relative;
+    padding: 0;
+    width: 100%;
+    background: #e8e4de;
+    overflow: hidden;
+    
+    /* 1. Висота за замовчуванням для ТЕЛЕФОНІВ (Мобільні пристрої) */
+    height: 40vh; 
+    min-height: 300px;
+}
+
+/* 2. Висота для ПЛАНШЕТІВ (Екрани від 768px до 991px) */
+@media (min-width: 768px) {
+    .hero {
+        height: 50vh;
+        min-height: 440px;
+    }
+}
+
+/* 3. Висота для КОМП'ЮТЕРІВ (Екрани від 992px і вище) */
+@media (min-width: 992px) {
+    .hero {
+        height: 55vh;
+        min-height: 400px;
+        max-height: 700px;
+    }
+}
+
+/* Стилізація фонових картинок */
+.carousel-bg-slide {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Базовий масштаб, з якого починається рух */
+    transform: scale(1);
+    /* Плавне повернення назад, коли слайд стає неактивним */
+    transition: transform 0.5s ease-out; 
+}
+
+/* Ефект плавного збільшення на 15% тільки для АКТИВНОГО слайда Bootstrap */
+.carousel-item.active .carousel-bg-slide {
+    animation: kenBurnsZoom 5.5s linear forwards;
+}
+
+/* Сама анімація збільшення картини в часі */
+@keyframes kenBurnsZoom {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.15); /* Збільшення рівно на 15% перед перемиканням */
+    }
+}
+
+/* Блок з напівпрозорим фоном поверх картинок */
+.hero-overlay-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, rgba(34,34,34,0.45) 0%, rgba(34,34,34,0.3) 60%, rgba(34,34,34,0.45) 100%);
+}
+
+.hero-content {
+    color: #fff;
+    text-align: center;
+    padding: 2rem var(--container-padding);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero-content h1 {
+    color: #fff;
+    font-size: clamp(1.6rem, 4.5vw, 3rem);
+    text-shadow: 0 3px 14px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+}
+
+.hero-content .lead {
+    color: #f8f9fa;
+    font-size: clamp(0.95rem, 2.2vw, 1.25rem);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    max-width: 60ch;
+    margin: 0 auto 1.5rem;
+}
+
+/* Ексклюзивна кнопка для Hero секції */
+.btn-hero {
+    display: inline-block;
+    background: var(--accent-2);
+    color: #fff;
+    padding: 0.85rem 1.75rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.btn-hero:hover {
+    background: #b5866e;
+    color: #fff;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* ==========================================================================
    Content Sections & Grids
    ========================================================================== */
 .sr-only {
@@ -450,17 +575,6 @@ p {
     overflow: hidden;
     clip: rect(1px, 1px, 1px, 1px);
     white-space: nowrap;
-}
-
-.hero {
-    padding: 5rem 0;
-    background: linear-gradient(180deg, rgba(163, 180, 154, 0.06), transparent);
-}
-
-.hero .lead {
-    font-size: clamp(.95rem, 2.8vw, 1.15rem);
-    color: var(--muted);
-    max-width: 60ch;
 }
 
 .btn {
