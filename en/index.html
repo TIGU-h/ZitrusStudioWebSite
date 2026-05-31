@@ -83,9 +83,9 @@
                     <p class="lead">Full body & aroma oil massages in a cozy atmosphere. Pure relaxation.</p>
                 </div>
             </div>
-            
+
         </section>
-        
+
         <section id="about" class="section about" style="padding-bottom: 1.5rem;">
             <div class="container">
                 <div class="welcome-box compact-welcome">
@@ -109,10 +109,11 @@
                             <img src="/assets/Masters/Oksana.png" alt="Oksana, massage master at Zitrus Massage Studio">
                         </figure>
                         <div class="card-body">
-                               <h3>Oksana</h3>
-                               <p class="specialty">Wellness massages, full body & aroma oil massages, spa rituals</p>
-                               <p class="bio">Oksana brings passion and experience to ensure your relaxation and wellbeing.</p>
-                               <p><a class="master-link" href="/en/oksana.html">View Profile</a></p>
+                            <h3>Oksana</h3>
+                            <p class="specialty">Wellness massages, full body & aroma oil massages, spa rituals</p>
+                            <p class="bio">Oksana brings passion and experience to ensure your relaxation and wellbeing.
+                            </p>
+                            <p><a class="master-link" href="/en/oksana.html">View Profile</a></p>
                         </div>
                     </article>
                     <article class="card master">
@@ -120,10 +121,10 @@
                             <img src="/assets/Masters/Maryna.png" alt="Maryna, massage master at Zitrus Massage Studio">
                         </figure>
                         <div class="card-body">
-                               <h3>Maryna</h3>
-                               <p class="specialty">Wellness massages, full body & aroma oil massages, spa rituals</p>
-                               <p class="bio">Maryna brings calm, expertise, and warmth to every treatment.</p>
-                               <p><a class="master-link" href="/en/maryna.html">View Profile</a></p>
+                            <h3>Maryna</h3>
+                            <p class="specialty">Wellness massages, full body & aroma oil massages, spa rituals</p>
+                            <p class="bio">Maryna brings calm, expertise, and warmth to every treatment.</p>
+                            <p><a class="master-link" href="/en/maryna.html">View Profile</a></p>
                         </div>
                     </article>
                 </div>
@@ -131,22 +132,41 @@
         </section>
 
         <section id="services" class="section services">
-    <div class="container">
-        <h2>Services & Pricing</h2>
-        
-        <div class="services-grid" data-services-source="/assets/MassageList.json">
-            <p class="muted services-loading">Loading services...</p>
-        </div>
-    </div>
-</section>
+            <div class="container">
+                <h2>Services & Pricing</h2>
+
+                <div class="services-grid" data-services-source="/assets/MassageList.json">
+                    <p class="muted services-loading">Loading services...</p>
+                </div>
+            </div>
+        </section>
 
         <section id="gallery" class="section gallery">
             <div class="container">
                 <h2>Gallery</h2>
                 <p class="muted">Take a virtual tour of our peaceful oasis and treatment spaces.</p>
-                <div
-                    style="padding: 3rem; background: var(--card); border-radius: var(--radius); text-align: center; border: 2px dashed rgba(0,0,0,0.05);">
-                    <p class="muted" style="margin: 0;">[ Gallery Assets Placeholder ]</p>
+                <div id="galleryCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="/assets/carousel/slide1.png" alt="Gallery Photo 1" class="d-block w-100">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/assets/carousel/slide2.jpg" alt="Gallery Photo 2" class="d-block w-100">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/assets/carousel/slide3.jpg" alt="Gallery Photo 3" class="d-block w-100">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
         </section>

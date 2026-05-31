@@ -122,7 +122,24 @@ function loadServiceCards() {
             if (!response.ok) throw new Error('Could not load services');
             return response.json();
         })
-        .then(renderServiceCards)
+        .then(function(services) {
+            renderServiceCards(services); // Малюємо картки з цінами
+
+            // --- ПОЧАТОК КОСТИЛЯ (Фікс скролу) ---
+            if (window.location.hash) {
+                var targetElement = document.querySelector(window.location.hash);
+                if (targetElement) {
+                    setTimeout(function() {
+                        var header = document.querySelector('.site-header');
+                        var headerHeight = header ? header.getBoundingClientRect().height : 72;
+                        var rect = targetElement.getBoundingClientRect();
+                        var offset = window.scrollY + rect.top - headerHeight - 12;
+                        window.scrollTo({ top: offset, behavior: 'smooth' });
+                    }, 150); // Даємо браузеру 150мс на перерахунок висоти після вставки HTML
+                }
+            }
+            // --- КІНЕЦЬ КОСТИЛЯ ---
+        })
         .catch(function () {
             grid.innerHTML = '<p class="muted services-loading">Services could not be loaded.</p>';
         });
@@ -317,3 +334,4 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
