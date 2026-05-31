@@ -30,7 +30,7 @@
    Base Settings & Variables
    ========================================================================== */
 :root {
-    --bg: #f5efe7;
+    --bg: #fce4c3;
     --card: #fbf9f6;
     --text: #222222;
     --muted: #6b6b64;
@@ -55,13 +55,18 @@ html {
 }
 
 body {
+    /* Повертаємо базові стилі, які випадково затерлися */
     margin: 0;
-    background: var(--bg);
     color: var(--text);
     line-height: 1.45;
     -webkit-font-smoothing: antialiased;
-}
 
+    /* Об'єднуємо налаштування безшовного SVG-фону */
+    background-image: url('/assets/BG.svg');
+    background-position: top left;
+    background-repeat: repeat-y; /* Залишаємо цей варіант, він чистіший і коротший */
+    background-size: 100% auto;
+}
 h1 {
     font-size: clamp(1.4rem, 4vw, 2.4rem);
     margin: 0 0 .5rem;
@@ -97,9 +102,8 @@ p {
 .site-header {
     position: sticky;
     top: 0;
-    background: linear-gradient(to bottom, rgba(219, 215, 215, 0.85), rgba(255, 255, 255, 0.6));
+    background: linear-gradient(to bottom, rgb(255, 235, 138), #c89b83);
     backdrop-filter: blur(6px);
-    border-bottom: 1px solid rgba(34, 34, 34, 0.04);
     z-index: 100;
     min-height: 70px;
     transition: min-height var(--header-transition-time) cubic-bezier(0.4,0,0.2,1), background var(--header-transition-time) cubic-bezier(0.4,0,0.2,1), transform var(--header-transition-time) cubic-bezier(0.4,0,0.2,1);
@@ -637,12 +641,150 @@ p {
 }
 
 .portrait {
-    flex: 0 0 90px;
+    flex: 0 0 140px;
     margin: 0;
+}
+
+.portrait img {
+    display: block;
+    width: 140px;
+    height: 140px;
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: 0 6px 18px rgba(34, 34, 34, 0.08);
+}
+
+.master {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.master .portrait {
+    flex: none;
+    width: 100%;
+}
+
+.master .portrait img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+}
+
+.profile-portrait {
+    flex: none;
+    margin: 0;
+}
+
+.profile-portrait img {
+    width: min(240px, 70vw);
+    height: min(240px, 70vw);
+}
+
+.master-profile {
+    padding-top: 4rem;
+}
+
+.master-profile-card {
+    display: grid;
+    gap: 1.5rem;
+    align-items: center;
+    background: rgba(251, 249, 246, 0.96);
+    border: 1px solid #e8e4de;
+    border-radius: 16px;
+    box-shadow: 0 10px 32px rgba(34, 34, 34, 0.07);
+    padding: clamp(1rem, 4vw, 2rem);
+}
+
+.master-profile-card .profile-portrait img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+}
+
+.profile-content {
+    max-width: 620px;
+}
+
+.eyebrow {
+    color: var(--accent-2);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+}
+
+.profile-content .bio {
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.profile-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 1.5rem;
+}
+
+.profile-highlights li {
+    background: rgba(163, 180, 154, 0.16);
+    border: 1px solid rgba(163, 180, 154, 0.35);
+    border-radius: 999px;
+    color: var(--text);
+    font-size: 0.92rem;
+    font-weight: 600;
+    padding: 0.45rem 0.8rem;
+}
+
+.profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.text-link {
+    color: var(--accent-2);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.text-link:hover,
+.text-link:focus-visible {
+    color: #b5866e;
+    text-decoration: underline;
 }
 
 .card-body {
     flex: 1;
+}
+
+.card-body p:last-child {
+    margin-bottom: 0;
+}
+
+.master-link {
+    display: inline-block;
+    background: var(--accent-2);
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 700;
+    margin-top: 0.35rem;
+    padding: 0.6rem 0.9rem;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.master-link:hover,
+.master-link:focus-visible {
+    background: #b5866e;
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-1px);
 }
 
 .specialty {
@@ -658,6 +800,10 @@ p {
 
     .team-grid {
         grid-template-columns: 1fr 1fr;
+    }
+
+    .master-profile-card {
+        grid-template-columns: minmax(260px, 42%) 1fr;
     }
 }
 
