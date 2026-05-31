@@ -1,0 +1,206 @@
+[
+  {
+    "id": "ganzkoerper",
+    "img": "/assets/carousel/slide1.png",
+    "de": { 
+      "title": "Ganzkörperlichemassage",
+      "desc": "Klassische Tiefenentspannung für den ganzen Körper. Löst Blockaden, baut Stress ab und bringt Ihre Energie wieder voll in Fluss."
+    },
+    "en": { 
+      "title": "Full Body Massage",
+      "desc": "Classic deep relaxation from head to toe. Melts away muscle tension, reduces daily stress, and recharges your inner energy."
+    },
+    "durations": [
+      { "time": "30 min", "price": "29€", "oldPrice": "35€" },
+      { "time": "60 min", "price": "55€", "oldPrice": "65€" },
+      { "time": "90 min", "price": "79€", "oldPrice": "95€" }
+    ]
+  },
+  {
+    "id": "relax",
+    "img": "/assets/carousel/slide2.jpg",
+    "de": { 
+      "title": "Relax massage",
+      "desc": "Eine besonders sanfte Massage mit beruhigenden Griffen. Ideal, um das Nervensystem runterzufahren und den Kopf komplett freizubekommen."
+    },
+    "en": { 
+      "title": "Relax Massage",
+      "desc": "An extra gentle massage focused on smooth, calming strokes. Perfect for slowing down the nervous system and clearing a busy mind."
+    },
+    "durations": [
+      { "time": "30 min", "price": "29€", "oldPrice": "35€" },
+      { "time": "60 min", "price": "55€", "oldPrice": "65€" },
+      { "time": "90 min", "price": "79€", "oldPrice": "95€" }
+    ]
+  },
+  {
+    "id": "hot-stone",
+    "img": "/assets/carousel/slide3.jpg",
+    "de": { 
+      "title": "Hot Stone Therapie",
+      "desc": "Die pure Kraft warmer Basaltsteine. Die tiefenwirksame Wärme dringt bis in die tiefsten Muskelschichten und löst selbst hartnäckige Verspannungen."
+    },
+    "en": { 
+      "title": "Hot Stone Therapy",
+      "desc": "The pure power of smooth, heated basalt stones. Deep thermal warmth penetrates deep into muscles to melt away stubborn tension."
+    },
+    "durations": [
+      { "time": "30 min", "price": "29€", "oldPrice": "35€" },
+      { "time": "60 min", "price": "55€", "oldPrice": "65€" },
+      { "time": "90 min", "price": "79€", "oldPrice": "95€" }
+    ]
+  },
+  {
+    "id": "anti-cellulite",
+    "img": "/assets/services/anti-cellulite.jpg",
+    "de": { 
+      "title": "Anti-Cellulite Hand+Vakuum",
+      "desc": "Effektive Kombination aus manueller Bindegewebsmassage und Vakuum-Technik. Strafft die Haut, kurbelt den Stoffwechsel an und formt die Silhouette."
+    },
+    "en": { 
+      "title": "Anti-Cellulite Hand + Vacuum",
+      "desc": "An effective blend of manual lymphatic drainage and vacuum cupping. Firms the skin, boosts metabolism, and helps sculpt your silhouette."
+    },
+    "durations": [
+      { "time": "30 min", "price": "29€", "oldPrice": "35€" },
+      { "time": "60 min", "price": "55€", "oldPrice": "65€" },
+      { "time": "90 min", "price": "79€", "oldPrice": "95€" }
+    ]
+  },
+  {
+    "id": "sport",
+    "img": "/assets/services/sport.jpg",
+    "de": { 
+      "title": "Sportmassage",
+      "desc": "Intensive, kraftvolle Griffe speziell für aktive Muskeln. Fördert die Durchblutung, beschleunigt die Regeneration nach dem Training und beugt Muskelkater vor."
+    },
+    "en": { 
+      "title": "Sports Massage",
+      "desc": "Intense, deep-tissue strokes tailored for active muscles. Boosts circulation, speeds up recovery after training, and prevents soreness."
+    },
+    "durations": [
+      { "time": "30 min", "price": "32€", "oldPrice": "35€" },
+      { "time": "60 min", "price": "60€", "oldPrice": "65€" },
+      { "time": "90 min", "price": "--", "oldPrice": "--" }
+    ]
+  },
+  {
+    "id": "honig",
+    "img": "/assets/services/honig.jpg",
+    "de": { 
+      "title": "Honigmassage",
+      "desc": "Eine traditionelle Entgiftungsmassage mit echtem Honig. Die spezielle Klopftechnik zieht Schlackenstoffe aus der Haut und hinterlässt sie seidenweich."
+    },
+    "en": { 
+      "title": "Honey Massage",
+      "desc": "A traditional detox therapy using natural honey. Special tapping techniques draw out toxins from the skin, leaving it incredibly soft and smooth."
+    },
+    "durations": [
+      { "time": "30 min", "price": "29€", "oldPrice": "35€" },
+      { "time": "60 min", "price": "55€", "oldPrice": "65€" },
+      { "time": "90 min", "price": "79€", "oldPrice": "95€" }
+    ]
+  },
+  {
+    "id": "lomi-lomi",
+    "img": "/assets/services/lomi-lomi.jpg",
+    "de": { 
+      "title": "Hawaii Lomi-Lomi",
+      "desc": "Ein hawaiianisches Entspannungsritual mit warmem Öl. Fließende Unterarmgriffe, die sich wie sanfte Meereswellen anfühlen, für Körper und Seele."
+    },
+    "en": { 
+      "title": "Hawaii Lomi-Lomi",
+      "desc": "A traditional Hawaiian ritual using warm oil. Long, flowing forearm strokes feel like gentle ocean waves, deeply soothing body and soul."
+    },
+    "durations": [
+      { "time": "30 min", "price": "--", "oldPrice": "--" },
+      { "time": "60 min", "price": "67€", "oldPrice": "82€" },
+      { "time": "90 min", "price": "99€", "oldPrice": "120€" }
+    ]
+  },
+  {
+    "id": "vierhand",
+    "img": "/assets/services/vierhand.jpg",
+    "de": { 
+      "title": "Hawaii Vierhand",
+      "desc": "Das ultimative Wellness-Erlebnis: Vier Hände arbeiten absolut synchron an Ihrem Körper. Schaltet das logische Denken komplett aus – Entspannung pur."
+    },
+    "en": { 
+      "title": "Hawaii Four-Hand",
+      "desc": "The ultimate luxury massage: two therapists working in perfect harmony. Completely tricks your brain into letting go — non-stop pure bliss."
+    },
+    "durations": [
+      { "time": "30 min", "price": "--", "oldPrice": "--" },
+      { "time": "60 min", "price": "134€", "oldPrice": "160€" },
+      { "time": "90 min", "price": "198€", "oldPrice": "240€" }
+    ]
+  },
+  {
+    "id": "gesicht",
+    "img": "/assets/services/gesicht.jpg",
+    "de": { 
+      "title": "Gesichtsmassage",
+      "desc": "Erfrischende Massage für Gesicht, Dekolleté und Kopfhaut. Löst feine Mimikverspannungen, regt die Durchblutung an und sorgt für einen frischen Glow."
+    },
+    "en": { 
+      "title": "Face Massage",
+      "desc": "Refreshing treatment for your face, neck, and scalp. Releases hidden facial tension, boosts microcirculation, and gives you a radiant glow."
+    },
+    "durations": [
+      { "time": "30 min", "price": "28€", "oldPrice": "35€" },
+      { "time": "60 min", "price": "--", "oldPrice": "--" },
+      { "time": "90 min", "price": "--", "oldPrice": "--" }
+    ]
+  },
+  {
+    "id": "kinder",
+    "img": "/assets/services/kinder.jpg",
+    "de": { 
+      "title": "\"Sonnenstrahlen\" Kinder und Jugendmassage bis 13 Jahre alt",
+      "desc": "Sanfte und feinfühlige Massage speziell für Kinder. Hilft, Schulstress abzubauen, verbessert den Schlaf und schenkt ein Gefühl von Geborgenheit."
+    },
+    "en": { 
+      "title": "\"Sunbeams\" Kids & Teens Massage (up to 13 years)",
+      "desc": "A gentle and sensitive massage created specifically for children. Helps relieve school stress, improves sleep, and boosts overall well-being."
+    },
+    "durations": [
+      { "time": "30 min", "price": "20€", "oldPrice": "25€" },
+      { "time": "60 min", "price": "36€", "oldPrice": "45€" },
+      { "time": "90 min", "price": "--", "oldPrice": "--" }
+    ]
+  },
+  {
+    "id": "kopf-nacken",
+    "img": "/assets/services/kopf-nacken.jpg",
+    "de": { 
+      "title": "Kopf, Nacken, Schulter",
+      "desc": "Die perfekte Akuthilfe für Büro- und Handyarbeiter. Gezielter Druck löst die typischen Blockaden im oberen Rücken und beugt Kopfschmerzen vor."
+    },
+    "en": { 
+      "title": "Head, Neck & Shoulder",
+      "desc": "The perfect relief for desk and smartphone users. Targeted pressure unlocks the upper back, releases neck strain, and prevents stress headaches."
+    },
+    "durations": [
+      { "time": "30 min", "price": "28€", "oldPrice": "35€" },
+      { "time": "60 min", "price": "--", "oldPrice": "--" },
+      { "time": "90 min", "price": "--", "oldPrice": "--" }
+    ]
+  },
+  {
+    "id": "ruecken",
+    "img": "/assets/services/ruecken.jpg",
+    "de": { 
+      "title": "Rücken-Massage",
+      "desc": "Konzentrierte Behandlung für die gesamte Wirbelsäule. Lockert festsitzende Muskelbündel, entlastet die Lendenwirbel und verbessert die Haltung."
+    },
+    "en": { 
+      "title": "Back Massage",
+      "desc": "Focused treatment targeting the entire spine. Unlocks tight muscle knots, relieves lower back strain, and helps restore normal posture."
+    },
+    "durations": [
+      { "time": "30 min", "price": "28€", "oldPrice": "35€" },
+      { "time": "60 min", "price": "55€", "oldPrice": "65€" },
+      { "time": "90 min", "price": "--", "oldPrice": "--" }
+    ]
+  }
+]

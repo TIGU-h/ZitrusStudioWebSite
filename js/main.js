@@ -1,3 +1,168 @@
+// Services expandable cards
+var SERVICE_IMAGE_FALLBACK = '/assets/carousel/slide1.png';
+
+function toggleCard(card) {
+    var activeCard = document.querySelector('.service-card.expanded');
+    if (activeCard && activeCard !== card) {
+        activeCard.classList.remove('expanded');
+    }
+
+    card.classList.toggle('expanded');
+}
+
+function createServiceCard(service, lang) {
+    var localized = service[lang] || {};
+    var title = localized.title || (service.en && service.en.title) || (service.de && service.de.title) || 'Massage';
+    var description = localized.desc || (service.en && service.en.desc) || (service.de && service.de.desc) || '';
+    var card = document.createElement('div');
+    card.className = 'service-card';
+    card.addEventListener('click', function () {
+        toggleCard(card);
+    });
+
+    var preview = document.createElement('div');
+    preview.className = 'service-preview';
+
+    var imageWrapper = document.createElement('div');
+    imageWrapper.className = 'service-img-wrapper';
+
+    var image = document.createElement('img');
+    image.src = service.img || SERVICE_IMAGE_FALLBACK;
+    image.alt = title;
+    image.addEventListener('error', function () {
+        if (image.src.indexOf(SERVICE_IMAGE_FALLBACK) === -1) {
+            image.src = SERVICE_IMAGE_FALLBACK;
+        }
+    });
+    imageWrapper.appendChild(image);
+
+    var footer = document.createElement('div');
+    footer.className = 'service-footer';
+
+    var heading = document.createElement('h3');
+    heading.textContent = title;
+
+    var button = document.createElement('button');
+    button.className = 'btn-arrow';
+    button.type = 'button';
+    button.setAttribute('aria-label', 'Toggle details');
+    button.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>';
+
+    footer.appendChild(heading);
+    footer.appendChild(button);
+    preview.appendChild(imageWrapper);
+    preview.appendChild(footer);
+
+    var details = document.createElement('div');
+    details.className = 'service-details';
+
+    var detailsContent = document.createElement('div');
+    detailsContent.className = 'details-content';
+
+    if (description) {
+        var descriptionElement = document.createElement('p');
+        descriptionElement.className = 'description';
+        descriptionElement.textContent = description;
+        detailsContent.appendChild(descriptionElement);
+    }
+
+    var prices = document.createElement('ul');
+    prices.className = 'prices';
+
+    (service.durations || []).forEach(function (duration) {
+        if (!duration.price || duration.price === '--') return;
+
+        var item = document.createElement('li');
+        var time = document.createElement('strong');
+        time.textContent = duration.time;
+
+        var priceGroup = document.createElement('span');
+        if (duration.oldPrice && duration.oldPrice !== '--') {
+            var oldPrice = document.createElement('span');
+            oldPrice.className = 'old-price';
+            oldPrice.textContent = duration.oldPrice;
+            priceGroup.appendChild(oldPrice);
+        }
+
+        priceGroup.appendChild(document.createTextNode(duration.price));
+        item.appendChild(time);
+        item.appendChild(priceGroup);
+        prices.appendChild(item);
+    });
+
+    detailsContent.appendChild(prices);
+    details.appendChild(detailsContent);
+    card.appendChild(preview);
+    card.appendChild(details);
+
+    return card;
+}
+
+function renderServiceCards(services) {
+    var grid = document.querySelector('.services-grid');
+    if (!grid) return;
+
+    var lang = document.documentElement.lang || 'en';
+    grid.innerHTML = '';
+    delete grid.dataset.columns;
+
+    services.forEach(function (service) {
+        grid.appendChild(createServiceCard(service, lang));
+    });
+
+    layoutServiceColumns();
+}
+
+function loadServiceCards() {
+    var grid = document.querySelector('.services-grid[data-services-source]');
+    if (!grid) return;
+
+    fetch(grid.dataset.servicesSource)
+        .then(function (response) {
+            if (!response.ok) throw new Error('Could not load services');
+            return response.json();
+        })
+        .then(renderServiceCards)
+        .catch(function () {
+            grid.innerHTML = '<p class="muted services-loading">Services could not be loaded.</p>';
+        });
+}
+
+function getServiceColumnCount() {
+    if (window.innerWidth <= 699) return 1;
+    if (window.innerWidth <= 1024) return 2;
+    return 3;
+}
+
+function layoutServiceColumns() {
+    var grid = document.querySelector('.services-grid');
+    if (!grid) return;
+
+    var columnCount = getServiceColumnCount();
+    if (grid.dataset.columns === String(columnCount)) return;
+
+    var cards = Array.from(grid.querySelectorAll('.service-card'));
+    grid.innerHTML = '';
+    grid.dataset.columns = String(columnCount);
+
+    var columns = [];
+    for (var i = 0; i < columnCount; i += 1) {
+        var column = document.createElement('div');
+        column.className = 'service-column';
+        columns.push(column);
+        grid.appendChild(column);
+    }
+
+    cards.forEach(function (card, index) {
+        columns[index % columnCount].appendChild(card);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', loadServiceCards);
+window.addEventListener('resize', function () {
+    window.requestAnimationFrame(layoutServiceColumns);
+});
+
 // Hero Background Carousel Logic
 document.addEventListener('DOMContentLoaded', function () {
     const bgSlides = document.querySelectorAll('#hero-carousel-bg .carousel-bg-slide');
