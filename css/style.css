@@ -95,8 +95,7 @@ p {
    Header & Core Navigation
    ========================================================================== */
 :root {
-    --header-transition-time: 0.4s;
-    --header-hide-distance: 200%;
+    --header-transition-time: 0.28s;
 }
 
 .site-header {
@@ -106,13 +105,15 @@ p {
     backdrop-filter: blur(6px);
     z-index: 100;
     min-height: 70px;
-    transition: min-height var(--header-transition-time) cubic-bezier(0.4,0,0.2,1), background var(--header-transition-time) cubic-bezier(0.4,0,0.2,1), transform var(--header-transition-time) cubic-bezier(0.4,0,0.2,1);
+    transition: transform var(--header-transition-time) cubic-bezier(0.4,0,0.2,1);
     overflow: visible;
     will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .site-header.hide {
-    transform: translateY(calc(-1 * var(--header-hide-distance-active, var(--header-hide-distance))));
+    transform: translateY(-200%);
     pointer-events: none;
     opacity: 0.98;
 }

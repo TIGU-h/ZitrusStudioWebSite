@@ -332,9 +332,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                     var currentScrollY = window.scrollY;
                     if (currentScrollY > lastScrollY && currentScrollY > hideThreshold) {
-                        header.classList.add('hide');
+                        if (!header.classList.contains('hide')) {
+                            header.classList.add('hide');
+                        }
                     } else if (currentScrollY < lastScrollY || currentScrollY <= hideThreshold) {
-                        header.classList.remove('hide');
+                        if (header.classList.contains('hide')) {
+                            header.classList.remove('hide');
+                        }
                     }
                     lastScrollY = currentScrollY;
                     ticking = false;
