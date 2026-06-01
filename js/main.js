@@ -202,10 +202,21 @@ document.addEventListener('DOMContentLoaded', function () {
     if (logoLink) {
         logoLink.addEventListener('click', function(e) {
             var path = window.location.pathname;
-            var isHomePage = /\/(?:en|de)\/(?:index\.html)?$/.test(path);
+            // Перевіряємо, чи ми на головній сторінці (англійській чи німецькій)
+            var isHomePage = path.indexOf('/en/') !== -1 || path.indexOf('/de/') !== -1 || path === '/';
+            
             if (isHomePage) {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Якщо при кліку на лого було відкрито мобільне меню — закриваємо його
+                if (navList && navList.classList.contains('show')) {
+                    navList.classList.remove('show');
+                    if (toggle) {
+                        toggle.classList.remove('active');
+                        toggle.setAttribute('aria-expanded', 'false');
+                    }
+                }
             }
         });
     }
@@ -337,20 +348,35 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }, { passive: true });
     }
+if (langSwitch) {
+        var path = window.location.pathname;
+        var hash = window.location.hash || '';
+        
+        // Отримуємо чисте ім'я файлу (наприклад, index.html, oksana.html)
+        var fileName = path.split('/').pop() || 'index.html';
+        var target = '';
 
-    if (langSwitch) {
-        var path = location.pathname;
-        var hash = location.hash || '';
-        var currentLang = document.documentElement.lang === 'de' ? 'de' : 'en';
-        var nextLang = currentLang === 'de' ? 'en' : 'de';
-        var fileName = location.pathname.split('/').pop() || 'index.html';
-        var target = '../' + nextLang + '/' + fileName;
+        // 1. Якщо ми знаходимося на АНГЛІЙСЬКІЙ сторінці (в папці /en/)
         if (path.indexOf('/en/') !== -1) {
-            target = '../de/' + fileName;
-        } else if (path.indexOf('/de/') !== -1) {
+            if (fileName === 'index.html' || fileName === '') {
+                // Якщо це головна англійська -> перемикаємо на німецьку головну в корінь
+                target = '../index.html';
+            } else {
+                // Якщо це внутрішня англійська -> перемикаємо на таку саму в папку /de/
+                target = '../de/' + fileName;
+            }
+        } 
+        
+        // 2. Якщо ми знаходимося на сторінці в папці /de/
+        else if (path.indexOf('/de/') !== -1) {
+            // З папки /de/ ми завжди перемикаємо в папку /en/ на такий самий файл
             target = '../en/' + fileName;
-        } else {
-            target = 'en/index.html';
+        } 
+        
+        // 3. Якщо ми на НІМЕЦЬКІЙ ГОЛОВНІЙ сторінці в корені сайту
+        else {
+            // З кореня перемикаємо на англійську головну в папку /en/
+            target = 'en/' + fileName;
         }
 
         langSwitch.setAttribute('href', target + hash);
