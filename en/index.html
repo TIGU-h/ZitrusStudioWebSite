@@ -6,13 +6,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Zitrus Massage Studio — Home</title>
     <meta name="description" content="Premium Massage & Spa Studio in Augsburg — wellbeing & regeneration.">
+
+    <!-- Завантажуємо перший слайд банера миттєво -->
+    <link rel="preload" as="image" href="/assets/carousel/slide1.png">
+
     <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <link rel="stylesheet" href="/css/style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script defer src="/js/main.js"></script>
+    <script src="/js/main.js" defer></script>
 </head>
 
 <body>
@@ -55,8 +58,7 @@
     <main>
         <section id="hero" class="hero">
 
-            <div id="heroBootstrapCarousel" class="carousel slide carousel-fade h-100 w-100" data-bs-ride="carousel"
-                data-bs-interval="5000">
+            <div id="heroBootstrapCarousel" class="carousel slide carousel-fade h-100 w-100" data-bs-ride="carousel" data-bs-interval="5000">
                 <div class="carousel-inner h-100">
 
                     <div class="carousel-item active h-100">
@@ -94,7 +96,7 @@
                         Discover premium relaxation and wellness in the heart of Augsburg.
                         Enjoy professional full body, aroma oil, and hot stone massages in a cozy, welcoming studio.
                     </p>
-                    </br>
+                    <br>
                     <p><a class="btn-hero" href="#contact">Book Now</a></p>
                 </div>
             </div>
@@ -106,19 +108,18 @@
                 <div class="team-grid">
                     <article class="card master">
                         <figure class="portrait">
-                            <img src="/assets/Masters/Oksana.png" alt="Oksana, massage master at Zitrus Massage Studio">
+                            <img src="/assets/Masters/Oksana.png" width="300" height="400" decoding="async" loading="lazy" alt="Oksana, massage master at Zitrus Massage Studio">
                         </figure>
                         <div class="card-body">
                             <h3>Oksana</h3>
                             <p class="specialty">Wellness massages, full body & aroma oil massages, spa rituals</p>
-                            <p class="bio">Oksana brings passion and experience to ensure your relaxation and wellbeing.
-                            </p>
+                            <p class="bio">Oksana brings passion and experience to ensure your relaxation and wellbeing.</p>
                             <p><a class="master-link" href="/en/oksana.html">View Profile</a></p>
                         </div>
                     </article>
                     <article class="card master">
                         <figure class="portrait">
-                            <img src="/assets/Masters/Maryna.png" alt="Maryna, massage master at Zitrus Massage Studio">
+                            <img src="/assets/Masters/Maryna.png" width="300" height="400" decoding="async" loading="lazy" alt="Maryna, massage master at Zitrus Massage Studio">
                         </figure>
                         <div class="card-body">
                             <h3>Maryna</h3>
@@ -141,13 +142,13 @@
             </div>
         </section>
 
-<section id="gallery" class="section gallery">
+        <section id="gallery" class="section gallery">
             <div class="container">
                 <h2>Gallery</h2>
                 <p class="muted">Explore our peaceful haven and treatment rooms virtually.</p>
+                
                 <div id="studioGalleryCarousel" class="carousel slide carousel-dark shadow-sm" data-bs-ride="carousel">
                     <div class="carousel-indicators" id="gallery-indicators"></div>
-                    
                     <div class="carousel-inner" id="gallery-slides"></div>
                     
                     <button class="carousel-control-prev" type="button" data-bs-target="#studioGalleryCarousel" data-bs-slide="prev">
@@ -180,7 +181,6 @@
                             
                             <h4>Book an Appointment</h4>
                             <div class="d-flex flex-column gap-3">
-                                
                                 <div class="expert-contact-row">
                                     <p class="expert-name">Oksana:</p>
                                     <a href="https://wa.me/4915172441951" target="_blank" rel="noopener" class="btn btn-whatsapp w-100">
@@ -238,10 +238,6 @@
                         <span class="footer-separator">•</span>
                         <a href="/en/datenschutz.html">Data Protection</a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </footer>
                 </div>
             </div>
         </div>

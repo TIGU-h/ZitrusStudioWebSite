@@ -1,12 +1,30 @@
-// Services expandable cards
-var SERVICE_IMAGE_FALLBACK = '/assets/carousel/slide1.png';
+// Автоматичне визначення базового шляху для локалки та GitHub Pages
+const SITE_BASE = window.location.hostname.indexOf('github.io') !== -1 
+    ? '/ZitrusStudioWebSite/' 
+    : '/';
+
+var SERVICE_IMAGE_FALLBACK = SITE_BASE + 'assets/carousel/slide1.png';
+
+(function() {
+    // Перевіряємо, чи ми на GitHub Pages (урл містить назву репозиторію)
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    
+    // Створюємо тег <base>
+    const baseTag = document.createElement('base');
+    
+    // Якщо GitHub Pages — ставимо базу з назвою репозиторію, інакше (локально) — корінь "/"
+    baseTag.href = isGitHubPages ? '/ZitrusStudioWebSite/' : '/';
+    
+    // Додаємо його на самий початок секції <head>, щоб він спрацював до завантаження інших ресурсів
+    document.head.insertBefore(baseTag, document.head.firstChild);
+})();
+
 
 function toggleCard(card) {
     var activeCard = document.querySelector('.service-card.expanded');
     if (activeCard && activeCard !== card) {
         activeCard.classList.remove('expanded');
     }
-
     card.classList.toggle('expanded');
 }
 
@@ -14,11 +32,10 @@ function createServiceCard(service, lang) {
     var localized = service[lang] || {};
     var title = localized.title || (service.en && service.en.title) || (service.de && service.de.title) || 'Massage';
     var description = localized.desc || (service.en && service.en.desc) || (service.de && service.de.desc) || '';
+    
     var card = document.createElement('div');
     card.className = 'service-card';
-    card.addEventListener('click', function () {
-        toggleCard(card);
-    });
+    card.addEventListener('click', function () { toggleCard(card); });
 
     var preview = document.createElement('div');
     preview.className = 'service-preview';
@@ -106,26 +123,29 @@ function renderServiceCards(services) {
     grid.innerHTML = '';
     delete grid.dataset.columns;
 
+    // Оптимізація: додаємо через фрагмент, щоб не перевантажувати DOM
+    var fragment = document.createDocumentFragment();
     services.forEach(function (service) {
-        grid.appendChild(createServiceCard(service, lang));
+        fragment.appendChild(createServiceCard(service, lang));
     });
+    grid.appendChild(fragment);
 
     layoutServiceColumns();
 }
 
 function loadServiceCards() {
-    var grid = document.querySelector('.services-grid[data-services-source]');
+    var grid = document.querySelector('.services-grid');
     if (!grid) return;
 
-    fetch(grid.dataset.servicesSource)
+    // Скрипт тепер залізобетонно знає шлях до JSON через базу
+    fetch(SITE_BASE + 'assets/MassageList.json')
         .then(function (response) {
             if (!response.ok) throw new Error('Could not load services');
             return response.json();
         })
         .then(function(services) {
-            renderServiceCards(services); // Малюємо картки з цінами
+            renderServiceCards(services);
 
-            // --- ПОЧАТОК КОСТИЛЯ (Фікс скролу) ---
             if (window.location.hash) {
                 var targetElement = document.querySelector(window.location.hash);
                 if (targetElement) {
@@ -135,10 +155,9 @@ function loadServiceCards() {
                         var rect = targetElement.getBoundingClientRect();
                         var offset = window.scrollY + rect.top - headerHeight - 12;
                         window.scrollTo({ top: offset, behavior: 'smooth' });
-                    }, 150); // Даємо браузеру 150мс на перерахунок висоти після вставки HTML
+                    }, 150);
                 }
             }
-            // --- КІНЕЦЬ КОСТИЛЯ ---
         })
         .catch(function () {
             grid.innerHTML = '<p class="muted services-loading">Services could not be loaded.</p>';
@@ -163,16 +182,20 @@ function layoutServiceColumns() {
     grid.dataset.columns = String(columnCount);
 
     var columns = [];
+    var fragment = document.createDocumentFragment();
+    
     for (var i = 0; i < columnCount; i += 1) {
         var column = document.createElement('div');
         column.className = 'service-column';
         columns.push(column);
-        grid.appendChild(column);
+        fragment.appendChild(column);
     }
 
     cards.forEach(function (card, index) {
         columns[index % columnCount].appendChild(card);
     });
+    
+    grid.appendChild(fragment);
 }
 
 document.addEventListener('DOMContentLoaded', loadServiceCards);
@@ -180,7 +203,7 @@ window.addEventListener('resize', function () {
     window.requestAnimationFrame(layoutServiceColumns);
 });
 
-// Hero Background Carousel Logic
+// Hero Background Carousel
 document.addEventListener('DOMContentLoaded', function () {
     const bgSlides = document.querySelectorAll('#hero-carousel-bg .carousel-bg-slide');
     let current = 0;
@@ -193,23 +216,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-
-// Main JS for global interactions
+// Global interactions
 document.addEventListener('DOMContentLoaded', function () {
 
-    // Intercept logo click to prevent reload and scroll to top (ONLY on the home page)
+    // Intercept logo click
     var logoLink = document.querySelector('.logo-img')?.parentElement;
     if (logoLink) {
         logoLink.addEventListener('click', function(e) {
             var path = window.location.pathname;
-            if (path === '/' || path === '/index.html' || path === '/en/' || path === '/en/index.html') {
+            var cleanPath = path.replace(SITE_BASE, '/');
+            if (cleanPath === '/' || cleanPath === '/index.html' || cleanPath === '/en/' || cleanPath === '/en/index.html') {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
     }
 
-    // Mobile nav toggle
     var toggle = document.querySelector('.nav-toggle');
     var navList = document.getElementById('nav-list');
     if (toggle && navList) {
@@ -218,48 +240,41 @@ document.addEventListener('DOMContentLoaded', function () {
             var expanded = this.getAttribute('aria-expanded') === 'true';
             this.setAttribute('aria-expanded', String(!expanded));
             navList.classList.toggle('show');
-            this.classList.toggle('active'); // анімує три смужки
+            this.classList.toggle('active');
         });
     }
 
-    // Close mobile nav when clicking outside of it
     document.addEventListener('click', function (e) {
         if (navList && navList.classList.contains('show')) {
             if (!navList.contains(e.target) && !toggle.contains(e.target)) {
                 navList.classList.remove('show');
-                toggle.classList.remove('active'); // повертає смужки назад
+                toggle.classList.remove('active');
                 toggle.setAttribute('aria-expanded', 'false');
             }
         }
     });
 
-// ==========================================
-    // ТУТ ПОЧИНАЄТЬСЯ НАША ДИНАМІЧНА ГАЛЕРЕЯ
     // ==========================================
-    var galleryImages = [
-        'slide1.png',
-        'slide2.jpg',
-        'slide3.jpg'
-        // Якщо закинеш нові фото в assets/gallery/, просто допиши їх назви через кому сюди
-    ];
-
+    // ОПТИМІЗОВАНА ГАЛЕРЕЯ (ЧЕРЕЗ SITE_BASE)
+    // ==========================================
+    var galleryImages = ['slide1.png', 'slide2.jpg', 'slide3.jpg'];
     var galleryIndicators = document.getElementById('gallery-indicators');
     var gallerySlides = document.getElementById('gallery-slides');
 
     if (galleryIndicators && gallerySlides && galleryImages.length > 0) {
+        var indicatorsFragment = document.createDocumentFragment();
+        var slidesFragment = document.createDocumentFragment();
+
         galleryImages.forEach(function (imageName, index) {
-            // Створюємо крапочку-індикатор
             var indicator = document.createElement('button');
             indicator.type = 'button';
             indicator.setAttribute('data-bs-target', '#studioGalleryCarousel');
             indicator.setAttribute('data-bs-slide-to', String(index));
             indicator.setAttribute('aria-label', 'Slide ' + (index + 1));
             
-            // Створюємо слайд
             var slide = document.createElement('div');
             slide.className = 'carousel-item h-100';
             
-            // Першому слайду даємо активний клас
             if (index === 0) {
                 indicator.className = 'active';
                 indicator.setAttribute('aria-current', 'true');
@@ -267,27 +282,21 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             var img = document.createElement('img');
-            
-            // Автоматично виправляємо шлях, якщо користувач сидить на англійській версії
-            var basePath = (window.location.pathname.indexOf('/en/') !== -1) ? '../assets/gallery/' : 'assets/gallery/';
-            
-            img.src = basePath + imageName;
+            img.src = SITE_BASE + 'assets/gallery/' + imageName; // Чистий шлях через корінь
             img.className = 'd-block w-100 h-100';
             img.style.objectFit = 'cover';
             img.alt = 'Zitrus Massagestudio Galeriebild ' + (index + 1);
 
             slide.appendChild(img);
-            galleryIndicators.appendChild(indicator);
-            gallerySlides.appendChild(slide);
+            indicatorsFragment.appendChild(indicator);
+            slidesFragment.appendChild(slide);
         });
+
+        galleryIndicators.appendChild(indicatorsFragment);
+        gallerySlides.appendChild(slidesFragment);
     }
-    // ==========================================
-    // КІНЕЦЬ БЛОКУ ГАЛЕРЕЇ
-    // ==========================================
 
-    var langSwitch = document.getElementById('lang-switch');
-
-    // --- ОПТИМІЗАЦІЯ ХЕДЕРА ТА УКРОЩЕННЯ СКРОЛУ ---
+    // --- ХЕДЕР ТА СКРОЛ ---
     var lastScrollY = window.scrollY;
     var ticking = false;
     var header = document.querySelector('.site-header');
@@ -337,23 +346,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { passive: true });
     }
 
-    if (langSwitch) {
-        var path = location.pathname;
-        var hash = location.hash || '';
-        var target = path;
-
-        if (path.indexOf('/en/') === 0) {
-            target = path === '/en/' || path === '/en/index.html' ? '/' : path.replace('/en/', '/de/');
-        } else if (path.indexOf('/de/') === 0) {
-            target = path.replace('/de/', '/en/');
-        } else {
-            target = '/en/';
-        }
-
-        langSwitch.setAttribute('href', target + hash);
-    }
-
-    // Adjust anchor clicks to account for sticky header
+    // Anchor smooth scroll
     var headerHeight = header ? header.getBoundingClientRect().height : 72;
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
         anchor.addEventListener('click', function (e) {
