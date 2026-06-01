@@ -62,7 +62,7 @@ body {
     -webkit-font-smoothing: antialiased;
 
     /* Об'єднуємо налаштування безшовного SVG-фону */
-    background-image: url('/assets/BG.svg');
+    background-image: url('../assets/BG.svg');
     background-position: top left;
     background-repeat: repeat-y; /* Залишаємо цей варіант, він чистіший і коротший */
     background-size: 100% auto;
