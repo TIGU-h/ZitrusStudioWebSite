@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Language switch: preserve hash and map between language folders.
+    // Language switch: preserve hash and map between language pages.
     var langSwitch = document.getElementById('lang-switch');
 
     // HEADER HIDE/SHOW ON SCROLL
@@ -289,11 +289,19 @@ document.addEventListener('DOMContentLoaded', function () {
         header.style.setProperty('--header-hide-distance-active', getHideDistance());
     }
     if (langSwitch) {
+        var path = location.pathname;
         var hash = location.hash || '';
         var currentLang = document.documentElement.lang === 'de' ? 'de' : 'en';
         var nextLang = currentLang === 'de' ? 'en' : 'de';
         var fileName = location.pathname.split('/').pop() || 'index.html';
         var target = '../' + nextLang + '/' + fileName;
+        if (path.indexOf('/en/') === 0) {
+            target = path === '/en/' || path === '/en/index.html' ? '/' : path.replace('/en/', '/de/');
+        } else if (path.indexOf('/de/') === 0) {
+            target = path.replace('/de/', '/en/');
+        } else {
+            target = '/en/';
+        }
 
         langSwitch.setAttribute('href', target + hash);
     }
