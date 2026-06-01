@@ -1107,3 +1107,164 @@ a:focus {
         align-items: center;
     }
 }
+/* ==========================================================================
+   Gallery Section & Carousel Custom Styling
+   ========================================================================== */
+#studioGalleryCarousel {
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+#gallery-slides {
+    aspect-ratio: 16 / 9;
+    background-color: #f4f4f4;
+}
+
+/* ==========================================================================
+   Contact Section & Buttons Custom Styling
+   ========================================================================== */
+.contact-info-block {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.studio-address {
+    font-style: normal;
+    margin-bottom: 1.5rem;
+}
+
+.studio-address h4, 
+.contact-info-block h4 {
+    color: var(--text);
+    margin-bottom: 1rem;
+}
+
+.address-icon {
+    color: #e67e22;
+    flex-shrink: 0;
+    margin-top: 3px;
+}
+
+.expert-name {
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+/* Кнопки месенджерів */
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #25D366;
+    color: #ffffff;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.btn-whatsapp:hover,
+.btn-whatsapp:focus-visible {
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+.btn-instagram {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #ffffff;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.btn-instagram:hover,
+.btn-instagram:focus-visible {
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+.contact-divider {
+    margin: 0.5rem 0;
+    opacity: 0.1;
+    border-top: 1px solid var(--text);
+}
+
+.map-wrapper {
+    border-radius: var(--radius);
+    overflow: hidden;
+    height: 300px;
+}
+
+.map-wrapper iframe {
+    border: 0;
+}
+
+/* ==========================================================================
+   Site Footer (Clean & Contrast)
+   ========================================================================== */
+.site-footer {
+    background-color: #1a1a1a;
+    color: #a0a0a0;
+    padding: 3rem 0 2rem;
+    font-size: 0.95rem;
+}
+
+.footer-title {
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.footer-copyright {
+    margin-bottom: 0.25rem;
+    color: #e0e0e0; /* Світло-сірий для гарної читабельності */
+}
+
+.footer-address {
+    font-size: 0.85rem;
+    color: #ffffff; /* Абсолютно білий та чіткий колір для адреси */
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.footer-links a {
+    color: #a0a0a0;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+    color: #ffffff;
+}
+
+.footer-separator {
+    color: #555555;
+}
+
+/* Фікс ховерів для кнопок соцмереж у контактах (щоб текст не зникав) */
+.btn-whatsapp:hover,
+.btn-whatsapp:focus-visible {
+    background-color: #1ebe57 !important; /* Трохи темніший зелений */
+    color: #ffffff !important;            /* Текст залишається білим */
+    opacity: 1 !important;
+}
+
+.btn-instagram:hover,
+.btn-instagram:focus-visible {
+    /* Робимо градієнт трішки темнішим/насиченішим при наведенні */
+    background: linear-gradient(45deg, #e08523 0%, #d6582c 25%, #cc1733 50%, #bc1356 75%, #ac0878 100%) !important;
+    color: #ffffff !important;            /* Текст залишається білим */
+    opacity: 1 !important;
+}
