@@ -295,12 +295,12 @@ document.addEventListener('DOMContentLoaded', function () {
         var nextLang = currentLang === 'de' ? 'en' : 'de';
         var fileName = location.pathname.split('/').pop() || 'index.html';
         var target = '../' + nextLang + '/' + fileName;
-        if (path.indexOf('/en/') === 0) {
-            target = path === '/en/' || path === '/en/index.html' ? '/' : path.replace('/en/', '/de/');
-        } else if (path.indexOf('/de/') === 0) {
-            target = path.replace('/de/', '/en/');
+        if (path.indexOf('/en/') !== -1) {
+            target = '../de/' + fileName;
+        } else if (path.indexOf('/de/') !== -1) {
+            target = '../en/' + fileName;
         } else {
-            target = '/en/';
+            target = 'en/index.html';
         }
 
         langSwitch.setAttribute('href', target + hash);
