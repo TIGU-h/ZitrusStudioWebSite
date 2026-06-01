@@ -1,5 +1,5 @@
 // Services expandable cards
-var SERVICE_IMAGE_FALLBACK = '/assets/carousel/slide1.png';
+var SERVICE_IMAGE_FALLBACK = '../assets/carousel/slide1.png';
 
 function toggleCard(card) {
     var activeCard = document.querySelector('.service-card.expanded');
@@ -201,8 +201,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (logoLink) {
         logoLink.addEventListener('click', function(e) {
             var path = window.location.pathname;
-            // Перехоплюємо клік ТІЛЬКИ якщо ми точно на головній англійській сторінці
-            if (path === '/en/' || path === '/en/index.html') {
+            var isHomePage = /\/(?:en|de)\/(?:index\.html)?$/.test(path);
+            if (isHomePage) {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Language switch: preserve hash and map between /de/ and /en/
+    // Language switch: preserve hash and map between language folders.
     var langSwitch = document.getElementById('lang-switch');
 
     // HEADER HIDE/SHOW ON SCROLL
@@ -289,22 +289,12 @@ document.addEventListener('DOMContentLoaded', function () {
         header.style.setProperty('--header-hide-distance-active', getHideDistance());
     }
     if (langSwitch) {
-        var path = location.pathname; // Отримуємо поточний шлях, наприклад: "/en/oksana.html"
         var hash = location.hash || '';
-        var target = path;
+        var currentLang = document.documentElement.lang === 'de' ? 'de' : 'en';
+        var nextLang = currentLang === 'de' ? 'en' : 'de';
+        var fileName = location.pathname.split('/').pop() || 'index.html';
+        var target = '../' + nextLang + '/' + fileName;
 
-        if (path.indexOf('/en/') === 0) {
-            // Якщо ми в англійській папці, міняємо "/en/" на "/de/"
-            target = path.replace('/en/', '/de/');
-        } else if (path.indexOf('/de/') === 0) {
-            // Якщо ми в німецькій папці, міняємо "/de/" на "/en/"
-            target = path.replace('/de/', '/en/');
-        } else {
-            // Страховка: якщо папок немає в шляху, просто кидаємо в корінь німецької
-            target = '/de/';
-        }
-
-        // Записуємо фінальний правильний шлях у кнопку перемикання мови
         langSwitch.setAttribute('href', target + hash);
     }
 
@@ -334,4 +324,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-

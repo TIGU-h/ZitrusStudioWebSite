@@ -1,7 +1,7 @@
 [
   {
     "id": "ganzkoerper",
-    "img": "/assets/carousel/slide1.png",
+    "img": "../assets/carousel/slide1.png",
     "de": { 
       "title": "Ganzkörperlichemassage",
       "desc": "Klassische Tiefenentspannung für den ganzen Körper. Löst Blockaden, baut Stress ab und bringt Ihre Energie wieder voll in Fluss."
@@ -18,7 +18,7 @@
   },
   {
     "id": "relax",
-    "img": "/assets/carousel/slide2.jpg",
+    "img": "../assets/carousel/slide2.jpg",
     "de": { 
       "title": "Relax massage",
       "desc": "Eine besonders sanfte Massage mit beruhigenden Griffen. Ideal, um das Nervensystem runterzufahren und den Kopf komplett freizubekommen."
@@ -35,7 +35,7 @@
   },
   {
     "id": "hot-stone",
-    "img": "/assets/carousel/slide3.jpg",
+    "img": "../assets/carousel/slide3.jpg",
     "de": { 
       "title": "Hot Stone Therapie",
       "desc": "Die pure Kraft warmer Basaltsteine. Die tiefenwirksame Wärme dringt bis in die tiefsten Muskelschichten und löst selbst hartnäckige Verspannungen."
@@ -52,7 +52,7 @@
   },
   {
     "id": "anti-cellulite",
-    "img": "/assets/services/anti-cellulite.jpg",
+    "img": "../assets/services/anti-cellulite.jpg",
     "de": { 
       "title": "Anti-Cellulite Hand+Vakuum",
       "desc": "Effektive Kombination aus manueller Bindegewebsmassage und Vakuum-Technik. Strafft die Haut, kurbelt den Stoffwechsel an und formt die Silhouette."
@@ -69,7 +69,7 @@
   },
   {
     "id": "sport",
-    "img": "/assets/services/sport.jpg",
+    "img": "../assets/services/sport.jpg",
     "de": { 
       "title": "Sportmassage",
       "desc": "Intensive, kraftvolle Griffe speziell für aktive Muskeln. Fördert die Durchblutung, beschleunigt die Regeneration nach dem Training und beugt Muskelkater vor."
@@ -86,7 +86,7 @@
   },
   {
     "id": "honig",
-    "img": "/assets/services/honig.jpg",
+    "img": "../assets/services/honig.jpg",
     "de": { 
       "title": "Honigmassage",
       "desc": "Eine traditionelle Entgiftungsmassage mit echtem Honig. Die spezielle Klopftechnik zieht Schlackenstoffe aus der Haut und hinterlässt sie seidenweich."
@@ -103,7 +103,7 @@
   },
   {
     "id": "lomi-lomi",
-    "img": "/assets/services/lomi-lomi.jpg",
+    "img": "../assets/services/lomi-lomi.jpg",
     "de": { 
       "title": "Hawaii Lomi-Lomi",
       "desc": "Ein hawaiianisches Entspannungsritual mit warmem Öl. Fließende Unterarmgriffe, die sich wie sanfte Meereswellen anfühlen, für Körper und Seele."
@@ -120,7 +120,7 @@
   },
   {
     "id": "vierhand",
-    "img": "/assets/services/vierhand.jpg",
+    "img": "../assets/services/vierhand.jpg",
     "de": { 
       "title": "Hawaii Vierhand",
       "desc": "Das ultimative Wellness-Erlebnis: Vier Hände arbeiten absolut synchron an Ihrem Körper. Schaltet das logische Denken komplett aus – Entspannung pur."
@@ -137,7 +137,7 @@
   },
   {
     "id": "gesicht",
-    "img": "/assets/services/gesicht.jpg",
+    "img": "../assets/services/gesicht.jpg",
     "de": { 
       "title": "Gesichtsmassage",
       "desc": "Erfrischende Massage für Gesicht, Dekolleté und Kopfhaut. Löst feine Mimikverspannungen, regt die Durchblutung an und sorgt für einen frischen Glow."
@@ -154,7 +154,7 @@
   },
   {
     "id": "kinder",
-    "img": "/assets/services/kinder.jpg",
+    "img": "../assets/services/kinder.jpg",
     "de": { 
       "title": "\"Sonnenstrahlen\" Kinder und Jugendmassage bis 13 Jahre alt",
       "desc": "Sanfte und feinfühlige Massage speziell für Kinder. Hilft, Schulstress abzubauen, verbessert den Schlaf und schenkt ein Gefühl von Geborgenheit."
@@ -171,7 +171,7 @@
   },
   {
     "id": "kopf-nacken",
-    "img": "/assets/services/kopf-nacken.jpg",
+    "img": "../assets/services/kopf-nacken.jpg",
     "de": { 
       "title": "Kopf, Nacken, Schulter",
       "desc": "Die perfekte Akuthilfe für Büro- und Handyarbeiter. Gezielter Druck löst die typischen Blockaden im oberen Rücken und beugt Kopfschmerzen vor."
@@ -188,7 +188,7 @@
   },
   {
     "id": "ruecken",
-    "img": "/assets/services/ruecken.jpg",
+    "img": "../assets/services/ruecken.jpg",
     "de": { 
       "title": "Rücken-Massage",
       "desc": "Konzentrierte Behandlung für die gesamte Wirbelsäule. Lockert festsitzende Muskelbündel, entlastet die Lendenwirbel und verbessert die Haltung."
