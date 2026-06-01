@@ -1,14 +1,179 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-serif="refresh" content="0; url=en.html">
-    <script type="text/javascript">
-        window.location.href = "en/index.html"
-    </script>
-    <title>Redirecting...</title>
-</head>
-<body>
+<!doctype html>
+<html lang="de">
 
-    <p>If you are not redirected, <a href="en/index.html">click here</a>.</p>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Zitrus Massagestudio — Startseite</title>
+    <meta name="description" content="Premium Massage- und Spa-Studio in Augsburg — Wohlbefinden & Regeneration.">
+    <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script defer src="/js/main.js"></script>
+</head>
+
+<body>
+    <header class="site-header" role="banner">
+        <div class="container header-inner">
+
+            <nav id="site-nav" class="nav" role="navigation" aria-label="Hauptnavigation">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Menü">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <div id="nav-list" class="nav-list">
+                    <ul class="nav-group nav-left">
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#services">Preise</a></li>
+                    </ul>
+
+                    <ul class="nav-group nav-right">
+                        <li><a href="#gallery">Galerie</a></li>
+                        <li><a href="#contact">Kontakt</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <a href="/">
+                <img src="/assets/logo.svg" alt="Zitrus Massagestudio Logo" class="logo-img" />
+                <span class="sr-only">Zitrus Massagestudio — Startseite</span>
+            </a>
+
+            <div class="lang">
+                <a class="lang-link active" href="/">DE</a>
+                <a class="lang-link" id="lang-switch" href="/en/">EN</a>
+            </div>
+
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+
+            <div id="heroBootstrapCarousel" class="carousel slide carousel-fade h-100 w-100" data-bs-ride="carousel"
+                data-bs-interval="5000">
+                <div class="carousel-inner h-100">
+
+                    <div class="carousel-item active h-100">
+                        <div class="carousel-bg-slide" style="background-image:url('/assets/carousel/slide1.png');">
+                        </div>
+                    </div>
+
+                    <div class="carousel-item h-100">
+                        <div class="carousel-bg-slide" style="background-image:url('/assets/carousel/slide2.jpg');">
+                        </div>
+                    </div>
+
+                    <div class="carousel-item h-100">
+                        <div class="carousel-bg-slide" style="background-image:url('/assets/carousel/slide3.jpg');">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="hero-overlay-content">
+                <div class="hero-content">
+                    <h1>Wellness-Massagen in Augsburg</h1>
+                    <p class="lead">Ganzkörper- & Aromaölmassagen in gemütlicher Atmosphäre. Pure Entspannung.</p>
+                </div>
+            </div>
+            
+        </section>
+        
+        <section id="about" class="section about" style="padding-bottom: 1.5rem;">
+            <div class="container">
+                <div class="welcome-box compact-welcome">
+                    <h2 class="welcome-title">Willkommen bei Zitrus</h2>
+                    <p class="welcome-text" style="margin-bottom: 0;">
+                        Entdecken Sie erstklassige Entspannung und Wohlbefinden im Herzen von Augsburg.
+                        Genießen Sie professionelle Ganzkörper-, Aromaöl- und Hot-Stone-Massagen in einem gemütlichen, einladenden Studio.
+                    </p>
+                    </br>
+                    <p><a class="btn-hero" href="#contact">Jetzt buchen</a></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="section team" style="padding-top: 1.5rem;">
+            <div class="container">
+                <h2>Lernen Sie unser Team kennen</h2>
+                <div class="team-grid">
+                    <article class="card master">
+                        <figure class="portrait">
+                            <img src="/assets/Masters/Oksana.png" alt="Oksana, Massagemeisterin im Zitrus Massagestudio">
+                        </figure>
+                        <div class="card-body">
+                               <h3>Oksana</h3>
+                               <p class="specialty">Wellnessmassagen, Ganzkörper- & Aromaölmassagen, Spa-Rituale</p>
+                               <p class="bio">Oksana bringt Leidenschaft und Erfahrung mit, um Ihre Entspannung und Ihr Wohlbefinden zu gewährleisten.</p>
+                               <p><a class="master-link" href="/de/oksana.html">Profil ansehen</a></p>
+                        </div>
+                    </article>
+                    <article class="card master">
+                        <figure class="portrait">
+                            <img src="/assets/Masters/Maryna.png" alt="Maryna, Massagemeisterin im Zitrus Massagestudio">
+                        </figure>
+                        <div class="card-body">
+                               <h3>Maryna</h3>
+                               <p class="specialty">Wellnessmassagen, Ganzkörper- & Aromaölmassagen, Spa-Rituale</p>
+                               <p class="bio">Maryna bringt Ruhe, Fachwissen und Herzlichkeit in jede Behandlung.</p>
+                               <p><a class="master-link" href="/de/maryna.html">Profil ansehen</a></p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section services">
+    <div class="container">
+        <h2>Leistungen & Preise</h2>
+        
+        <div class="services-grid" data-services-source="/assets/MassageList.json">
+            <p class="muted services-loading">Leistungen werden geladen...</p>
+        </div>
+    </div>
+</section>
+
+        <section id="gallery" class="section gallery">
+            <div class="container">
+                <h2>Galerie</h2>
+                <p class="muted">Machen Sie einen virtuellen Rundgang durch unsere friedliche Oase und Behandlungsräume.</p>
+                <div
+                    style="padding: 3rem; background: var(--card); border-radius: var(--radius); text-align: center; border: 2px dashed rgba(0,0,0,0.05);">
+                    <p class="muted" style="margin: 0;">[ Platzhalter für Galerie-Assets ]</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact">
+            <div class="container">
+                <h2>Kontakt & Studio</h2>
+                <address>
+                    <p><strong>Adresse</strong>: Schaezlerstraße 32, 86152 Augsburg (Stadtzentrum)</p>
+                </address>
+                <p class="muted">Termine und Buchungen sind schnell und einfach über Instagram DM oder WhatsApp möglich.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div>
+                <p>© 2026 Wellness Massagen Augsburg</p>
+                <p>Schaezlerstraße 32 · 86152 Augsburg</p>
+            </div>
+            <div class="footer-links">
+                <p><a href="/de/impressum.html">Impressum</a> · <a href="/de/datenschutz.html">Datenschutz</a></p>
+            </div>
+        </div>
+    </footer>
+
 </body>
+
 </html>
