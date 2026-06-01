@@ -1,8 +1,19 @@
-// Автоматичне визначення базового шляху для локалки та GitHub Pages
-const SITE_BASE = window.location.hostname.indexOf('github.io') !== -1 
-    ? '/ZitrusStudioWebSite/' 
-    : '/';
+function getSiteBase() {
+    var pathname = window.location.pathname;
+    var segments = pathname.split('/').filter(Boolean);
 
+    if (!pathname.endsWith('/')) {
+        segments.pop();
+    }
+
+    if (segments.length <= 1) {
+        return './';
+    }
+
+    return '../'.repeat(segments.length - 1);
+}
+
+var SITE_BASE = getSiteBase();
 var SERVICE_IMAGE_FALLBACK = SITE_BASE + 'assets/carousel/slide1.png';
 
 
@@ -212,8 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (logoLink) {
         logoLink.addEventListener('click', function(e) {
             var path = window.location.pathname;
-            var cleanPath = path.replace(SITE_BASE, '/');
-            if (cleanPath === '/' || cleanPath === '/index.html' || cleanPath === '/en/' || cleanPath === '/en/index.html') {
+            if (path.endsWith('/') || path.endsWith('/index.html')) {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
@@ -270,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             var img = document.createElement('img');
-            img.src = SITE_BASE + 'assets/gallery/' + imageName; // Чистий шлях через корінь
+            img.src = SITE_BASE + 'assets/gallery/' + imageName;
             img.className = 'd-block w-100 h-100';
             img.style.objectFit = 'cover';
             img.alt = 'Zitrus Massagestudio Galeriebild ' + (index + 1);
