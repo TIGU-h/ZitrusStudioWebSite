@@ -1,6 +1,4 @@
-// =========================================================================
-// 1. АВТОМАТИЧНЕ ВИЗНАЧЕННЯ БАЗОВОГО ШЛЯХУ ТА СТВОРЕННЯ ТЕГУ <base>
-// =========================================================================
+// Автоматичне визначення базового шляху для локалки та GitHub Pages
 const SITE_BASE = window.location.hostname.indexOf('github.io') !== -1 
     ? '/ZitrusStudioWebSite/' 
     : '/';
@@ -8,15 +6,20 @@ const SITE_BASE = window.location.hostname.indexOf('github.io') !== -1
 var SERVICE_IMAGE_FALLBACK = SITE_BASE + 'assets/carousel/slide1.png';
 
 (function() {
+    // Перевіряємо, чи ми на GitHub Pages (урл містить назву репозиторію)
     const isGitHubPages = window.location.hostname.includes('github.io');
+    
+    // Створюємо тег <base>
     const baseTag = document.createElement('base');
+    
+    // Якщо GitHub Pages — ставимо базу з назвою репозиторію, інакше (локально) — корінь "/"
     baseTag.href = isGitHubPages ? '/ZitrusStudioWebSite/' : '/';
+    
+    // Додаємо його на самий початок секції <head>, щоб він спрацював до завантаження інших ресурсів
     document.head.insertBefore(baseTag, document.head.firstChild);
 })();
 
-// =========================================================================
-// 2. ЛОГІКА СЕРВІСНИХ КАРТОК ТА ПРАЙСУ
-// =========================================================================
+
 function toggleCard(card) {
     var activeCard = document.querySelector('.service-card.expanded');
     if (activeCard && activeCard !== card) {
@@ -43,16 +46,11 @@ function createServiceCard(service, lang) {
     var image = document.createElement('img');
     image.src = service.img || SERVICE_IMAGE_FALLBACK;
     image.alt = title;
-
-    // Фікс зациклювання: прапорець захищає від нескінченного рендерингу при 404 помилці
-    var hasFallbackBeenSet = false;
     image.addEventListener('error', function () {
-        if (!hasFallbackBeenSet) {
-            hasFallbackBeenSet = true;
+        if (image.src.indexOf(SERVICE_IMAGE_FALLBACK) === -1) {
             image.src = SERVICE_IMAGE_FALLBACK;
         }
     });
-
     imageWrapper.appendChild(image);
 
     var footer = document.createElement('div');
@@ -125,6 +123,7 @@ function renderServiceCards(services) {
     grid.innerHTML = '';
     delete grid.dataset.columns;
 
+    // Оптимізація: додаємо через фрагмент, щоб не перевантажувати DOM
     var fragment = document.createDocumentFragment();
     services.forEach(function (service) {
         fragment.appendChild(createServiceCard(service, lang));
@@ -138,6 +137,7 @@ function loadServiceCards() {
     var grid = document.querySelector('.services-grid');
     if (!grid) return;
 
+    // Скрипт тепер залізобетонно знає шлях до JSON через базу
     fetch(SITE_BASE + 'assets/MassageList.json')
         .then(function (response) {
             if (!response.ok) throw new Error('Could not load services');
@@ -203,9 +203,7 @@ window.addEventListener('resize', function () {
     window.requestAnimationFrame(layoutServiceColumns);
 });
 
-// =========================================================================
-// 3. АНІМАЦІЯ БЕКГРАУНДУ HERO (КАРУСЕЛЬ)
-// =========================================================================
+// Hero Background Carousel
 document.addEventListener('DOMContentLoaded', function () {
     const bgSlides = document.querySelectorAll('#hero-carousel-bg .carousel-bg-slide');
     let current = 0;
@@ -218,12 +216,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// =========================================================================
-// 4. ГЛОБАЛЬНІ ІНТЕРАКЦІЇ (МЕНЮ, СКРОЛ, ГАЛЕРЕЯ)
-// =========================================================================
+// Global interactions
 document.addEventListener('DOMContentLoaded', function () {
 
-    // Клік на логотип — плавний скрол вгору
+    // Intercept logo click
     var logoLink = document.querySelector('.logo-img')?.parentElement;
     if (logoLink) {
         logoLink.addEventListener('click', function(e) {
@@ -236,7 +232,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Мобільне меню бургер
     var toggle = document.querySelector('.nav-toggle');
     var navList = document.getElementById('nav-list');
     if (toggle && navList) {
@@ -249,7 +244,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Закриття меню при кліку поза ним
     document.addEventListener('click', function (e) {
         if (navList && navList.classList.contains('show')) {
             if (!navList.contains(e.target) && !toggle.contains(e.target)) {
@@ -260,7 +254,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Динамічний рендер галереї
+    // ==========================================
+    // ОПТИМІЗОВАНА ГАЛЕРЕЯ (ЧЕРЕЗ SITE_BASE)
+    // ==========================================
     var galleryImages = ['slide1.png', 'slide2.jpg', 'slide3.jpg'];
     var galleryIndicators = document.getElementById('gallery-indicators');
     var gallerySlides = document.getElementById('gallery-slides');
@@ -286,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             var img = document.createElement('img');
-            img.src = SITE_BASE + 'assets/gallery/' + imageName;
+            img.src = SITE_BASE + 'assets/gallery/' + imageName; // Чистий шлях через корінь
             img.className = 'd-block w-100 h-100';
             img.style.objectFit = 'cover';
             img.alt = 'Zitrus Massagestudio Galeriebild ' + (index + 1);
@@ -300,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
         gallerySlides.appendChild(slidesFragment);
     }
 
-    // Хедер (приховування при скролі вниз, поява при скролі вгору)
+    // --- ХЕДЕР ТА СКРОЛ ---
     var lastScrollY = window.scrollY;
     var ticking = false;
     var header = document.querySelector('.site-header');
@@ -350,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { passive: true });
     }
 
-    // Плавний скрол для внутрішніх посилань (якорів)
+    // Anchor smooth scroll
     var headerHeight = header ? header.getBoundingClientRect().height : 72;
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
         anchor.addEventListener('click', function (e) {
