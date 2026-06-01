@@ -5,19 +5,7 @@ const SITE_BASE = window.location.hostname.indexOf('github.io') !== -1
 
 var SERVICE_IMAGE_FALLBACK = SITE_BASE + 'assets/carousel/slide1.png';
 
-(function() {
-    // Перевіряємо, чи ми на GitHub Pages (урл містить назву репозиторію)
-    const isGitHubPages = window.location.hostname.includes('github.io');
-    
-    // Створюємо тег <base>
-    const baseTag = document.createElement('base');
-    
-    // Якщо GitHub Pages — ставимо базу з назвою репозиторію, інакше (локально) — корінь "/"
-    baseTag.href = isGitHubPages ? '/ZitrusStudioWebSite/' : '/';
-    
-    // Додаємо його на самий початок секції <head>, щоб він спрацював до завантаження інших ресурсів
-    document.head.insertBefore(baseTag, document.head.firstChild);
-})();
+
 
 
 function toggleCard(card) {
