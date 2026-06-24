@@ -600,6 +600,52 @@ p {
 }
 
 /* ==========================================================================
+   Legal Pages
+   ========================================================================== */
+.legal-page {
+    padding-top: clamp(3rem, 6vw, 5rem);
+}
+
+.legal-card {
+    background: rgba(251, 249, 246, 0.96);
+    border: 1px solid #e8e4de;
+    border-radius: 16px;
+    box-shadow: 0 10px 32px rgba(34, 34, 34, 0.07);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.legal-card h1 {
+    margin-bottom: 0.25rem;
+}
+
+.legal-card h2 {
+    color: var(--text);
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    margin: 2rem 0 0.65rem;
+}
+
+.legal-card p {
+    color: #373737;
+    line-height: 1.75;
+}
+
+.legal-updated {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.legal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+/* ==========================================================================
    Services Expandable Cards
    ========================================================================== */
 .services-grid {
