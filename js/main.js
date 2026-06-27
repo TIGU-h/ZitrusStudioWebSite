@@ -1,24 +1,3 @@
-function getSiteBase() {
-    var pathname = window.location.pathname;
-    var segments = pathname.split('/').filter(Boolean);
-
-    if (!pathname.endsWith('/')) {
-        segments.pop();
-    }
-
-    if (segments.length <= 1) {
-        return './';
-    }
-
-    return '../'.repeat(segments.length - 1);
-}
-
-var SITE_BASE = getSiteBase();
-var SERVICE_IMAGE_FALLBACK = SITE_BASE + 'assets/carousel/slide1.png';
-
-
-
-
 function toggleCard(card) {
     var activeCard = document.querySelector('.service-card.expanded');
     if (activeCard && activeCard !== card) {
@@ -27,7 +6,40 @@ function toggleCard(card) {
     card.classList.toggle('expanded');
 }
 
-function createServiceCard(service, lang) {
+function fitServiceTitle(heading) {
+    if (!heading) return;
+
+    var text = (heading.textContent || '').trim();
+    if (!text) return;
+
+    var maxFontSize = 1.1;
+    var minFontSize = 0.72;
+    var step = 0.02;
+    var computedStyle = window.getComputedStyle(heading);
+    var maxHeight = parseFloat(computedStyle.lineHeight) * 2;
+
+    heading.style.fontSize = maxFontSize + 'rem';
+    heading.style.lineHeight = '1.25';
+
+    while (maxFontSize >= minFontSize) {
+        heading.style.fontSize = maxFontSize + 'rem';
+        if (heading.scrollHeight <= maxHeight + 1 && heading.scrollWidth <= heading.clientWidth + 1) {
+            break;
+        }
+        maxFontSize -= step;
+    }
+
+    heading.style.fontSize = Math.max(maxFontSize, minFontSize) + 'rem';
+}
+
+function fitServiceTitles() {
+    var headings = document.querySelectorAll('.service-footer h3');
+    headings.forEach(function (heading) {
+        fitServiceTitle(heading);
+    });
+}
+
+function createServiceCard(service, lang, fallbackImage) {
     var localized = service[lang] || {};
     var title = localized.title || (service.en && service.en.title) || (service.de && service.de.title) || 'Massage';
     var description = localized.desc || (service.en && service.en.desc) || (service.de && service.de.desc) || '';
@@ -43,11 +55,11 @@ function createServiceCard(service, lang) {
     imageWrapper.className = 'service-img-wrapper';
 
     var image = document.createElement('img');
-    image.src = service.img || SERVICE_IMAGE_FALLBACK;
+    image.src = service.img || fallbackImage;
     image.alt = title;
     image.addEventListener('error', function () {
-        if (image.src.indexOf(SERVICE_IMAGE_FALLBACK) === -1) {
-            image.src = SERVICE_IMAGE_FALLBACK;
+        if (image.src.indexOf(fallbackImage) === -1) {
+            image.src = fallbackImage;
         }
     });
     imageWrapper.appendChild(image);
@@ -57,6 +69,10 @@ function createServiceCard(service, lang) {
 
     var heading = document.createElement('h3');
     heading.textContent = title;
+    var normalizedTitle = (title || '').trim();
+    if (normalizedTitle && !/\s/.test(normalizedTitle) && normalizedTitle.length > 16) {
+        heading.classList.add('single-word');
+    }
 
     var button = document.createElement('button');
     button.className = 'btn-arrow';
@@ -119,25 +135,27 @@ function renderServiceCards(services) {
     if (!grid) return;
 
     var lang = document.documentElement.lang || 'en';
+    var fallbackImage = grid.getAttribute('data-service-fallback') || 'assets/carousel/slide1.png';
     grid.innerHTML = '';
     delete grid.dataset.columns;
 
     // Оптимізація: додаємо через фрагмент, щоб не перевантажувати DOM
     var fragment = document.createDocumentFragment();
     services.forEach(function (service) {
-        fragment.appendChild(createServiceCard(service, lang));
+        fragment.appendChild(createServiceCard(service, lang, fallbackImage));
     });
     grid.appendChild(fragment);
 
     layoutServiceColumns();
+    window.requestAnimationFrame(fitServiceTitles);
 }
 
 function loadServiceCards() {
     var grid = document.querySelector('.services-grid');
     if (!grid) return;
 
-    // Скрипт тепер залізобетонно знає шлях до JSON через базу
-    fetch(SITE_BASE + 'assets/MassageList.json')
+    var servicesSource = grid.getAttribute('data-services-source') || 'assets/MassageList.json';
+    fetch(servicesSource)
         .then(function (response) {
             if (!response.ok) throw new Error('Could not load services');
             return response.json();
@@ -200,6 +218,7 @@ function layoutServiceColumns() {
 document.addEventListener('DOMContentLoaded', loadServiceCards);
 window.addEventListener('resize', function () {
     window.requestAnimationFrame(layoutServiceColumns);
+    window.requestAnimationFrame(fitServiceTitles);
 });
 
 // Hero Background Carousel
@@ -253,9 +272,22 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // ==========================================
-    // ОПТИМІЗОВАНА ГАЛЕРЕЯ (ЧЕРЕЗ SITE_BASE)
+    // ОПТИМІЗОВАНА ГАЛЕРЕЯ
     // ==========================================
-    var galleryImages = ['slide1.png', 'slide2.jpg', 'slide3.jpg'];
+    var gallery = document.getElementById('studioGalleryCarousel');
+    var galleryImages = [];
+    var galleryBase = 'assets/gallery/';
+
+    if (gallery && gallery.getAttribute('data-gallery-images')) {
+        galleryImages = gallery.getAttribute('data-gallery-images').split(',').map(function (value) {
+            return value.trim();
+        }).filter(Boolean);
+    }
+
+    if (gallery && gallery.getAttribute('data-gallery-base')) {
+        galleryBase = gallery.getAttribute('data-gallery-base');
+    }
+
     var galleryIndicators = document.getElementById('gallery-indicators');
     var gallerySlides = document.getElementById('gallery-slides');
 
@@ -280,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             var img = document.createElement('img');
-            img.src = SITE_BASE + 'assets/gallery/' + imageName;
+            img.src = galleryBase + imageName;
             img.className = 'd-block w-100 h-100';
             img.style.objectFit = 'cover';
             img.alt = 'Zitrus Massagestudio Galeriebild ' + (index + 1);

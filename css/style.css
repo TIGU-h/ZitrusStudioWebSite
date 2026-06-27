@@ -710,6 +710,10 @@ p {
     padding: 1.25rem;
 }
 
+.service-footer {
+    min-height: 88px;
+}
+
 .service-footer h3 {
     flex: 1;
     margin: 0;
@@ -718,6 +722,22 @@ p {
     font-weight: 600;
     letter-spacing: 0.05em;
     overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: none;
+    line-height: 1.25;
+    min-height: calc(1.25em * 2);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: normal;
+}
+
+.service-footer h3.single-word {
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+    white-space: normal;
+    overflow: hidden;
 }
 
 .btn-arrow {
