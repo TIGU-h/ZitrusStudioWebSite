@@ -52,7 +52,7 @@
   },
   {
     "id": "anti-cellulite",
-    "img": "services/anti-cellulite.jpg",
+    "img": "carousel/slide1.png",
     "de": { 
       "title": "Anti-Cellulite Hand+Vakuum",
       "desc": "Effektive Kombination aus manueller Bindegewebsmassage und Vakuum-Technik. Strafft die Haut, kurbelt den Stoffwechsel an und formt die Silhouette."
@@ -69,7 +69,7 @@
   },
   {
     "id": "sport",
-    "img": "services/sport.jpg",
+    "img": "carousel/slide2.jpg",
     "de": { 
       "title": "Sportmassage",
       "desc": "Intensive, kraftvolle Griffe speziell für aktive Muskeln. Fördert die Durchblutung, beschleunigt die Regeneration nach dem Training und beugt Muskelkater vor."
@@ -86,7 +86,7 @@
   },
   {
     "id": "honig",
-    "img": "services/honig.jpg",
+    "img": "carousel/slide3.jpg",
     "de": { 
       "title": "Honigmassage",
       "desc": "Eine traditionelle Entgiftungsmassage mit echtem Honig. Die spezielle Klopftechnik zieht Schlackenstoffe aus der Haut und hinterlässt sie seidenweich."
@@ -103,7 +103,7 @@
   },
   {
     "id": "lomi-lomi",
-    "img": "services/lomi-lomi.jpg",
+    "img": "carousel/slide1.png",
     "de": { 
       "title": "Hawaii Lomi-Lomi",
       "desc": "Ein hawaiianisches Entspannungsritual mit warmem Öl. Fließende Unterarmgriffe, die sich wie sanfte Meereswellen anfühlen, für Körper und Seele."
@@ -120,7 +120,7 @@
   },
   {
     "id": "vierhand",
-    "img": "services/vierhand.jpg",
+    "img": "carousel/slide2.jpg",
     "de": { 
       "title": "Hawaii Vierhand",
       "desc": "Das ultimative Wellness-Erlebnis: Vier Hände arbeiten absolut synchron an Ihrem Körper. Schaltet das logische Denken komplett aus – Entspannung pur."
@@ -137,7 +137,7 @@
   },
   {
     "id": "gesicht",
-    "img": "services/gesicht.jpg",
+    "img": "carousel/slide3.jpg",
     "de": { 
       "title": "Gesichtsmassage",
       "desc": "Erfrischende Massage für Gesicht, Dekolleté und Kopfhaut. Löst feine Mimikverspannungen, regt die Durchblutung an und sorgt für einen frischen Glow."
@@ -154,7 +154,7 @@
   },
   {
     "id": "kinder",
-    "img": "services/kinder.jpg",
+    "img": "carousel/slide1.png",
     "de": { 
       "title": "\"Sonnenstrahlen\" Kinder und Jugendmassage bis 13 Jahre alt",
       "desc": "Sanfte und feinfühlige Massage speziell für Kinder. Hilft, Schulstress abzubauen, verbessert den Schlaf und schenkt ein Gefühl von Geborgenheit."
@@ -171,7 +171,7 @@
   },
   {
     "id": "kopf-nacken",
-    "img": "services/kopf-nacken.jpg",
+    "img": "carousel/slide2.jpg",
     "de": { 
       "title": "Kopf, Nacken, Schulter",
       "desc": "Die perfekte Akuthilfe für Büro- und Handyarbeiter. Gezielter Druck löst die typischen Blockaden im oberen Rücken und beugt Kopfschmerzen vor."
@@ -188,7 +188,7 @@
   },
   {
     "id": "ruecken",
-    "img": "services/ruecken.jpg",
+    "img": "carousel/slide3.jpg",
     "de": { 
       "title": "Rücken-Massage",
       "desc": "Konzentrierte Behandlung für die gesamte Wirbelsäule. Lockert festsitzende Muskelbündel, entlastet die Lendenwirbel und verbessert die Haltung."
