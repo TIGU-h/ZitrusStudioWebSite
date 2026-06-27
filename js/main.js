@@ -49,11 +49,28 @@ function normalizeAssetPath(value) {
     return normalized.replace(/\/{2,}/g, '/');
 }
 
+function getSiteBasePath() {
+    var pathname = window.location.pathname || '/';
+    if (!pathname.endsWith('/')) {
+        pathname = pathname.replace(/[^/]*$/, '');
+    }
+    if (!pathname.startsWith('/')) {
+        pathname = '/' + pathname;
+    }
+    return pathname === '/' ? '/' : pathname.replace(/\/+$/, '/') + '';
+}
+
 function resolveAssetUrl(path, baseUrl) {
     var normalizedPath = normalizeAssetPath(path);
     if (!normalizedPath) return '';
     if (/^(?:[a-z]+:)?\/\//i.test(normalizedPath) || normalizedPath.startsWith('data:') || normalizedPath.startsWith('mailto:') || normalizedPath.startsWith('#')) {
         return normalizedPath;
+    }
+
+    if (normalizedPath.startsWith('/')) {
+        var siteBasePath = getSiteBasePath();
+        var relativePath = normalizedPath.replace(/^\/+/, '');
+        return new URL(relativePath, window.location.origin + siteBasePath).toString();
     }
 
     try {
