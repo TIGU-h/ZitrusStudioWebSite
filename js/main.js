@@ -39,7 +39,31 @@ function fitServiceTitles() {
     });
 }
 
-function createServiceCard(service, lang, fallbackImage) {
+function normalizeAssetPath(value) {
+    if (!value) return '';
+
+    var normalized = String(value).trim();
+    if (!normalized) return '';
+    if (/^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(normalized)) return normalized;
+
+    return normalized.replace(/\/{2,}/g, '/');
+}
+
+function resolveAssetUrl(path, baseUrl) {
+    var normalizedPath = normalizeAssetPath(path);
+    if (!normalizedPath) return '';
+    if (/^(?:[a-z]+:)?\/\//i.test(normalizedPath) || normalizedPath.startsWith('data:') || normalizedPath.startsWith('mailto:') || normalizedPath.startsWith('#')) {
+        return normalizedPath;
+    }
+
+    try {
+        return new URL(normalizedPath, baseUrl || window.location.href).toString();
+    } catch (error) {
+        return normalizedPath;
+    }
+}
+
+function createServiceCard(service, lang, fallbackImage, servicesBaseUrl) {
     var localized = service[lang] || {};
     var title = localized.title || (service.en && service.en.title) || (service.de && service.de.title) || 'Massage';
     var description = localized.desc || (service.en && service.en.desc) || (service.de && service.de.desc) || '';
@@ -55,11 +79,14 @@ function createServiceCard(service, lang, fallbackImage) {
     imageWrapper.className = 'service-img-wrapper';
 
     var image = document.createElement('img');
-    image.src = service.img || fallbackImage;
+    var fallbackImageUrl = resolveAssetUrl(fallbackImage, document.baseURI);
+    var imageUrl = service.img ? resolveAssetUrl(service.img, servicesBaseUrl) : fallbackImageUrl;
+
+    image.src = imageUrl || fallbackImageUrl;
     image.alt = title;
     image.addEventListener('error', function () {
-        if (image.src.indexOf(fallbackImage) === -1) {
-            image.src = fallbackImage;
+        if (fallbackImageUrl && image.currentSrc !== fallbackImageUrl) {
+            image.src = fallbackImageUrl;
         }
     });
     imageWrapper.appendChild(image);
@@ -130,19 +157,20 @@ function createServiceCard(service, lang, fallbackImage) {
     return card;
 }
 
-function renderServiceCards(services) {
+function renderServiceCards(services, servicesBaseUrl) {
     var grid = document.querySelector('.services-grid');
     if (!grid) return;
 
     var lang = document.documentElement.lang || 'en';
     var fallbackImage = grid.getAttribute('data-service-fallback') || 'assets/carousel/slide1.png';
+    var resolvedFallbackImage = resolveAssetUrl(fallbackImage, document.baseURI);
     grid.innerHTML = '';
     delete grid.dataset.columns;
 
     // Оптимізація: додаємо через фрагмент, щоб не перевантажувати DOM
     var fragment = document.createDocumentFragment();
     services.forEach(function (service) {
-        fragment.appendChild(createServiceCard(service, lang, fallbackImage));
+        fragment.appendChild(createServiceCard(service, lang, resolvedFallbackImage, servicesBaseUrl));
     });
     grid.appendChild(fragment);
 
@@ -155,13 +183,14 @@ function loadServiceCards() {
     if (!grid) return;
 
     var servicesSource = grid.getAttribute('data-services-source') || 'assets/MassageList.json';
-    fetch(servicesSource)
+    var servicesUrl = resolveAssetUrl(servicesSource, document.baseURI);
+    fetch(servicesUrl)
         .then(function (response) {
             if (!response.ok) throw new Error('Could not load services');
             return response.json();
         })
         .then(function(services) {
-            renderServiceCards(services);
+            renderServiceCards(services, servicesUrl);
 
             if (window.location.hash) {
                 var targetElement = document.querySelector(window.location.hash);
@@ -288,6 +317,8 @@ document.addEventListener('DOMContentLoaded', function () {
         galleryBase = gallery.getAttribute('data-gallery-base');
     }
 
+    var resolvedGalleryBase = resolveAssetUrl(galleryBase, document.baseURI);
+
     var galleryIndicators = document.getElementById('gallery-indicators');
     var gallerySlides = document.getElementById('gallery-slides');
 
@@ -312,7 +343,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             var img = document.createElement('img');
-            img.src = galleryBase + imageName;
+            img.src = resolveAssetUrl(imageName, resolvedGalleryBase);
             img.className = 'd-block w-100 h-100';
             img.style.objectFit = 'cover';
             img.alt = 'Zitrus Massagestudio Galeriebild ' + (index + 1);
