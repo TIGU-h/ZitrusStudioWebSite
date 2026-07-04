@@ -440,7 +440,7 @@ document.addEventListener('DOMContentLoaded', function () {
     buildGalleryCarousel();
 
     // --- ХЕДЕР ТА СКРОЛ ---
-    var lastScrollY = window.scrollY;
+    var lastScrollY = window.scrollY || window.pageYOffset || 0;
     var ticking = false;
     var header = document.querySelector('.site-header');
     var cachedHideDistance = '72px';
@@ -465,30 +465,37 @@ document.addEventListener('DOMContentLoaded', function () {
         updateHideDistance();
         window.addEventListener('resize', updateHideDistance);
 
-        var hideThreshold = 150; 
+        var hideThreshold = 24;
+        function updateHeaderVisibility() {
+            var currentScrollY = window.scrollY || window.pageYOffset || 0;
+            var delta = currentScrollY - lastScrollY;
+
+            if (navList && navList.classList.contains('show')) {
+                header.classList.remove('hide');
+                lastScrollY = currentScrollY;
+                ticking = false;
+                return;
+            }
+
+            if (Math.abs(delta) < 8) {
+                ticking = false;
+                return;
+            }
+
+            if (currentScrollY > lastScrollY && currentScrollY > hideThreshold) {
+                header.classList.add('hide');
+            } else if (currentScrollY < lastScrollY || currentScrollY <= hideThreshold) {
+                header.classList.remove('hide');
+            }
+
+            lastScrollY = currentScrollY;
+            ticking = false;
+        }
+
         window.addEventListener('scroll', function () {
             if (!ticking) {
-                window.requestAnimationFrame(function () {
-                    if (navList && navList.classList.contains('show')) {
-                        header.classList.remove('hide');
-                        lastScrollY = window.scrollY;
-                        ticking = false;
-                        return;
-                    }
-                    var currentScrollY = window.scrollY;
-                    if (currentScrollY > lastScrollY && currentScrollY > hideThreshold) {
-                        if (!header.classList.contains('hide')) {
-                            header.classList.add('hide');
-                        }
-                    } else if (currentScrollY < lastScrollY || currentScrollY <= hideThreshold) {
-                        if (header.classList.contains('hide')) {
-                            header.classList.remove('hide');
-                        }
-                    }
-                    lastScrollY = currentScrollY;
-                    ticking = false;
-                });
                 ticking = true;
+                window.requestAnimationFrame(updateHeaderVisibility);
             }
         }, { passive: true });
     }
