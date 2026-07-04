@@ -80,6 +80,135 @@ function resolveAssetUrl(path, baseUrl) {
     }
 }
 
+var heroCarouselImages = [
+    'assets/gallery/prof_duo.jpg',
+    'assets/gallery/duolike.jpg',
+    'assets/gallery/stones.jpg',
+];
+
+var galleryCarouselImages = [
+    'assets/gallery/prof_duo.jpg',
+    'assets/gallery/stomach.jpg',
+    'assets/gallery/duolike.jpg',
+    'assets/gallery/stones.jpg',
+];
+
+function getSiteRootBaseUrl() {
+    var pathname = window.location.pathname || '/';
+    var normalizedPath = String(pathname).replace(/\\/g, '/');
+    var isLanguagePage = /\/(en|de)(\/|$)/i.test(normalizedPath);
+
+    if (isLanguagePage) {
+        return new URL('../', window.location.href).toString();
+    }
+
+    return new URL('./', window.location.href).toString();
+}
+
+function resolveImagePath(imagePath, baseUrl) {
+    var normalizedPath = normalizeAssetPath(imagePath);
+    if (!normalizedPath) return '';
+
+    if (/^(?:[a-z]+:)?\/\//i.test(normalizedPath) || normalizedPath.startsWith('data:') || normalizedPath.startsWith('mailto:') || normalizedPath.startsWith('#')) {
+        return normalizedPath;
+    }
+
+    if (normalizedPath.startsWith('/')) {
+        return resolveAssetUrl(normalizedPath.replace(/^\/+/, ''), getSiteRootBaseUrl());
+    }
+
+    if (normalizedPath.includes('/') || normalizedPath.includes('\\')) {
+        return resolveAssetUrl(normalizedPath, getSiteRootBaseUrl());
+    }
+
+    return resolveAssetUrl(normalizedPath, baseUrl || getSiteRootBaseUrl());
+}
+
+function buildHeroCarousel() {
+    var carousel = document.getElementById('heroBootstrapCarousel');
+    if (!carousel || !heroCarouselImages.length) return;
+
+    var inner = carousel.querySelector('.carousel-inner');
+    if (!inner) return;
+
+    inner.innerHTML = '';
+    var fragment = document.createDocumentFragment();
+
+    heroCarouselImages.forEach(function (imagePath, index) {
+        var slide = document.createElement('div');
+        slide.className = 'carousel-item h-100' + (index === 0 ? ' active' : '');
+
+        var background = document.createElement('div');
+        background.className = 'carousel-bg-slide';
+        background.style.backgroundImage = 'url("' + resolveImagePath(imagePath, getSiteRootBaseUrl()) + '")';
+
+        slide.appendChild(background);
+        fragment.appendChild(slide);
+    });
+
+    inner.appendChild(fragment);
+}
+
+function buildGalleryCarousel() {
+    var gallery = document.getElementById('studioGalleryCarousel');
+    if (!gallery) return;
+
+    var galleryImages = galleryCarouselImages && galleryCarouselImages.length
+        ? galleryCarouselImages.slice()
+        : [];
+
+    if (!galleryImages.length) {
+        var galleryImagesAttribute = gallery.getAttribute('data-gallery-images');
+        galleryImages = galleryImagesAttribute
+            ? galleryImagesAttribute.split(',').map(function (value) {
+                return value.trim();
+            }).filter(Boolean)
+            : [];
+    }
+
+    var galleryBase = gallery.getAttribute('data-gallery-base') || 'assets/gallery/';
+    var resolvedGalleryBase = resolveAssetUrl(galleryBase, getSiteRootBaseUrl());
+
+    var galleryIndicators = document.getElementById('gallery-indicators');
+    var gallerySlides = document.getElementById('gallery-slides');
+    if (!galleryIndicators || !gallerySlides || !galleryImages.length) return;
+
+    galleryIndicators.innerHTML = '';
+    gallerySlides.innerHTML = '';
+
+    var indicatorsFragment = document.createDocumentFragment();
+    var slidesFragment = document.createDocumentFragment();
+
+    galleryImages.forEach(function (imagePath, index) {
+        var indicator = document.createElement('button');
+        indicator.type = 'button';
+        indicator.setAttribute('data-bs-target', '#studioGalleryCarousel');
+        indicator.setAttribute('data-bs-slide-to', String(index));
+        indicator.setAttribute('aria-label', 'Slide ' + (index + 1));
+
+        var slide = document.createElement('div');
+        slide.className = 'carousel-item h-100' + (index === 0 ? ' active' : '');
+
+        if (index === 0) {
+            indicator.className = 'active';
+            indicator.setAttribute('aria-current', 'true');
+        }
+
+        var img = document.createElement('img');
+        img.src = resolveImagePath(imagePath, resolvedGalleryBase);
+        img.className = 'd-block w-100 h-100';
+        img.style.objectFit = 'cover';
+        img.alt = 'Zitrus Massagestudio Galeriebild ' + (index + 1);
+
+        slide.appendChild(img);
+        indicatorsFragment.appendChild(indicator);
+        slidesFragment.appendChild(slide);
+    });
+
+    galleryIndicators.appendChild(indicatorsFragment);
+    gallerySlides.appendChild(slidesFragment);
+}
+
 function createServiceCard(service, lang, fallbackImage, servicesBaseUrl) {
     var localized = service[lang] || {};
     var title = localized.title || (service.en && service.en.title) || (service.de && service.de.title) || 'Massage';
@@ -179,7 +308,7 @@ function renderServiceCards(services, servicesBaseUrl) {
     if (!grid) return;
 
     var lang = document.documentElement.lang || 'en';
-    var fallbackImage = grid.getAttribute('data-service-fallback') || 'assets/carousel/slide1.png';
+    var fallbackImage = grid.getAttribute('data-service-fallback') || 'assets/gallery/stones.jpg';
     var resolvedFallbackImage = resolveAssetUrl(fallbackImage, document.baseURI);
     grid.innerHTML = '';
     delete grid.dataset.columns;
@@ -267,17 +396,8 @@ window.addEventListener('resize', function () {
     window.requestAnimationFrame(fitServiceTitles);
 });
 
-// Hero Background Carousel
 document.addEventListener('DOMContentLoaded', function () {
-    const bgSlides = document.querySelectorAll('#hero-carousel-bg .carousel-bg-slide');
-    let current = 0;
-    if (bgSlides.length > 1) {
-        setInterval(() => {
-            bgSlides[current].classList.remove('active');
-            current = (current + 1) % bgSlides.length;
-            bgSlides[current].classList.add('active');
-        }, 4000);
-    }
+    buildHeroCarousel();
 });
 
 // Global interactions
@@ -317,62 +437,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // ==========================================
-    // ОПТИМІЗОВАНА ГАЛЕРЕЯ
-    // ==========================================
-    var gallery = document.getElementById('studioGalleryCarousel');
-    var galleryImages = [];
-    var galleryBase = 'assets/gallery/';
-
-    if (gallery && gallery.getAttribute('data-gallery-images')) {
-        galleryImages = gallery.getAttribute('data-gallery-images').split(',').map(function (value) {
-            return value.trim();
-        }).filter(Boolean);
-    }
-
-    if (gallery && gallery.getAttribute('data-gallery-base')) {
-        galleryBase = gallery.getAttribute('data-gallery-base');
-    }
-
-    var resolvedGalleryBase = resolveAssetUrl(galleryBase, document.baseURI);
-
-    var galleryIndicators = document.getElementById('gallery-indicators');
-    var gallerySlides = document.getElementById('gallery-slides');
-
-    if (galleryIndicators && gallerySlides && galleryImages.length > 0) {
-        var indicatorsFragment = document.createDocumentFragment();
-        var slidesFragment = document.createDocumentFragment();
-
-        galleryImages.forEach(function (imageName, index) {
-            var indicator = document.createElement('button');
-            indicator.type = 'button';
-            indicator.setAttribute('data-bs-target', '#studioGalleryCarousel');
-            indicator.setAttribute('data-bs-slide-to', String(index));
-            indicator.setAttribute('aria-label', 'Slide ' + (index + 1));
-            
-            var slide = document.createElement('div');
-            slide.className = 'carousel-item h-100';
-            
-            if (index === 0) {
-                indicator.className = 'active';
-                indicator.setAttribute('aria-current', 'true');
-                slide.className += ' active';
-            }
-
-            var img = document.createElement('img');
-            img.src = resolveAssetUrl(imageName, resolvedGalleryBase);
-            img.className = 'd-block w-100 h-100';
-            img.style.objectFit = 'cover';
-            img.alt = 'Zitrus Massagestudio Galeriebild ' + (index + 1);
-
-            slide.appendChild(img);
-            indicatorsFragment.appendChild(indicator);
-            slidesFragment.appendChild(slide);
-        });
-
-        galleryIndicators.appendChild(indicatorsFragment);
-        gallerySlides.appendChild(slidesFragment);
-    }
+    buildGalleryCarousel();
 
     // --- ХЕДЕР ТА СКРОЛ ---
     var lastScrollY = window.scrollY;
