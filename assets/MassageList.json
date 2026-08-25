@@ -4,11 +4,11 @@
     "img": "../assets/massagePhotos/Ganzkörperlichemassage.jpg",
     "de": { 
       "title": "Ganzkörperlichemassage",
-      "desc": "Klassische Tiefenentspannung für den ganzen Körper. Löst Blockaden, baut Stress ab und bringt Ihre Energie wieder voll in Fluss."
+      "desc": "Wohltuende Tiefenentspannung für den ganzen Körper. Löst Verspannungen, baut Alltagsstress ab und bringt Ihre Energie wieder voll in Fluss."
     },
     "en": { 
       "title": "Full Body Massage",
-      "desc": "Classic deep relaxation from head to toe. Melts away muscle tension, reduces daily stress, and recharges your inner energy."
+      "desc": "Soothing deep relaxation from head to toe. Melts away muscle tension, reduces daily stress, and recharges your inner energy."
     },
     "durations": [
       { "time": "30 min", "price": "29€", "oldPrice": "35€" },
