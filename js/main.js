@@ -1,3 +1,8 @@
+if (window.location.pathname.endsWith('/index.html')) {
+    var cleanUrl = window.location.pathname.replace('/index.html', '') + window.location.search + window.location.hash;
+    window.history.replaceState(null, '', cleanUrl || '/');
+}
+
 function toggleCard(card) {
     var activeCard = document.querySelector('.service-card.expanded');
     if (activeCard && activeCard !== card) {
@@ -81,15 +86,16 @@ function resolveAssetUrl(path, baseUrl) {
 }
 
 var heroCarouselImages = [
-    'assets/gallery/prof_duo.jpg',
-    'assets/gallery/duolike.jpg',
     'assets/gallery/stones.jpg',
+    'assets/gallery/candles.jpg',
+    'assets/gallery/oil.jpg',
 ];
 
 var galleryCarouselImages = [
     'assets/gallery/prof_duo.jpg',
-    'assets/gallery/stomach.jpg',
+    'assets/gallery/candles.jpg',
     'assets/gallery/duolike.jpg',
+    'assets/gallery/oil.jpg',
     'assets/gallery/stones.jpg',
 ];
 
