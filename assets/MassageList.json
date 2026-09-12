@@ -202,5 +202,22 @@
       { "time": "60 min", "price": "55€", "oldPrice": "65€" },
       { "time": "90 min", "price": "--", "oldPrice": "--" }
     ]
+  },
+  {
+    "id": "reiki",
+    "img": "../assets/massagePhotos/Reiki-Massage.webp",
+    "de": { 
+      "title": "Reiki-Massage",
+      "desc": "Die exklusive Reiki-Massage ist eine seltene, energetische Anwendung aus Japan, die durch sanfte Berührungen und tiefe Wärme spürbar Stress abbaut, den Geist beruhigt und die eigenen Selbstheilungskräfte aktiviert. Diese von Meisterhand geführte Anwendung bringt Körper und Seele wieder in ein harmonisches Gleichgewicht und schenkt Ihnen eine wohltuende Auszeit vom Alltag (nur bei Maryna)."
+    },
+    "en": { 
+      "title": "Reiki Massage",
+      "desc": "The exclusive Reiki massage is a rare energetic practice from Japan that uses gentle touches and deep warmth to visibly relieve stress, calm the mind, and restore inner balance. Guided by a certified master, this soothing session brings body and soul into harmony, offering a deeply relaxing escape from daily life (available with Maryna only)."
+    },
+    "durations": [
+      { "time": "30 min", "price": "29€", "oldPrice": "35€" },
+      { "time": "60 min", "price": "55€", "oldPrice": "65€" },
+      { "time": "90 min", "price": "79€", "oldPrice": "95€" }
+    ]
   }
 ]
