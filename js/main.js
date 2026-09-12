@@ -86,17 +86,17 @@ function resolveAssetUrl(path, baseUrl) {
 }
 
 var heroCarouselImages = [
-    'assets/gallery/stones.jpg',
-    'assets/gallery/candles.jpg',
-    'assets/gallery/oil.jpg',
+    'assets/gallery/stones.webp',
+    'assets/gallery/candles.webp',
+    'assets/gallery/oil.webp',
 ];
 
 var galleryCarouselImages = [
-    'assets/gallery/prof_duo.jpg',
-    'assets/gallery/candles.jpg',
-    'assets/gallery/duolike.jpg',
-    'assets/gallery/oil.jpg',
-    'assets/gallery/stones.jpg',
+    'assets/gallery/prof_duo.webp',
+    'assets/gallery/candles.webp',
+    'assets/gallery/duolike.webp',
+    'assets/gallery/oil.webp',
+    'assets/gallery/stones.webp',
 ];
 
 function getSiteRootBaseUrl() {
@@ -314,7 +314,7 @@ function renderServiceCards(services, servicesBaseUrl) {
     if (!grid) return;
 
     var lang = document.documentElement.lang || 'en';
-    var fallbackImage = grid.getAttribute('data-service-fallback') || 'assets/gallery/stones.jpg';
+    var fallbackImage = grid.getAttribute('data-service-fallback') || 'assets/gallery/stones.webp';
     var resolvedFallbackImage = resolveAssetUrl(fallbackImage, document.baseURI);
     grid.innerHTML = '';
     delete grid.dataset.columns;
