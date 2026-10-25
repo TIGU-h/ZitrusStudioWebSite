@@ -285,7 +285,7 @@ function createServiceCard(service, lang, fallbackImage, servicesBaseUrl) {
 
         var item = document.createElement('li');
         var time = document.createElement('strong');
-        time.textContent = duration.time;
+        time.textContent = duration[lang] || duration.time;
 
         var priceGroup = document.createElement('span');
         if (duration.oldPrice && duration.oldPrice !== '--') {
@@ -293,6 +293,8 @@ function createServiceCard(service, lang, fallbackImage, servicesBaseUrl) {
             oldPrice.className = 'old-price';
             oldPrice.textContent = duration.oldPrice;
             priceGroup.appendChild(oldPrice);
+        } else {
+            item.classList.add('price-single');
         }
 
         priceGroup.appendChild(document.createTextNode(duration.price));

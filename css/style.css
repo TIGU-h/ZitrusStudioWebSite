@@ -851,6 +851,10 @@ p {
     transform: translateY(0.75rem);
 }
 
+.details-content .prices li.price-single strong {
+    transform: none;
+}
+
 .details-content .prices li > span {
     display: flex;
     flex-direction: column;

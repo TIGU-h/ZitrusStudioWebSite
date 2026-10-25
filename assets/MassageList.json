@@ -208,16 +208,84 @@
     "img": "../assets/massagePhotos/Reiki-Massage.webp",
     "de": { 
       "title": "Reiki-Massage",
-      "desc": "Die exklusive Reiki-Massage ist eine seltene, energetische Anwendung aus Japan, die durch sanfte Berührungen und tiefe Wärme spürbar Stress abbaut, den Geist beruhigt und die eigenen Selbstheilungskräfte aktiviert. Diese von Meisterhand geführte Anwendung bringt Körper und Seele wieder in ein harmonisches Gleichgewicht und schenkt Ihnen eine wohltuende Auszeit vom Alltag (nur bei Maryna)."
+      "desc": "Eine ganzheitliche Praxis zur Regeneration und tiefen Entspannung. Die sanfte Arbeit mit den Energiezentren des Reiki wird mit einer entspannenden Massage von Händen und Unterarmen kombiniert. Sie löst körperliche Verspannungen, beruhigt den Geist und schenkt ein Gefühl von Harmonie."
     },
     "en": { 
       "title": "Reiki Massage",
-      "desc": "The exclusive Reiki massage is a rare energetic practice from Japan that uses gentle touches and deep warmth to visibly relieve stress, calm the mind, and restore inner balance. Guided by a certified master, this soothing session brings body and soul into harmony, offering a deeply relaxing escape from daily life (available with Maryna only)."
+      "desc": "A holistic practice to restore your energy and encourage deep relaxation. Gentle work with the Reiki energy centers is combined with a soothing massage of the hands and forearms. It eases physical tension, calms the mind, and restores a sense of harmony."
     },
     "durations": [
       { "time": "30 min", "price": "29€", "oldPrice": "35€" },
       { "time": "60 min", "price": "55€", "oldPrice": "65€" },
       { "time": "90 min", "price": "79€", "oldPrice": "95€" }
     ]
+  },
+  {
+    "id": "sugaring-waxing-women",
+    "img": "../assets/massagePhotos/waxing woman.webp",
+    "de": {
+      "title": "Sugaring/Waxing Damen",
+      "desc": "Preise in der Reihenfolge Sugaring / Waxing."
+    },
+    "en": {
+      "title": "Sugaring/Waxing for Women",
+      "desc": "Prices are listed in the order Sugaring / Waxing."
+    },
+    "durations": [
+      { "de": "Bikini komplett", "en": "Full bikini", "price": "45€ / 35€" },
+      { "de": "Bikini", "en": "Bikini line", "price": "35€ / 25€" },
+      { "de": "Hinterbacke", "en": "Buttocks", "price": "35€ / 25€" },
+      { "de": "Beine", "en": "Legs", "price": "65€ / 55€" },
+      { "de": "Unterschenkel", "en": "Lower legs", "price": "50€ / 40€" },
+      { "de": "Oberschenkel", "en": "Thighs", "price": "50€ / 40€" },
+      { "de": "Arme komplett", "en": "Full arms", "price": "40€ / 30€" },
+      { "de": "Unterarme", "en": "Forearms", "price": "30€ / 20€" },
+      { "de": "Oberarme", "en": "Upper arms", "price": "25€ / 10€" },
+      { "de": "Achseln", "en": "Underarms", "price": "20€ / 10€" },
+      { "de": "Rücken", "en": "Back", "price": "40€ / 30€" },
+      { "de": "Bauch", "en": "Abdomen", "price": "20€ / 10€" },
+      { "de": "Gesicht", "en": "Face", "price": "20€ / 10€" },
+      { "de": "Alginatmaske für empfindliche Zonen", "en": "Alginate mask for sensitive areas", "price": "20€" }
+    ]
+  },
+  {
+    "id": "sugaring-waxing-men",
+    "img": "../assets/massagePhotos/waxing man.webp",
+    "de": {
+      "title": "Sugaring/Waxing Herren",
+      "desc": "Preise in der Reihenfolge Sugaring / Waxing."
+    },
+    "en": {
+      "title": "Sugaring/Waxing for Men",
+      "desc": "Prices are listed in the order Sugaring / Waxing."
+    },
+    "durations": [
+      { "de": "Bikini komplett", "en": "Full bikini", "price": "75€ / 65€" },
+      { "de": "Bikini klassisch", "en": "Classic bikini", "price": "45€ / 35€" },
+      { "de": "Beine", "en": "Legs", "price": "80€ / 70€" },
+      { "de": "Unterschenkel", "en": "Lower legs", "price": "60€ / 50€" },
+      { "de": "Oberschenkel", "en": "Thighs", "price": "60€ / 50€" },
+      { "de": "Arme komplett", "en": "Full arms", "price": "55€ / 45€" },
+      { "de": "Unterarme", "en": "Forearms", "price": "35€ / 25€" },
+      { "de": "Oberarme", "en": "Upper arms", "price": "30€ / 20€" },
+      { "de": "Achseln", "en": "Underarms", "price": "25€ / 15€" },
+      { "de": "Rücken", "en": "Back", "price": "40€ / 30€" },
+      { "de": "Bauch", "en": "Abdomen", "price": "30€ / 20€" },
+      { "de": "Gesicht", "en": "Face", "price": "25€ / 15€" },
+      { "de": "Alginatmaske für empfindliche Zonen", "en": "Alginate mask for sensitive areas", "price": "20€" }
+    ]
+  },
+  {
+    "id": "gift-certificate",
+    "img": "../assets/massagePhotos/geschenkgutschein.webp",
+    "de": {
+      "title": "Geschenkgutschein",
+      "desc": "Verschenken Sie Entspannung und Wohlbefinden. Geschenkgutscheine sind für jede Massage erhältlich und können über WhatsApp oder Instagram bestellt werden."
+    },
+    "en": {
+      "title": "Gift Certificate",
+      "desc": "Give the gift of relaxation and wellbeing. Gift certificates are available for any massage and can be ordered via WhatsApp or Instagram."
+    },
+    "durations": []
   }
 ]
