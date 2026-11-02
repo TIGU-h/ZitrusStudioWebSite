@@ -4,118 +4,138 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Massage Augsburg | Zitrus Massagestudio - Entspannungsmassage & SPA</title>
-    <meta name="description" content="Ihr exklusives Zitrus Massagestudio in Augsburg. Professionelle Entspannungsmassage, 4-Hände-Massage & Wellness.">
-    <script src="js/main.js?v=20260912" defer></script>
-
-    <!-- Прелоад першого слайду, щоб він вантажився миттєво і сайт не виглядав порожнім -->
+    <title>Massage Augsburg | Zitrus Massagestudio – Entspannungsmassage &amp; SPA</title>
+    <meta name="description" content="Ihr exklusives Zitrus Massagestudio in Augsburg. Professionelle Entspannungsmassage, 4-Hände-Massage &amp; Wellness. Jetzt Termin vereinbaren!">
+    <script src="js/main.js?v=20261102" defer></script>
     <link rel="preload" as="image" href="assets/gallery/stones.webp" fetchpriority="high">
-
     <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=20260912">
-
+    <link rel="stylesheet" href="css/style.css?v=20261102">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 </head>
 
 <body>
     <header class="site-header" role="banner">
         <div class="container header-inner">
-
-            <nav id="site-nav" class="nav" role="navigation" aria-label="Hauptnavigation">
-                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Menü">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+            <nav id="site-nav" class="nav" aria-label="Hauptnavigation">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Menü öffnen">
+                    <span></span><span></span><span></span>
                 </button>
-
                 <div id="nav-list" class="nav-list">
                     <ul class="nav-group nav-left">
-                        <li><a href="#team">Team</a></li>
-                        <li><a href="#services">Preise</a></li>
+                        <li><a href="#services">Massagen &amp; Preise</a></li>
+                        <li><a href="#gift-certificates">Gutscheine</a></li>
+                        <li><a href="#about">Über uns</a></li>
                     </ul>
-
                     <ul class="nav-group nav-right">
-                        <li><a href="#gallery">Galerie</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#gallery">Studio</a></li>
                         <li><a href="#contact">Kontakt</a></li>
                     </ul>
                 </div>
             </nav>
-
-            <a href="index.html">
-                <img src="assets/logo.svg" alt="Zitrus Massagestudio Logo" class="logo-img" />
-                <span class="sr-only">Zitrus Massagestudio — Startseite</span>
+            <a class="brand-link" href="index.html" aria-label="Zitrus Massagestudio – Startseite">
+                <img src="assets/logo.svg" alt="" class="logo-img">
             </a>
-
-            <div class="lang">
-                <a class="lang-link active" href="index.html">DE</a>
-                <a class="lang-link" id="lang-switch" href="en/index.html">EN</a>
+            <div class="lang" aria-label="Sprache wählen">
+                <a class="lang-link active" aria-current="page" href="index.html">DE</a>
+                <a class="lang-link" href="en/index.html">EN</a>
             </div>
-
         </div>
     </header>
 
     <main>
         <section id="hero" class="hero">
-
-            <div id="heroBootstrapCarousel" class="carousel slide carousel-fade h-100 w-100" data-bs-ride="carousel"
-                data-bs-interval="5000">
-                <div class="carousel-inner h-100">
-                </div>
+            <div id="heroBootstrapCarousel" class="carousel slide carousel-fade h-100 w-100" data-bs-ride="carousel" data-bs-interval="5000" aria-hidden="true">
+                <div class="carousel-inner h-100"></div>
             </div>
-
             <div class="hero-overlay-content">
                 <div class="hero-content">
-                    <h1>Wellness-Massagen in Augsburg</h1>
-                    <p class="lead">Ganzkörper- & Aromaölmassagen in gemütlicher Atmosphäre. Pure Entspannung.</p>
+                    <p class="eyebrow hero-eyebrow">Zitrus Massagestudio · Augsburg</p>
+                    <h1>Entspannen, auftanken und sich rundum wohlfühlen</h1>
+                    <p class="lead">Professionelle Wellnessmassagen in Augsburg – Verspannungen loslassen, dem Alltag entfliehen und sich bewusst Zeit für sich nehmen.</p>
                 </div>
             </div>
-
         </section>
 
-        <section id="about" class="section about" style="padding-bottom: 1.5rem;">
+        <section id="about" class="section about">
             <div class="container">
                 <div class="welcome-box compact-welcome">
                     <h2 class="welcome-title">Willkommen bei Zitrus</h2>
-                    <p class="welcome-text" style="margin-bottom: 0;">
-                        Entdecken Sie erstklassige Entspannung und Wohlbefinden im Herzen von Augsburg.
-                        Genießen Sie professionelle Ganzkörper-, Aromaöl- und Hot-Stone-Massagen in einem gemütlichen,
-                        einladenden Studio.
-                    </p>
-                    <br>
-                    <p><a class="btn-hero" href="#contact">Jetzt buchen</a></p>
+                    <p class="welcome-text">Im Zitrus Massagestudio im Herzen von Augsburg erwarten Sie wohltuende Massagen in einer ruhigen, einladenden Atmosphäre. Ob gezielte Entspannung oder eine Auszeit für den ganzen Körper – wir nehmen uns Zeit für Ihr Wohlbefinden.</p>
+                    <a class="text-link" href="#team">Lernen Sie unser Team kennen</a>
                 </div>
             </div>
         </section>
 
-        <section id="team" class="section team" style="padding-top: 1.5rem;">
+        <section id="audiences" class="section audience-section">
             <div class="container">
+                <p class="eyebrow">Eine Auszeit, die zu Ihnen passt</p>
+                <h2>Massage für jeden Bedarf</h2>
+                <div class="audience-grid">
+                    <article class="audience-card">
+                        <span class="audience-number" aria-hidden="true">01</span>
+                        <h3>Für den Büroalltag</h3>
+                        <p>Langes Sitzen kann Nacken, Schultern und Rücken beanspruchen. Entdecken Sie unsere Kopf-, Nacken- und Schultermassage oder die Rückenmassage.</p>
+                        <a class="text-link" href="#service-kopf-nacken">Kopf-, Nacken- und Schultermassage ansehen</a>
+                    </article>
+                    <article class="audience-card">
+                        <span class="audience-number" aria-hidden="true">02</span>
+                        <h3>Zum Abschalten</h3>
+                        <p>Gönnen Sie sich eine ruhige Pause vom Alltag. Eine Relaxmassage oder Ganzkörpermassage schenkt Ihnen bewusste Zeit zum Durchatmen.</p>
+                        <a class="text-link" href="#service-relax">Relaxmassage ansehen</a>
+                    </article>
+                    <article class="audience-card">
+                        <span class="audience-number" aria-hidden="true">03</span>
+                        <h3>Zum Verschenken</h3>
+                        <p>Ein Massagegutschein ist eine persönliche Aufmerksamkeit zum Geburtstag, Jahrestag, zu Feiertagen oder einfach zwischendurch.</p>
+                        <a class="text-link" href="#gift-certificates">Gutscheine entdecken</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-zitrus" class="section why-section">
+            <div class="container why-layout">
+                <div>
+                    <p class="eyebrow">Ihre Zeit bei uns</p>
+                    <h2>Warum Zitrus?</h2>
+                    <p class="muted">Im Mittelpunkt stehen Ihre persönliche Auszeit und eine angenehme Behandlung in ruhiger Atmosphäre.</p>
+                </div>
+                <ul class="benefit-list">
+                    <li><strong>Persönliche Aufmerksamkeit</strong><span>Wir möchten, dass Sie sich während Ihres Besuchs wohl und gut aufgehoben fühlen.</span></li>
+                    <li><strong>Ruhige Studioatmosphäre</strong><span>Ein einladender Ort, um dem Alltag für einen Moment zu entkommen.</span></li>
+                    <li><strong>Verschiedene Massageerlebnisse</strong><span>Von Ganzkörper- und Aromaölmassagen bis zur Hawaii-Vierhand- und Relaxmassage.</span></li>
+                    <li><strong>Direkt und unkompliziert</strong><span>Fragen und Terminwünsche können Sie direkt per WhatsApp senden.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="team" class="section team">
+            <div class="container">
+                <p class="eyebrow">Persönlich für Sie da</p>
                 <h2>Lernen Sie unser Team kennen</h2>
                 <div class="team-grid">
                     <article class="card master">
                         <figure class="portrait">
-                            <!-- Розміри фіксують блоки, щоб сторінка не сіпалася під час завантаження фото -->
-                            <img src="assets/Masters/Oksana.webp" width="300" height="400" decoding="async"
-                                loading="lazy" alt="Oksana, Massagemeisterin im Zitrus Massagestudio">
+                            <img src="assets/Masters/Oksana.webp" width="300" height="400" decoding="async" loading="lazy" alt="Oksana im Zitrus Massagestudio">
                         </figure>
                         <div class="card-body">
                             <h3>Oksana</h3>
-                            <p class="specialty">Wellnessmassagen, Ganzkörper- & Aromaölmassagen, Spa-Rituale</p>
-                            <p class="bio">Oksana bringt Leidenschaft und Erfahrung mit, um Ihre Entspannung und Ihr
-                                Wohlbefinden zu gewährleisten.</p>
-                            <p><a class="master-link" href="de/oksana.html">Profil ansehen</a></p>
+                            <p class="specialty">Ganzkörper-, Aromaöl- und Hot-Stone-Massagen</p>
+                            <p class="bio">Oksana bietet wohltuende Wellnessmassagen und Spa-Rituale an. Ihr Angebot verbindet Ganzkörper- und Aromaölmassagen mit der Wärme der Hot-Stone-Therapie.</p>
+                            <a class="master-link" href="de/oksana.html">Oksana kennenlernen</a>
                         </div>
                     </article>
                     <article class="card master">
                         <figure class="portrait">
-                            <img src="assets/Masters/Maryna.webp" width="300" height="400" decoding="async"
-                                loading="lazy" alt="Maryna, Massagemeisterin im Zitrus Massagestudio">
+                            <img src="assets/Masters/Maryna.webp" width="300" height="400" decoding="async" loading="lazy" alt="Maryna im Zitrus Massagestudio">
                         </figure>
                         <div class="card-body">
                             <h3>Maryna</h3>
-                            <p class="specialty">Wellnessmassagen, Ganzkörper- & Aromaölmassagen, Spa-Rituale</p>
-                            <p class="bio">Maryna bringt Ruhe, Fachwissen und Herzlichkeit in jede Behandlung.</p>
-                            <p><a class="master-link" href="de/maryna.html">Profil ansehen</a></p>
+                            <p class="specialty">Relax-, Ganzkörper-, Aromaöl- und Gesichtsmassagen</p>
+                            <p class="bio">Marynas Angebot umfasst sanfte Relaxmassagen ebenso wie Ganzkörper-, Aromaöl- und Gesichtsmassagen – für eine entspannte Auszeit oder eine gezielte kleine Pause.</p>
+                            <a class="master-link" href="de/maryna.html">Maryna kennenlernen</a>
                         </div>
                     </article>
                 </div>
@@ -124,111 +144,71 @@
 
         <section id="services" class="section services">
             <div class="container">
-                <h2>Leistungen & Preise</h2>
-                <p class="muted mb-4">Geschenkgutscheine für jede Massage können ebenfalls bestellt werden.</p>
+                <p class="eyebrow">Finden Sie Ihre Auszeit</p>
+                <h2>Massagen &amp; Preise</h2>
+                <p class="muted mb-4">Entdecken Sie Behandlungen, verfügbare Dauer und Preise. Wählen Sie eine Karte, um die Details zu sehen; Terminfragen beantworten wir gerne per WhatsApp.</p>
+                <div class="services-grid" data-services-source="assets/MassageList.json?v=20261102" data-service-fallback="assets/gallery/prof_duo.webp">
+                    <p class="muted services-loading">Angebote werden geladen …</p>
+                </div>
+                <p class="services-note">Gutscheine für Massagen sind ebenfalls erhältlich. <a class="text-link" href="#gift-certificates">Mehr zu Massagegutscheinen</a></p>
+            </div>
+        </section>
 
-                <div class="services-grid" data-services-source="assets/MassageList.json?v=20260912"
-                    data-service-fallback="assets/gallery/prof_duo.webp?v=20260912">
-                    <p class="muted services-loading">Leistungen werden geladen...</p>
+        <section id="gift-certificates" class="section gift-section">
+            <div class="container gift-card">
+                <div class="gift-image">
+                    <img src="assets/massagePhotos/geschenkgutschein.webp" width="800" height="600" loading="lazy" alt="Geschenkgutschein für eine Massage im Zitrus Massagestudio">
+                </div>
+                <div class="gift-copy">
+                    <p class="eyebrow">Eine besondere Aufmerksamkeit</p>
+                    <h2>Entspannung verschenken</h2>
+                    <p>Ein Massagegutschein passt zu Geburtstagen, Jahrestagen, Feiertagen und vielen weiteren Anlässen. Gutscheine sind für Massagen erhältlich.</p>
+                    <p>Schreiben Sie uns per WhatsApp, um den gewünschten Gutschein zu besprechen und zu fragen, ob Personalisierung oder digitale Zustellung möglich ist.</p>
+                    <div class="gift-actions">
+                        <a class="btn-hero" href="de/gutscheine.html">Massagegutschein anfragen</a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="gallery" class="section gallery">
             <div class="container">
-                <h2>Galerie</h2>
-                <p class="muted">Machen Sie einen virtuellen Rundgang durch unsere friedliche Oase und Behandlungsräume.
-                </p>
-
-                <div id="studioGalleryCarousel" class="carousel slide carousel-dark shadow-sm" data-bs-ride="carousel"
-                    data-gallery-images="prof_duo.webp,stomach.webp,oil.webp,stones.webp"
-                    data-gallery-base="assets/gallery/">
+                <p class="eyebrow">Ein erster Eindruck</p>
+                <h2>Einblicke ins Studio</h2>
+                <p class="muted">Entdecken Sie unsere Räume und ausgewählte Eindrücke aus dem Zitrus Massagestudio.</p>
+                <div id="studioGalleryCarousel" class="carousel slide carousel-dark shadow-sm" data-bs-ride="carousel" data-gallery-base="assets/gallery/">
                     <div class="carousel-indicators" id="gallery-indicators"></div>
                     <div class="carousel-inner" id="gallery-slides"></div>
-
-                    <button class="carousel-control-prev" type="button" data-bs-target="#studioGalleryCarousel"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Zurück</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#studioGalleryCarousel"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Weiter</span>
-                    </button>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#studioGalleryCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Zurück</span></button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#studioGalleryCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Weiter</span></button>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="section contact">
             <div class="container">
-                <h2>Kontakt & Studio</h2>
-                <p class="muted mb-4">Termine und Buchungen sind schnell und einfach über Instagram DM oder WhatsApp
-                    möglich.</p>
-
-                <div class="row g-4 align-items-center mt-2">
+                <p class="eyebrow">Wir freuen uns auf Ihre Nachricht</p>
+                <h2>Kontakt &amp; Studio</h2>
+                <p class="muted mb-4">Fragen und Terminwünsche richten Sie am einfachsten direkt per WhatsApp an uns.</p>
+                <div class="row g-4 align-items-stretch">
                     <div class="col-md-5">
-                        <div class="contact-info-block p-4">
+                        <div class="contact-info-block p-4 h-100">
+                            <h3>Besuchen Sie uns</h3>
                             <address class="studio-address">
-                                <h4>Unser Studio</h4>
-                                <p class="address-details d-flex align-items-start gap-2">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" class="address-icon">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                        <circle cx="12" cy="10" r="3"></circle>
-                                    </svg>
-                                    <span><strong>Adresse:</strong><br>Schaezlerstraße 32,<br>86152 Augsburg
-                                        (Stadtzentrum)</span>
-                                </p>
+                                <p><strong>Zitrus Massagestudio</strong><br>Schaezlerstraße 32<br>86152 Augsburg</p>
                             </address>
-
-                            <h4>Termin buchen</h4>
+                            <p class="hours-note"><strong>Öffnungszeiten</strong><br>Bitte fragen Sie uns per WhatsApp nach den aktuellen Öffnungszeiten und verfügbaren Terminen.</p>
+                            <h3 class="contact-booking-heading">Direkt per WhatsApp</h3>
                             <div class="d-flex flex-column gap-3">
-                                <div class="expert-contact-row">
-                                    <p class="expert-name">Oksana:</p>
-                                    <a href="https://wa.me/4915172441951" target="_blank" rel="noopener"
-                                        class="btn btn-whatsapp w-100">
-                                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                                            <path
-                                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.703 1.458h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                                        </svg>
-                                        WhatsApp (Oksana)
-                                    </a>
-                                </div>
-
-                                <div class="expert-contact-row">
-                                    <p class="expert-name">Maryna:</p>
-                                    <a href="https://wa.me/491758214697" target="_blank" rel="noopener"
-                                        class="btn btn-whatsapp w-100">
-                                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                                            <path
-                                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.703 1.458h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                                        </svg>
-                                        WhatsApp (Maryna)
-                                    </a>
-                                </div>
-
-                                <div class="contact-divider"></div>
-
-                                <a href="https://www.instagram.com/zitrus.massage.augsburg" target="_blank"
-                                    rel="noopener" class="btn btn-instagram">
-                                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                                    </svg>
-                                    Instagram Profile
-                                </a>
+                                <a href="https://wa.me/4915172441951" target="_blank" rel="noopener" class="btn btn-whatsapp w-100">Oksana · +49 151 72441951</a>
+                                <a href="https://wa.me/491758214697" target="_blank" rel="noopener" class="btn btn-whatsapp w-100">Maryna · +49 175 8214697</a>
                             </div>
+                            <a class="map-link" href="https://maps.google.com/?cid=857988006097285715" target="_blank" rel="noopener">Route auf Google Maps ansehen</a>
                         </div>
                     </div>
-
                     <div class="col-md-7">
                         <div class="map-wrapper shadow-sm">
-                            <!-- Завантаження мапи відкладено, доки користувач не доскролить до секції -->
-                            <iframe
-                                src="https://maps.google.com/maps?q=Zitrus+Massagestudio+Schaezlerstra%C3%9Fe+32+Augsburg&cid=857988006097285715&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                                width="100%" height="100%" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
+                            <iframe title="Karte zum Zitrus Massagestudio in Augsburg" src="https://maps.google.com/maps?q=Zitrus+Massagestudio+Schaezlerstra%C3%9Fe+32+Augsburg&cid=857988006097285715&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>
@@ -238,24 +218,19 @@
 
     <footer class="site-footer">
         <div class="container">
-            <div class="row g-4 justify-content-between align-items-center">
-                <div class="col-md-6 text-center text-md-start">
-                    <h5 class="footer-title">Zitrus Massagestudio</h5>
-                    <p class="footer-copyright">© 2026 Wellness Massagen Augsburg. Alle Rechte vorbehalten.</p>
+            <div class="footer-layout">
+                <div>
+                    <h2 class="footer-title">Zitrus Massagestudio</h2>
+                    <p class="footer-copyright">© 2026 Zitrus Massagestudio · Augsburg</p>
                     <p class="footer-address">Schaezlerstraße 32 · 86152 Augsburg</p>
                 </div>
-
-                <div class="col-md-6 text-center text-md-end">
-                    <div class="footer-links d-flex justify-content-center justify-content-md-end gap-3">
-                        <a href="de/impressum.html">Impressum</a>
-                        <span class="footer-separator">•</span>
-                        <a href="de/datenschutz.html">Datenschutz</a>
-                    </div>
+                <div class="footer-links">
+                    <a href="https://www.instagram.com/zitrus.massage.augsburg" target="_blank" rel="noopener">Instagram</a>
+                    <a href="de/impressum.html">Impressum</a>
+                    <a href="de/datenschutz.html">Datenschutz</a>
                 </div>
             </div>
         </div>
-        <!-- version 37 -->
     </footer>
 </body>
-
 </html>

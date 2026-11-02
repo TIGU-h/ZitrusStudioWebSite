@@ -1,14 +1,28 @@
 if (window.location.pathname.endsWith('/index.html')) {
-    var cleanUrl = window.location.pathname.replace('/index.html', '') + window.location.search + window.location.hash;
+    var cleanUrl = window.location.pathname.replace(/index\.html$/, '') + window.location.search + window.location.hash;
     window.history.replaceState(null, '', cleanUrl || '/');
 }
 
-function toggleCard(card) {
+function getMenuLabel(open) {
+    var labels = document.documentElement.lang === 'de'
+        ? { open: 'Menü öffnen', close: 'Menü schließen' }
+        : { open: 'Open menu', close: 'Close menu' };
+    return open ? labels.close : labels.open;
+}
+
+function toggleCard(card, button) {
     var activeCard = document.querySelector('.service-card.expanded');
     if (activeCard && activeCard !== card) {
         activeCard.classList.remove('expanded');
+        var activeButton = activeCard.querySelector('.service-toggle');
+        var activeDetails = activeCard.querySelector('.service-details');
+        if (activeButton) activeButton.setAttribute('aria-expanded', 'false');
+        if (activeDetails) activeDetails.inert = true;
     }
     card.classList.toggle('expanded');
+    button.setAttribute('aria-expanded', String(card.classList.contains('expanded')));
+    var details = card.querySelector('.service-details');
+    if (details) details.inert = !card.classList.contains('expanded');
 }
 
 function fitServiceTitle(heading) {
@@ -38,7 +52,7 @@ function fitServiceTitle(heading) {
 }
 
 function fitServiceTitles() {
-    var headings = document.querySelectorAll('.service-footer h3');
+    var headings = document.querySelectorAll('.service-title');
     headings.forEach(function (heading) {
         fitServiceTitle(heading);
     });
@@ -204,7 +218,9 @@ function buildGalleryCarousel() {
         img.src = resolveImagePath(imagePath, resolvedGalleryBase);
         img.className = 'd-block w-100 h-100';
         img.style.objectFit = 'cover';
-        img.alt = 'Zitrus Massagestudio Galeriebild ' + (index + 1);
+        img.alt = document.documentElement.lang === 'de'
+            ? 'Einblick ins Zitrus Massagestudio ' + (index + 1)
+            : 'A look inside Zitrus Massage Studio ' + (index + 1);
 
         slide.appendChild(img);
         indicatorsFragment.appendChild(indicator);
@@ -220,14 +236,21 @@ function createServiceCard(service, lang, fallbackImage, servicesBaseUrl) {
     var title = localized.title || (service.en && service.en.title) || (service.de && service.de.title) || 'Massage';
     var description = localized.desc || (service.en && service.en.desc) || (service.de && service.de.desc) || '';
     
-    var card = document.createElement('div');
+    var card = document.createElement('article');
     card.className = 'service-card';
-    card.addEventListener('click', function () { toggleCard(card); });
+    card.id = 'service-' + service.id;
 
     var preview = document.createElement('div');
     preview.className = 'service-preview';
 
-    var imageWrapper = document.createElement('div');
+    var button = document.createElement('button');
+    button.className = 'service-toggle';
+    button.type = 'button';
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', 'service-details-' + service.id);
+    button.addEventListener('click', function () { toggleCard(card, button); });
+
+    var imageWrapper = document.createElement('span');
     imageWrapper.className = 'service-img-wrapper';
 
     var image = document.createElement('img');
@@ -235,7 +258,8 @@ function createServiceCard(service, lang, fallbackImage, servicesBaseUrl) {
     var imageUrl = service.img ? resolveAssetUrl(service.img, servicesBaseUrl) : fallbackImageUrl;
 
     image.src = imageUrl || fallbackImageUrl;
-    image.alt = title;
+    image.alt = '';
+    image.loading = 'lazy';
     image.addEventListener('error', function () {
         if (fallbackImageUrl && image.currentSrc !== fallbackImageUrl) {
             image.src = fallbackImageUrl;
@@ -243,29 +267,52 @@ function createServiceCard(service, lang, fallbackImage, servicesBaseUrl) {
     });
     imageWrapper.appendChild(image);
 
-    var footer = document.createElement('div');
+    var footer = document.createElement('span');
     footer.className = 'service-footer';
 
-    var heading = document.createElement('h3');
+    var heading = document.createElement('span');
+    heading.className = 'service-title';
     heading.textContent = title;
     var normalizedTitle = (title || '').trim();
     if (normalizedTitle && !/\s/.test(normalizedTitle) && normalizedTitle.length > 16) {
         heading.classList.add('single-word');
     }
 
-    var button = document.createElement('button');
-    button.className = 'btn-arrow';
-    button.type = 'button';
-    button.setAttribute('aria-label', 'Toggle details');
-    button.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>';
+    var availablePrices = (service.durations || []).filter(function (duration) {
+        return duration.price && duration.price !== '--';
+    });
+    var listedPrices = [];
+    availablePrices.forEach(function (duration) {
+        var matches = String(duration.price).match(/\d+(?:[.,]\d+)?/g) || [];
+        matches.forEach(function (price) {
+            listedPrices.push(Number(price.replace(',', '.')));
+        });
+    });
+    var summary = document.createElement('span');
+    summary.className = 'service-price-summary';
+    if (listedPrices.length) {
+        summary.textContent = (lang === 'de' ? 'Ab ' : 'From ') + Math.min.apply(Math, listedPrices) + '€';
+    } else if (service.id === 'gift-certificate') {
+        summary.textContent = lang === 'de' ? 'Auf Anfrage' : 'Ask us';
+    } else {
+        summary.textContent = lang === 'de' ? 'Preise ansehen' : 'View prices';
+    }
+
+    var arrow = document.createElement('span');
+    arrow.className = 'btn-arrow';
+    arrow.setAttribute('aria-hidden', 'true');
 
     footer.appendChild(heading);
-    footer.appendChild(button);
-    preview.appendChild(imageWrapper);
-    preview.appendChild(footer);
+    footer.appendChild(summary);
+    footer.appendChild(arrow);
+    button.appendChild(imageWrapper);
+    button.appendChild(footer);
+    preview.appendChild(button);
 
     var details = document.createElement('div');
     details.className = 'service-details';
+    details.id = 'service-details-' + service.id;
+    details.inert = true;
 
     var detailsContent = document.createElement('div');
     detailsContent.className = 'details-content';
@@ -304,6 +351,11 @@ function createServiceCard(service, lang, fallbackImage, servicesBaseUrl) {
     });
 
     detailsContent.appendChild(prices);
+    var contactLink = document.createElement('a');
+    contactLink.className = 'service-contact-link';
+    contactLink.href = '#contact';
+    contactLink.textContent = lang === 'de' ? 'Per WhatsApp anfragen' : 'Ask us via WhatsApp';
+    detailsContent.appendChild(contactLink);
     details.appendChild(detailsContent);
     card.appendChild(preview);
     card.appendChild(details);
@@ -360,7 +412,10 @@ function loadServiceCards() {
             }
         })
         .catch(function () {
-            grid.innerHTML = '<p class="muted services-loading">Services could not be loaded.</p>';
+            var message = document.documentElement.lang === 'de'
+                ? 'Die Angebote konnten nicht geladen werden.'
+                : 'Services could not be loaded.';
+            grid.innerHTML = '<p class="muted services-loading">' + message + '</p>';
         });
 }
 
@@ -432,16 +487,28 @@ document.addEventListener('DOMContentLoaded', function () {
             this.setAttribute('aria-expanded', String(!expanded));
             navList.classList.toggle('show');
             this.classList.toggle('active');
+            this.setAttribute('aria-label', getMenuLabel(!expanded));
         });
     }
 
     document.addEventListener('click', function (e) {
-        if (navList && navList.classList.contains('show')) {
+        if (navList && toggle && navList.classList.contains('show')) {
             if (!navList.contains(e.target) && !toggle.contains(e.target)) {
                 navList.classList.remove('show');
                 toggle.classList.remove('active');
                 toggle.setAttribute('aria-expanded', 'false');
+                toggle.setAttribute('aria-label', getMenuLabel(false));
             }
+        }
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && navList && toggle && navList.classList.contains('show')) {
+            navList.classList.remove('show');
+            toggle.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', getMenuLabel(false));
+            toggle.focus();
         }
     });
 
@@ -526,6 +593,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (toggle) {
                         toggle.classList.remove('active'); 
                         toggle.setAttribute('aria-expanded', 'false');
+                        toggle.setAttribute('aria-label', getMenuLabel(false));
                     }
                 }
             }

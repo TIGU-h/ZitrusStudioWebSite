@@ -4,11 +4,11 @@
     "img": "../assets/massagePhotos/Ganzkörperlichemassage.webp",
     "de": { 
       "title": "Ganzkörperlichemassage",
-      "desc": "Wohltuende Tiefenentspannung für den ganzen Körper. Löst Verspannungen, baut Alltagsstress ab und bringt Ihre Energie wieder voll in Fluss."
+      "desc": "Eine wohltuende Massage für den ganzen Körper. Wählen Sie aus den verfügbaren Behandlungszeiten die passende Auszeit."
     },
     "en": { 
       "title": "Full Body Massage",
-      "desc": "Soothing deep relaxation from head to toe. Melts away muscle tension, reduces daily stress, and recharges your inner energy."
+      "desc": "A soothing massage for the whole body. Choose from the available treatment lengths to find the pause that suits you."
     },
     "durations": [
       { "time": "30 min", "price": "29€", "oldPrice": "35€" },
@@ -21,11 +21,11 @@
     "img": "../assets/massagePhotos/relax.webp",
     "de": { 
       "title": "Relax massage",
-      "desc": "Eine besonders sanfte Massage mit beruhigenden Griffen. Ideal, um das Nervensystem runterzufahren und den Kopf komplett freizubekommen."
+      "desc": "Eine besonders sanfte Massage mit ruhigen, fließenden Griffen – eine passende Wahl, wenn Sie sich eine entspannte Auszeit wünschen."
     },
     "en": { 
       "title": "Relax Massage",
-      "desc": "An extra gentle massage focused on smooth, calming strokes. Perfect for slowing down the nervous system and clearing a busy mind."
+      "desc": "An especially gentle massage with calm, flowing strokes — a lovely choice when you would like a relaxing pause."
     },
     "durations": [
       { "time": "30 min", "price": "29€", "oldPrice": "35€" },
@@ -38,11 +38,11 @@
     "img": "../assets/massagePhotos/stones.webp",
     "de": { 
       "title": "Hot Stone Therapie",
-      "desc": "Die pure Kraft warmer Basaltsteine. Die tiefenwirksame Wärme dringt bis in die tiefsten Muskelschichten und löst selbst hartnäckige Verspannungen."
+      "desc": "Bei dieser Behandlung kommen warme Basaltsteine zum Einsatz. Die Wärme und die Massagegriffe machen sie zu einem besonderen Wellnesserlebnis."
     },
     "en": { 
       "title": "Hot Stone Therapy",
-      "desc": "The pure power of smooth, heated basalt stones. Deep thermal warmth penetrates deep into muscles to melt away stubborn tension."
+      "desc": "This treatment uses warm basalt stones. The warmth and massage strokes make it a distinctive wellness experience."
     },
     "durations": [
       { "time": "30 min", "price": "29€", "oldPrice": "35€" },
@@ -55,11 +55,11 @@
     "img": "../assets/massagePhotos/Anti-Cellulite Massage.webp",
     "de": { 
       "title": "Anti-Cellulite Hand+Vakuum",
-      "desc": "Effektive Kombination aus manueller Bindegewebsmassage und Vakuum-Technik. Strafft die Haut, kurbelt den Stoffwechsel an und formt die Silhouette."
+      "desc": "Eine Behandlung mit manuellen Griffen und Vakuum-Technik. Die verfügbaren Preise und Behandlungszeiten finden Sie in der Übersicht."
     },
     "en": { 
       "title": "Anti-Cellulite Hand + Vacuum",
-      "desc": "An effective blend of manual lymphatic drainage and vacuum cupping. Firms the skin, boosts metabolism, and helps sculpt your silhouette."
+      "desc": "A treatment combining manual techniques and vacuum technology. Available prices and treatment lengths are listed below."
     },
     "durations": [
       { "time": "30 min", "price": "29€", "oldPrice": "35€" },
@@ -72,11 +72,11 @@
     "img": "../assets/massagePhotos/SportMassage.webp",
     "de": { 
       "title": "Sportmassage",
-      "desc": "Intensive, kraftvolle Griffe speziell für aktive Muskeln. Fördert die Durchblutung, beschleunigt die Regeneration nach dem Training und beugt Muskelkater vor."
+      "desc": "Eine kräftigere Massage für aktive Muskeln. Eine passende Option nach sportlicher Aktivität oder wenn Sie eine intensivere Behandlung bevorzugen."
     },
     "en": { 
       "title": "Sports Massage",
-      "desc": "Intense, deep-tissue strokes tailored for active muscles. Boosts circulation, speeds up recovery after training, and prevents soreness."
+      "desc": "A firmer massage for active muscles. Consider it after physical activity or if you prefer a more intensive treatment."
     },
     "durations": [
       { "time": "30 min", "price": "32€", "oldPrice": "35€" },
@@ -89,11 +89,11 @@
     "img": "../assets/massagePhotos/Honigmassage.webp",
     "de": { 
       "title": "Honigmassage",
-      "desc": "Eine traditionelle Entgiftungsmassage mit echtem Honig. Die spezielle Klopftechnik zieht Schlackenstoffe aus der Haut und hinterlässt sie seidenweich."
+      "desc": "Bei der Honigmassage wird Honig mit einer rhythmischen Klopftechnik kombiniert. Bitte fragen Sie uns, wenn Sie mehr über die Behandlung wissen möchten."
     },
     "en": { 
       "title": "Honey Massage",
-      "desc": "A traditional detox therapy using natural honey. Special tapping techniques draw out toxins from the skin, leaving it incredibly soft and smooth."
+      "desc": "This treatment combines honey with a rhythmic tapping technique. Please contact us if you would like to know more about it."
     },
     "durations": [
       { "time": "30 min", "price": "29€", "oldPrice": "35€" },
@@ -106,11 +106,11 @@
     "img": "../assets/massagePhotos/Hawaii Lomi-Lomi.webp",
     "de": { 
       "title": "Hawaii Lomi-Lomi",
-      "desc": "Ein hawaiianisches Entspannungsritual mit warmem Öl. Fließende Unterarmgriffe, die sich wie sanfte Meereswellen anfühlen, für Körper und Seele."
+      "desc": "Eine hawaiianisch inspirierte Massage mit warmem Öl und langen, fließenden Griffen mit den Unterarmen."
     },
     "en": { 
       "title": "Hawaii Lomi-Lomi",
-      "desc": "A traditional Hawaiian ritual using warm oil. Long, flowing forearm strokes feel like gentle ocean waves, deeply soothing body and soul."
+      "desc": "A Hawaiian-inspired massage using warm oil and long, flowing strokes with the forearms."
     },
     "durations": [
       { "time": "30 min", "price": "--", "oldPrice": "--" },
@@ -123,11 +123,11 @@
     "img": "../assets/massagePhotos/HawaiiVierhand.webp",
     "de": { 
       "title": "Hawaii Vierhand",
-      "desc": "Das ultimative Wellness-Erlebnis: Vier Hände arbeiten absolut synchron an Ihrem Körper. Schaltet das logische Denken komplett aus – Entspannung pur."
+      "desc": "Zwei Massagetherapeuten arbeiten bei dieser Behandlung mit vier Händen synchron. Ein besonderes Massageerlebnis für alle, die etwas Außergewöhnliches suchen."
     },
     "en": { 
       "title": "Hawaii Four-Hand",
-      "desc": "The ultimate luxury massage: two therapists working in perfect harmony. Completely tricks your brain into letting go — non-stop pure bliss."
+      "desc": "Two massage therapists work in sync using four hands. A distinctive massage experience for anyone looking for something special."
     },
     "durations": [
       { "time": "30 min", "price": "--", "oldPrice": "--" },
@@ -140,11 +140,11 @@
     "img": "../assets/massagePhotos/Gesichtsmassage.webp",
     "de": { 
       "title": "Gesichtsmassage",
-      "desc": "Erfrischende Massage für Gesicht, Dekolleté und Kopfhaut. Löst feine Mimikverspannungen, regt die Durchblutung an und sorgt für einen frischen Glow."
+      "desc": "Eine wohltuende Massage für Gesicht, Dekolleté und Kopfhaut – eine kurze Auszeit mit Fokus auf diese Bereiche."
     },
     "en": { 
       "title": "Face Massage",
-      "desc": "Refreshing treatment for your face, neck, and scalp. Releases hidden facial tension, boosts microcirculation, and gives you a radiant glow."
+      "desc": "A soothing massage for the face, décolleté and scalp — a focused pause for these areas."
     },
     "durations": [
       { "time": "30 min", "price": "28€", "oldPrice": "35€" },
@@ -157,11 +157,11 @@
     "img": "../assets/massagePhotos/kind.webp",
     "de": { 
       "title": "\"Sonnenstrahlen\" Kinder und Jugendmassage bis 13 Jahre alt",
-      "desc": "Sanfte und feinfühlige Massage speziell für Kinder. Hilft, Schulstress abzubauen, verbessert den Schlaf und schenkt ein Gefühl von Geborgenheit."
+      "desc": "Eine sanfte Massage für Kinder und Jugendliche bis 13 Jahre. Bitte klären Sie Fragen zur Behandlung vorab direkt mit uns."
     },
     "en": { 
       "title": "\"Sunbeams\" Kids & Teens Massage (up to 13 years)",
-      "desc": "A gentle and sensitive massage created specifically for children. Helps relieve school stress, improves sleep, and boosts overall well-being."
+      "desc": "A gentle massage for children and teens up to age 13. Please contact us directly with any questions about the treatment."
     },
     "durations": [
       { "time": "30 min", "price": "20€", "oldPrice": "25€" },
@@ -174,11 +174,11 @@
     "img": "../assets/massagePhotos/Kopf, Nacken, Schulter.webp",
     "de": { 
       "title": "Kopf, Nacken, Schulter",
-      "desc": "Die perfekte Akuthilfe für Büro- und Handyarbeiter. Gezielter Druck löst die typischen Blockaden im oberen Rücken und beugt Kopfschmerzen vor."
+      "desc": "Eine gezielte Massage für Kopf, Nacken und Schultern – passend, wenn diese Bereiche nach langem Sitzen besondere Aufmerksamkeit brauchen."
     },
     "en": { 
       "title": "Head, Neck & Shoulder",
-      "desc": "The perfect relief for desk and smartphone users. Targeted pressure unlocks the upper back, releases neck strain, and prevents stress headaches."
+      "desc": "A focused massage for the head, neck and shoulders — a useful choice when these areas need extra attention after long hours at a desk."
     },
     "durations": [
       { "time": "30 min", "price": "28€", "oldPrice": "35€" },
@@ -191,11 +191,11 @@
     "img": "../assets/massagePhotos/Rücken-Massage.webp",
     "de": { 
       "title": "Rücken-Massage",
-      "desc": "Konzentrierte Behandlung für die gesamte Wirbelsäule. Lockert festsitzende Muskelbündel, entlastet die Lendenwirbel und verbessert die Haltung."
+      "desc": "Eine Massage mit Fokus auf den Rücken. Fragen Sie uns gerne, welche Behandlungszeit am besten zu Ihrem Anliegen passt."
     },
     "en": { 
       "title": "Back Massage",
-      "desc": "Focused treatment targeting the entire spine. Unlocks tight muscle knots, relieves lower back strain, and helps restore normal posture."
+      "desc": "A massage focused on the back. Get in touch if you would like help choosing a treatment length."
     },
     "durations": [
       { "time": "30 min", "price": "28€", "oldPrice": "35€" },
@@ -208,11 +208,11 @@
     "img": "../assets/massagePhotos/Reiki-Massage.webp",
     "de": { 
       "title": "Reiki-Massage",
-      "desc": "Eine ganzheitliche Praxis zur Regeneration und tiefen Entspannung. Die sanfte Arbeit mit den Energiezentren des Reiki wird mit einer entspannenden Massage von Händen und Unterarmen kombiniert. Sie löst körperliche Verspannungen, beruhigt den Geist und schenkt ein Gefühl von Harmonie."
+      "desc": "Diese Behandlung kombiniert Reiki mit einer entspannenden Massage von Händen und Unterarmen. Kontaktieren Sie uns gerne bei Fragen zum Ablauf."
     },
     "en": { 
       "title": "Reiki Massage",
-      "desc": "A holistic practice to restore your energy and encourage deep relaxation. Gentle work with the Reiki energy centers is combined with a soothing massage of the hands and forearms. It eases physical tension, calms the mind, and restores a sense of harmony."
+      "desc": "This treatment combines Reiki with a soothing massage of the hands and forearms. Please contact us if you have any questions about what to expect."
     },
     "durations": [
       { "time": "30 min", "price": "29€", "oldPrice": "35€" },
@@ -225,26 +225,26 @@
     "img": "../assets/massagePhotos/waxing woman.webp",
     "de": {
       "title": "Sugaring/Waxing Damen",
-      "desc": "Preise in der Reihenfolge Sugaring / Waxing."
+      "desc": "Professionelle Haarentfernung für Damen."
     },
     "en": {
       "title": "Sugaring/Waxing for Women",
-      "desc": "Prices are listed in the order Sugaring / Waxing."
+      "desc": "Professional hair removal for women."
     },
     "durations": [
-      { "de": "Bikini komplett", "en": "Full bikini", "price": "45€ / 35€" },
-      { "de": "Bikini", "en": "Bikini line", "price": "35€ / 25€" },
-      { "de": "Hinterbacke", "en": "Buttocks", "price": "35€ / 25€" },
-      { "de": "Beine", "en": "Legs", "price": "65€ / 55€" },
-      { "de": "Unterschenkel", "en": "Lower legs", "price": "50€ / 40€" },
-      { "de": "Oberschenkel", "en": "Thighs", "price": "50€ / 40€" },
-      { "de": "Arme komplett", "en": "Full arms", "price": "40€ / 30€" },
-      { "de": "Unterarme", "en": "Forearms", "price": "30€ / 20€" },
-      { "de": "Oberarme", "en": "Upper arms", "price": "25€ / 10€" },
-      { "de": "Achseln", "en": "Underarms", "price": "20€ / 10€" },
-      { "de": "Rücken", "en": "Back", "price": "40€ / 30€" },
-      { "de": "Bauch", "en": "Abdomen", "price": "20€ / 10€" },
-      { "de": "Gesicht", "en": "Face", "price": "20€ / 10€" },
+      { "de": "Bikini komplett", "en": "Full bikini", "price": "35€", "oldPrice": "45€" },
+      { "de": "Bikini", "en": "Bikini line", "price": "25€", "oldPrice": "35€" },
+      { "de": "Hinterbacke", "en": "Buttocks", "price": "25€", "oldPrice": "35€" },
+      { "de": "Beine", "en": "Legs", "price": "55€", "oldPrice": "65€" },
+      { "de": "Unterschenkel", "en": "Lower legs", "price": "40€", "oldPrice": "50€" },
+      { "de": "Oberschenkel", "en": "Thighs", "price": "40€", "oldPrice": "50€" },
+      { "de": "Arme komplett", "en": "Full arms", "price": "30€", "oldPrice": "40€" },
+      { "de": "Unterarme", "en": "Forearms", "price": "20€", "oldPrice": "30€" },
+      { "de": "Oberarme", "en": "Upper arms", "price": "10€", "oldPrice": "25€" },
+      { "de": "Achseln", "en": "Underarms", "price": "10€", "oldPrice": "20€" },
+      { "de": "Rücken", "en": "Back", "price": "30€", "oldPrice": "40€" },
+      { "de": "Bauch", "en": "Abdomen", "price": "10€", "oldPrice": "20€" },
+      { "de": "Gesicht", "en": "Face", "price": "10€", "oldPrice": "20€" },
       { "de": "Alginatmaske für empfindliche Zonen", "en": "Alginate mask for sensitive areas", "price": "20€" }
     ]
   },
@@ -253,25 +253,25 @@
     "img": "../assets/massagePhotos/waxing man.webp",
     "de": {
       "title": "Sugaring/Waxing Herren",
-      "desc": "Preise in der Reihenfolge Sugaring / Waxing."
+      "desc": "Professionelle Haarentfernung für Herren."
     },
     "en": {
       "title": "Sugaring/Waxing for Men",
-      "desc": "Prices are listed in the order Sugaring / Waxing."
+      "desc": "Professional hair removal for men."
     },
     "durations": [
-      { "de": "Bikini komplett", "en": "Full bikini", "price": "75€ / 65€" },
-      { "de": "Bikini klassisch", "en": "Classic bikini", "price": "45€ / 35€" },
-      { "de": "Beine", "en": "Legs", "price": "80€ / 70€" },
-      { "de": "Unterschenkel", "en": "Lower legs", "price": "60€ / 50€" },
-      { "de": "Oberschenkel", "en": "Thighs", "price": "60€ / 50€" },
-      { "de": "Arme komplett", "en": "Full arms", "price": "55€ / 45€" },
-      { "de": "Unterarme", "en": "Forearms", "price": "35€ / 25€" },
-      { "de": "Oberarme", "en": "Upper arms", "price": "30€ / 20€" },
-      { "de": "Achseln", "en": "Underarms", "price": "25€ / 15€" },
-      { "de": "Rücken", "en": "Back", "price": "40€ / 30€" },
-      { "de": "Bauch", "en": "Abdomen", "price": "30€ / 20€" },
-      { "de": "Gesicht", "en": "Face", "price": "25€ / 15€" },
+      { "de": "Bikini komplett", "en": "Full bikini", "price": "65€", "oldPrice": "75€" },
+      { "de": "Bikini klassisch", "en": "Classic bikini", "price": "35€", "oldPrice": "45€" },
+      { "de": "Beine", "en": "Legs", "price": "70€", "oldPrice": "80€" },
+      { "de": "Unterschenkel", "en": "Lower legs", "price": "50€", "oldPrice": "60€" },
+      { "de": "Oberschenkel", "en": "Thighs", "price": "50€", "oldPrice": "60€" },
+      { "de": "Arme komplett", "en": "Full arms", "price": "45€", "oldPrice": "55€" },
+      { "de": "Unterarme", "en": "Forearms", "price": "25€", "oldPrice": "35€" },
+      { "de": "Oberarme", "en": "Upper arms", "price": "20€", "oldPrice": "30€" },
+      { "de": "Achseln", "en": "Underarms", "price": "15€", "oldPrice": "25€" },
+      { "de": "Rücken", "en": "Back", "price": "30€", "oldPrice": "40€" },
+      { "de": "Bauch", "en": "Abdomen", "price": "20€", "oldPrice": "30€" },
+      { "de": "Gesicht", "en": "Face", "price": "15€", "oldPrice": "25€" },
       { "de": "Alginatmaske für empfindliche Zonen", "en": "Alginate mask for sensitive areas", "price": "20€" }
     ]
   },
@@ -280,11 +280,11 @@
     "img": "../assets/massagePhotos/geschenkgutschein.webp",
     "de": {
       "title": "Geschenkgutschein",
-      "desc": "Verschenken Sie Entspannung und Wohlbefinden. Geschenkgutscheine sind für jede Massage erhältlich und können über WhatsApp oder Instagram bestellt werden."
+      "desc": "Verschenken Sie eine Massageauszeit. Gutscheine sind für Massagen erhältlich; fragen Sie uns per WhatsApp nach Kauf, Personalisierung und möglichen digitalen Zustelloptionen."
     },
     "en": {
       "title": "Gift Certificate",
-      "desc": "Give the gift of relaxation and wellbeing. Gift certificates are available for any massage and can be ordered via WhatsApp or Instagram."
+      "desc": "Give someone a massage break. Certificates are available for massages; ask us via WhatsApp about purchasing, personalization and possible digital delivery options."
     },
     "durations": []
   }
