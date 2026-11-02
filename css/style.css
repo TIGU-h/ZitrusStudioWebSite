@@ -1362,6 +1362,15 @@ a:focus {
             gap: 1.25rem;
             background: #fbf0d9;
             overflow-y: auto;
+            z-index: 106;
+        }
+
+        .nav-toggle {
+            z-index: 110;
+        }
+
+        .lang {
+            z-index: 108;
         }
 
         .nav-group {
@@ -1372,6 +1381,8 @@ a:focus {
             display: block;
             padding: 0.4rem 0;
             font-size: 1.05rem;
+            white-space: normal;
+            overflow-wrap: anywhere;
         }
     }
 
