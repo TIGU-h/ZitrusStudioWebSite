@@ -4,5 +4,17 @@ Thumbs.db
 
 
 .env
+.env.*
+!.env.example
+
+docker/easyappointments/config.php
+docker/easyappointments/storage/backups/*
+docker/easyappointments/storage/cache/*
+docker/easyappointments/storage/logs/*
+docker/easyappointments/storage/sessions/*
+docker/easyappointments/storage/uploads/*
+
+!docker/easyappointments/storage/**/.htaccess
+!docker/easyappointments/storage/**/index.html
+
 docker/db_data/
-docker/easyappointments/

@@ -1,0 +1,220 @@
+/* ----------------------------------------------------------------------------
+ * Easy!Appointments - Online Appointment Scheduler
+ *
+ * @package     EasyAppointments
+ * @author      A.Tselegidis <alextselegidis@gmail.com>
+ * @copyright   Copyright (c) Alex Tselegidis
+ * @license     https://opensource.org/licenses/GPL-3.0 - GPLv3
+ * @link        https://easyappointments.org
+ * @since       v1.5.0
+ * ---------------------------------------------------------------------------- */
+/* Responsive booking wizard styles */
+@media (min-width: 768px) {
+  #book-appointment-wizard {
+    border-radius: var(--bs-border-radius) !important;
+    box-shadow: var(--bs-box-shadow-sm) !important;
+  }
+}
+
+#book-appointment-wizard .booking-progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+  max-width: 100%;
+}
+
+#book-appointment-wizard .book-step {
+  display: grid;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+#book-appointment-wizard .book-step strong {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+}
+
+/* Active step indicator - dynamic state that changes via JavaScript */
+#book-appointment-wizard .book-step.active-step {
+  flex-basis: 40px;
+  width: 40px !important;
+  height: 40px !important;
+  background: var(--bs-white) !important;
+}
+
+#book-appointment-wizard .book-step.active-step strong {
+  color: var(--bs-primary) !important;
+  font-size: 1.15rem;
+}
+
+#book-appointment-wizard .booking-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 1rem;
+}
+
+#book-appointment-wizard .booking-choice-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.75rem;
+  background: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  text-align: left;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+#book-appointment-wizard .booking-choice-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--bs-primary);
+  box-shadow: var(--bs-box-shadow-sm);
+}
+
+#book-appointment-wizard .booking-choice-card:focus-visible {
+  outline: 3px solid rgba(var(--bs-primary-rgb), 0.35);
+  outline-offset: 2px;
+}
+
+#book-appointment-wizard .booking-choice-card.is-selected {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 2px rgba(var(--bs-primary-rgb), 0.18);
+}
+
+#book-appointment-wizard .booking-choice-image,
+#book-appointment-wizard .booking-choice-image-placeholder {
+  display: block;
+  width: 100%;
+  height: 170px;
+  flex: 0 0 170px;
+  object-fit: cover;
+  background: var(--bs-tertiary-bg);
+}
+
+#book-appointment-wizard .booking-choice-image-placeholder {
+  display: grid;
+  place-items: center;
+  color: var(--bs-secondary-color);
+  font-size: 2rem;
+}
+
+#book-appointment-wizard .booking-choice-content {
+  display: flex;
+  width: 100%;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+#book-appointment-wizard .booking-category-description {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--bs-secondary-color);
+  line-height: 1.45;
+  white-space: pre-line;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+#book-appointment-wizard .booking-service-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
+}
+
+#book-appointment-wizard .booking-service-price {
+  color: var(--bs-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+#book-appointment-wizard .booking-provider-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+}
+
+#book-appointment-wizard .booking-provider-card {
+  align-items: center;
+  text-align: center;
+}
+
+#book-appointment-wizard .booking-provider-card .booking-choice-content {
+  align-items: center;
+}
+
+#book-appointment-wizard .booking-provider-avatar {
+  display: grid;
+  width: 88px;
+  height: 88px;
+  place-items: center;
+  margin: 1.25rem auto 0;
+  border-radius: 50%;
+  background: rgba(var(--bs-primary-rgb), 0.12);
+  color: var(--bs-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+@media (max-width: 575.98px) {
+  #book-appointment-wizard .booking-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #book-appointment-wizard .booking-choice-image,
+  #book-appointment-wizard .booking-choice-image-placeholder {
+    height: 190px;
+    flex-basis: 190px;
+  }
+}
+
+/* Selected hour button state */
+#book-appointment-wizard #available-hours .available-hour {
+  margin-bottom: 10px;
+}
+
+#book-appointment-wizard #available-hours .selected-hour {
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+  color: var(--bs-white) !important;
+}
+
+#book-appointment-wizard #available-hours .selected-hour-duration,
+#book-appointment-wizard #available-hours .selected-hour-range-end:not(.selected-hour) {
+  background-color: rgba(var(--bs-primary-rgb), 0.16) !important;
+  border-color: rgba(var(--bs-primary-rgb), 0.5) !important;
+  color: var(--bs-body-color) !important;
+}
+
+/* Captcha refresh icon hover effect */
+#book-appointment-wizard .captcha-title .fa-sync-alt {
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+
+#book-appointment-wizard .captcha-title .fa-sync-alt:hover {
+  color: var(--bs-primary);
+}
+
+/* Language popover list */
+.popover .popover-title {
+  text-align: center;
+}
+
+.popover .popover-content #language-list .language {
+  margin: 15px 0;
+}
+
+#book-appointment-wizard .flatpickr-calendar.inline {
+  margin: auto;
+}
