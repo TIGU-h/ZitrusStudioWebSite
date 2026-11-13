@@ -50,6 +50,7 @@ App.Utils.CalendarDefaultView = (function () {
     let $popoverTarget = null;
     let fullCalendar = null;
     let lastFocusedEventData = null;
+    let calendarTimeRange = null;
 
     // Helper Functions
 
@@ -91,6 +92,140 @@ App.Utils.CalendarDefaultView = (function () {
      */
     function findProvider(providerId) {
         return vars('available_providers').find((provider) => Number(provider.id) === Number(providerId));
+    }
+
+    /**
+     * Get the visible time range from the selected calendar filter's working plans.
+     *
+     * @returns {{start: string, end: string}} FullCalendar time limits.
+     */
+    function getWorkingTimeRange() {
+        const range = {start: Infinity, end: -Infinity};
+        const selectedFilterId = $selectFilterItem.val();
+
+        if (selectedFilterId === FILTER_TYPE_ALL) {
+            addWorkingPlanToRange(range, JSON.parse(vars('company_working_plan')));
+        } else {
+            const providers = isProviderFilter()
+                ? [findProvider(selectedFilterId)].filter(Boolean)
+                : vars('available_providers');
+
+            providers.forEach((provider) => {
+                const workingPlan = JSON.parse(
+                    provider?.settings?.working_plan || vars('company_working_plan'),
+                );
+
+                addWorkingPlanToRange(range, workingPlan);
+                addWorkingPlanExceptionsToRange(range, provider);
+            });
+        }
+
+        if (!Number.isFinite(range.start) || !Number.isFinite(range.end)) {
+            return {start: '00:00:00', end: '24:00:00'};
+        }
+
+        return {
+            start: formatCalendarTime(range.start),
+            end: formatCalendarTime(range.end),
+        };
+    }
+
+    /**
+     * Include the start and end times from a weekly working plan.
+     *
+     * @param {{start: number, end: number}} range - Current calendar time range.
+     * @param {Object} workingPlan - Weekly working plan.
+     */
+    function addWorkingPlanToRange(range, workingPlan) {
+        Object.values(workingPlan).forEach((dayPlan) => {
+            if (!dayPlan?.start || !dayPlan?.end) {
+                return;
+            }
+
+            range.start = Math.min(range.start, timeToMinutes(dayPlan.start));
+            range.end = Math.max(range.end, timeToMinutes(dayPlan.end));
+        });
+    }
+
+    /**
+     * Include working plan exception times that overlap the current calendar view.
+     *
+     * @param {{start: number, end: number}} range - Current calendar time range.
+     * @param {Object} provider - Provider with working plan exceptions.
+     */
+    function addWorkingPlanExceptionsToRange(range, provider) {
+        const rawExceptions = JSON.parse(provider?.settings?.working_plan_exceptions || '[]');
+        const exceptions = Array.isArray(rawExceptions)
+            ? rawExceptions
+            : Object.entries(rawExceptions).map(([date, exception]) => ({
+                startDate: date,
+                endDate: date,
+                startTime: exception?.start,
+                endTime: exception?.end,
+            }));
+        const viewStart = moment(fullCalendar.view.activeStart).startOf('day');
+        const viewEnd = moment(fullCalendar.view.activeEnd).startOf('day');
+
+        exceptions.forEach((exception) => {
+            const startDate = moment(exception.startDate);
+            const endDate = moment(exception.endDate || exception.startDate);
+
+            if (endDate.isBefore(viewStart, 'day') || !startDate.isBefore(viewEnd, 'day')) {
+                return;
+            }
+
+            const startTime = exception.startTime || exception.start;
+            const endTime = exception.endTime || exception.end;
+
+            if (startTime && endTime) {
+                range.start = Math.min(range.start, timeToMinutes(startTime));
+                range.end = Math.max(range.end, timeToMinutes(endTime));
+            }
+        });
+    }
+
+    /**
+     * Convert an HH:mm or HH:mm:ss value to minutes after midnight.
+     *
+     * @param {string} time - Time value.
+     * @returns {number}
+     */
+    function timeToMinutes(time) {
+        const [hours, minutes] = time.split(':').map(Number);
+
+        return hours * 60 + minutes;
+    }
+
+    /**
+     * Convert minutes after midnight to a FullCalendar time value.
+     *
+     * @param {number} minutes - Minutes after midnight.
+     * @returns {string}
+     */
+    function formatCalendarTime(minutes) {
+        const hours = String(Math.floor(minutes / 60)).padStart(2, '0');
+        const remainingMinutes = String(minutes % 60).padStart(2, '0');
+
+        return `${hours}:${remainingMinutes}:00`;
+    }
+
+    /**
+     * Apply the current filter's working hours to the calendar time grid.
+     */
+    function updateCalendarTimeRange() {
+        if (!$selectFilterItem.val()) {
+            return;
+        }
+
+        const timeRange = getWorkingTimeRange();
+
+        if (calendarTimeRange?.start === timeRange.start && calendarTimeRange?.end === timeRange.end) {
+            return;
+        }
+
+        calendarTimeRange = timeRange;
+        fullCalendar.setOption('slotMinTime', timeRange.start);
+        fullCalendar.setOption('slotMaxTime', timeRange.end);
     }
 
     /**
@@ -832,6 +967,8 @@ App.Utils.CalendarDefaultView = (function () {
     function onDatesSet() {
         if (!$selectFilterItem.val()) return;
 
+        updateCalendarTimeRange();
+
         refreshCalendarAppointments(
             $calendar,
             $selectFilterItem.val(),
@@ -1042,14 +1179,11 @@ App.Utils.CalendarDefaultView = (function () {
 
             // Handle non-working days
             if (!sortedWorkingPlan[weekdayName]) {
-                events.push(createNonWorkingDayEvent(calendarDate));
                 calendarDate.add(1, 'day');
                 continue;
             }
 
-            // Add before/after work unavailability
             const dayPlan = sortedWorkingPlan[weekdayName];
-            events.push(...createWorkHoursUnavailability(calendarDate, dayPlan, viewEnd));
 
             // Add break periods
             events.push(...createBreakEvents(calendarDate, dayPlan.breaks));
@@ -1090,78 +1224,6 @@ App.Utils.CalendarDefaultView = (function () {
     }
 
     /**
-     * Create a non-working day event.
-     *
-     * @param {moment.Moment} calendarDate - Calendar date moment object.
-     * @returns {Object} Calendar event object.
-     */
-    function createNonWorkingDayEvent(calendarDate) {
-        return {
-            title: lang('not_working'),
-            start: calendarDate.clone().toDate(),
-            end: calendarDate.clone().add(1, 'day').toDate(),
-            allDay: false,
-            color: EVENT_COLORS.notWorking,
-            editable: false,
-            display: 'background',
-            className: 'fc-unavailability',
-        };
-    }
-
-    /**
-     * Create unavailability events for before/after working hours.
-     *
-     * @param {moment.Moment} calendarDate - Calendar date moment object.
-     * @param {Object} dayPlan - Day working plan.
-     * @param {Date} viewEnd - Calendar view end date.
-     * @returns {Array} Array of calendar event objects.
-     */
-    function createWorkHoursUnavailability(calendarDate, dayPlan, viewEnd) {
-        const events = [];
-
-        // Before work starts
-        const [startHour, startMin] = dayPlan.start.split(':').map(Number);
-        const workStart = calendarDate.clone().hour(startHour).minute(startMin);
-
-        if (calendarDate.toDate() < workStart.toDate()) {
-            events.push({
-                title: lang('not_working'),
-                start: calendarDate.clone().toDate(),
-                // Reuse the already-parsed workStart rather than re-parsing dayPlan.start as a string: dayPlan.start
-                // may be "HH:mm:ss" (the raw MySQL TIME format returned by working plan exceptions fetched fresh
-                // from the server) rather than "HH:mm", and appending ":00" to the former produces a malformed
-                // 4-segment time string.
-                end: workStart.toDate(),
-                allDay: false,
-                color: EVENT_COLORS.notWorking,
-                editable: false,
-                display: 'background',
-                className: 'fc-unavailability',
-            });
-        }
-
-        // After work ends
-        const [endHour, endMin] = dayPlan.end.split(':').map(Number);
-        const workEnd = calendarDate.clone().hour(endHour).minute(endMin);
-
-        if (viewEnd > workEnd.toDate()) {
-            events.push({
-                title: lang('not_working'),
-                // See the comment above workStart's usage - same reasoning applies here.
-                start: workEnd.toDate(),
-                end: calendarDate.clone().add(1, 'day').toDate(),
-                allDay: false,
-                color: EVENT_COLORS.notWorking,
-                editable: false,
-                display: 'background',
-                className: 'fc-unavailability',
-            });
-        }
-
-        return events;
-    }
-
-    /**
      * Create break period events.
      *
      * @param {moment.Moment} calendarDate - Calendar date moment object.
@@ -1194,6 +1256,7 @@ App.Utils.CalendarDefaultView = (function () {
         // Reload button
         $reloadAppointments.on('click', () => {
             closePopover();
+            updateCalendarTimeRange();
             refreshCalendarAppointments(
                 $calendar,
                 $selectFilterItem.val(),

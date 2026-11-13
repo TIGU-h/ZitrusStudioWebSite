@@ -467,10 +467,6 @@ App.Pages.Booking = (function () {
 
         App.Utils.UI.setDateTimePickerValue($selectDate, new Date());
 
-        const browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        const isTimezoneSupported = $selectTimezone.find(`option[value="${browserTimezone}"]`).length > 0;
-        $selectTimezone.val(isTimezoneSupported ? browserTimezone : 'UTC');
-
         // Bind the event handlers (might not be necessary every time we use this class).
         addEventListeners();
 
@@ -1014,8 +1010,6 @@ App.Pages.Booking = (function () {
                 selectedTime;
         }
 
-        const timezoneOptionText = $selectTimezone.find('option:selected').text();
-
         $('#appointment-details').html(`
             <div>
                 <div class="mb-2 fw-bold fs-3">
@@ -1032,10 +1026,6 @@ App.Pages.Booking = (function () {
                     <i class="fas fa-clock me-2"></i>
                     ${service.duration} ${lang('minutes')}
                 </div>
-                <div class="mb-2">
-                    <i class="fas fa-globe me-2"></i>
-                    ${App.Utils.String.escapeHtml(timezoneOptionText)}
-                </div> 
                 <div class="mb-2" ${!Number(service.price) ? 'hidden' : ''}>
                     <i class="fas fa-cash-register me-2"></i>
                     ${Number(service.price).toFixed(2)} ${App.Utils.String.escapeHtml(service.currency)}
@@ -1208,9 +1198,6 @@ App.Pages.Booking = (function () {
             $address.val(customer.address);
             $city.val(customer.city);
             $zipCode.val(customer.zip_code);
-            if (customer.timezone) {
-                $selectTimezone.val(customer.timezone);
-            }
             const appointmentNotes = appointment.notes !== null ? appointment.notes : '';
             $notes.val(appointmentNotes);
 

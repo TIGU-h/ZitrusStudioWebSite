@@ -95,13 +95,6 @@
                                 <?= lang('api') ?>
                             </h5>
                         </div>
-                        <div class="card-body">
-                            <div class="mb-3 integration-info">
-                                <small>
-                                    <?= lang('api_info') ?>
-                                </small>
-                            </div>
-                        </div>
                         <div class="card-footer border-0">
                             <a href="<?= site_url('api_settings') ?>" class="btn btn-outline-primary w-100">
                                 <i class="fas fa-cogs me-2"></i>
@@ -117,13 +110,6 @@
                             <h5 class="fw-light mb-0">
                                 <?= lang('ldap') ?>
                             </h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="mb-3 integration-info">
-                                <small>
-                                    <?= lang('ldap_info') ?>
-                                </small>
-                            </div>
                         </div>
                         <div class="card-footer border-0">
                             <a href="<?= site_url('ldap_settings') ?>" class="btn btn-outline-primary w-100">

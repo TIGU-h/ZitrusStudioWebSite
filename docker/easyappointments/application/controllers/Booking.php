@@ -75,7 +75,6 @@ class Booking extends EA_Controller
         $this->load->model('settings_model');
         $this->load->model('consents_model');
 
-        $this->load->library('timezones');
         $this->load->library('synchronization');
         $this->load->library('notifications');
         $this->load->library('availability');
@@ -195,9 +194,6 @@ class Booking extends EA_Controller
         if (empty($theme) || !file_exists(__DIR__ . '/../../assets/css/themes/' . $theme . '.min.css')) {
             $theme = 'default';
         }
-
-        $timezones = $this->timezones->to_array();
-        $grouped_timezones = $this->timezones->to_grouped_array();
 
         $appointment_hash = html_vars('appointment_hash');
 
@@ -338,8 +334,6 @@ class Booking extends EA_Controller
             'google_analytics_code' => $google_analytics_code,
             'matomo_analytics_url' => $matomo_analytics_url,
             'matomo_analytics_site_id' => $matomo_analytics_site_id,
-            'timezones' => $timezones,
-            'grouped_timezones' => $grouped_timezones,
             'manage_mode' => $manage_mode,
             'appointment_data' => $appointment,
             'provider_data' => $provider ? filter_sensitive_user_data($provider) : null,

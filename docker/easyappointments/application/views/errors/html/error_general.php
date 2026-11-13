@@ -16,7 +16,7 @@
     <link rel="icon" type="image/x-icon" href="<?= function_exists('asset_url')
         ? asset_url('assets/img/favicon.ico')
         : 'assets/img/favicon.ico' ?>">
-    <title>Error | Easy!Appointments</title>
+    <title>Error</title>
     <style>
         #error-container {
             background: #ffffff;
@@ -74,12 +74,6 @@
 
     <?= $message ?>
 
-    <p>
-        <small>
-            Powered by
-            <a href="https://easyappointments.org">Easy!Appointments</a>
-        </small>
-    </p>
 </div>
 </body>
 </html>

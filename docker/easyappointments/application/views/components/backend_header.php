@@ -9,11 +9,8 @@
 
 <nav id="header" class="navbar navbar-expand-md navbar-dark bg-primary p-0">
     <div id="header-logo" class="navbar-brand p-1 lh-1">
-        <img src="<?= base_url(
-            'assets/img/logo.png',
-        ) ?>" alt="logo" class="float-start me-2" style="width: 45px; height: 45px;">
-        <h6 class="mb-1 mt-1 fw-bold text-white" style="font-size: 15px;">EASY!APPOINTMENTS</h6>
-        <small class="d-block text-white-50" style="font-size: 12px;">Online Appointment Scheduler</small>
+        <img src="<?= asset_url('assets/img/logo.png') ?>" alt="logo"
+             class="float-start me-2" style="width: 45px; height: 45px;">
     </div>
 
     <button type="button" class="navbar-toggler me-1" data-bs-toggle="collapse" data-bs-target="#header-menu">
@@ -107,10 +104,6 @@
                     <a class="dropdown-item" href="<?= site_url('about') ?>">
                         <i class="fas fa-info-circle me-2"></i>
                         <?= lang('about') ?>
-                    </a>
-                    <a class="dropdown-item text-danger" href="https://easyappointments.org/premium" target="_blank">
-                        <i class="fas fa-crown text-warning me-2"></i>
-                        Premium
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="<?= site_url('booking') ?>" target="_blank">

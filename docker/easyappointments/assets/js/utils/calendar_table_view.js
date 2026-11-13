@@ -982,8 +982,6 @@ App.Utils.CalendarTableView = (function () {
 
         const start = moment(view.currentStart).clone();
 
-        const end = moment(view.currentEnd).clone();
-
         const selDayName = start.format('dddd').toLowerCase();
 
         const selDayDate = start.format('YYYY-MM-DD');
@@ -1028,52 +1026,8 @@ App.Utils.CalendarTableView = (function () {
         // Non-working day
 
         if (workingPlan[selDayName] === null) {
-            calendarEventSource.push({
-                title: lang('not_working'),
-                start: start.toDate(),
-                end: end.toDate(),
-                allDay: false,
-                color: EVENT_COLORS.notWorking,
-                editable: false,
-                display: 'background',
-                className: 'fc-unavailability',
-            });
             $calendar.data('fullCalendar').addEventSource(calendarEventSource);
             return;
-        }
-
-        // Before work starts
-
-        const workDateStart = moment(start.format('YYYY-MM-DD') + ' ' + workingPlan[selDayName].start);
-
-        if (start < workDateStart) {
-            calendarEventSource.push({
-                title: lang('not_working'),
-                start: start.toDate(),
-                end: workDateStart.toDate(),
-                allDay: false,
-                color: EVENT_COLORS.notWorking,
-                editable: false,
-                display: 'background',
-                className: 'fc-unavailability',
-            });
-        }
-
-        // After work ends
-
-        const workDateEnd = moment(start.format('YYYY-MM-DD') + ' ' + workingPlan[selDayName].end);
-
-        if (end > workDateEnd) {
-            calendarEventSource.push({
-                title: lang('not_working'),
-                start: workDateEnd.toDate(),
-                end: end.toDate(),
-                allDay: false,
-                color: EVENT_COLORS.notWorking,
-                editable: false,
-                display: 'background',
-                className: 'fc-unavailability',
-            });
         }
 
         // Breaks

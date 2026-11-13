@@ -37,11 +37,6 @@
                                     <?= lang('api_token') ?>
                                 </label>
                                 <input id="api-token" class="form-control" data-field="api_token">
-                                <div class="form-text text-muted">
-                                    <small>
-                                        <?= lang('api_token_hint') ?>
-                                    </small>
-                                </div>
                             </div>
                         </div>
                     </div>

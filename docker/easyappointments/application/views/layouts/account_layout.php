@@ -9,7 +9,7 @@
 
     <?php slot('meta'); ?>
 
-    <title><?= vars('page_title') ?? lang('account') ?> | Easy!Appointments</title>
+    <title><?= vars('page_title') ?? lang('account') ?></title>
 
     <link rel="icon" type="image/x-icon" href="<?= asset_url('assets/img/favicon.ico') ?>">
     <link rel="icon" sizes="192x192" href="<?= asset_url('assets/img/logo.png') ?>">
@@ -30,12 +30,6 @@
             <?php slot('content'); ?>
         </div>
 
-        <div class="card-footer text-center py-3">
-            <small>
-                Powered by
-                <a href="https://easyappointments.org">Easy!Appointments</a>
-            </small>
-        </div>
     </div>
 
 </div>

@@ -117,8 +117,18 @@ class EA_Controller extends CI_Controller
         $query_language = request('language');
         $available_languages = config('available_languages');
 
-        // Priority: session > query param > default (english)
-        $language = null;
+        $public_german_controllers = [
+            'booking',
+            'booking_confirmation',
+            'booking_cancellation',
+            'login',
+            'recovery',
+        ];
+
+        // Keep a client-selected language, otherwise default public pages to German.
+        $language = in_array(strtolower($this->router->class), $public_german_controllers, true)
+            ? 'german'
+            : config('language');
 
         if ($session_language && in_array($session_language, $available_languages)) {
             $language = $session_language;
@@ -126,14 +136,12 @@ class EA_Controller extends CI_Controller
             $language = $query_language;
         }
 
-        if ($language) {
-            $language_codes = config('language_codes');
+        $language_codes = config('language_codes');
 
-            config([
-                'language' => $language,
-                'language_code' => array_search($language, $language_codes) ?: 'en',
-            ]);
-        }
+        config([
+            'language' => $language,
+            'language_code' => array_search($language, $language_codes) ?: 'en',
+        ]);
 
         $this->lang->load('translations');
     }
