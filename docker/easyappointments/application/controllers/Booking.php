@@ -23,6 +23,11 @@
  */
 class Booking extends EA_Controller
 {
+    private const FIXED_BOOKING_PROVIDER_USERNAMES = [
+        'maryna' => 'Maryna',
+        'oksana' => 'Oksana',
+    ];
+
     public array $allowed_customer_fields = [
         // Security: 'id' is intentionally excluded. Customer record identity must be resolved on the
         // backend via exists()/find_record_id()
@@ -101,7 +106,7 @@ class Booking extends EA_Controller
     /**
      * Render the booking page.
      */
-    public function index(): void
+    public function index(?string $fixed_provider_slug = null): void
     {
         method('get');
 
@@ -143,8 +148,21 @@ class Booking extends EA_Controller
             return;
         }
 
+        $fixed_provider = $fixed_provider_slug
+            ? $this->find_fixed_booking_provider($fixed_provider_slug)
+            : null;
+
         $available_services = $this->services_model->get_available_services(true);
         $available_providers = $this->providers_model->get_available_providers(true);
+
+        if ($fixed_provider) {
+            $provider_service_ids = array_map('intval', $fixed_provider['services']);
+            $available_services = array_values(array_filter(
+                $available_services,
+                static fn(array $service): bool => in_array((int) $service['id'], $provider_service_ids, true),
+            ));
+            $available_providers = [$fixed_provider];
+        }
 
         foreach ($available_providers as &$available_provider) {
             // Only expose the required provider data.
@@ -280,6 +298,8 @@ class Booking extends EA_Controller
             'manage_mode' => $manage_mode,
             'available_services' => $available_services,
             'available_providers' => filter_sensitive_users_data($available_providers),
+            'fixed_provider_id' => $fixed_provider['id'] ?? null,
+            'fixed_provider_slug' => $fixed_provider ? $fixed_provider_slug : null,
             'date_format' => $date_format,
             'time_format' => $time_format,
             'first_weekday' => $first_weekday,
@@ -297,6 +317,7 @@ class Booking extends EA_Controller
         html_vars([
             'available_services' => $available_services,
             'available_providers' => filter_sensitive_users_data($available_providers),
+            'fixed_provider_id' => $fixed_provider['id'] ?? null,
             'theme' => $theme,
             'company_name' => $company_name,
             'company_logo' => $company_logo,
@@ -346,7 +367,7 @@ class Booking extends EA_Controller
     /**
      * Register the appointment to the database.
      */
-    public function register(): void
+    public function register(?string $fixed_provider_slug = null): void
     {
         try {
             method('post');
@@ -413,6 +434,17 @@ class Booking extends EA_Controller
 
             // Sanitize appointment fields - only allow expected fields
             $appointment = array_intersect_key($appointment, array_flip($this->allowed_appointment_fields));
+
+            if ($fixed_provider_slug !== null) {
+                $fixed_provider = $this->find_fixed_booking_provider($fixed_provider_slug);
+                $provider_service_ids = array_map('intval', $fixed_provider['services']);
+
+                if (!in_array((int) ($appointment['id_services'] ?? 0), $provider_service_ids, true)) {
+                    abort(403);
+                }
+
+                $appointment['id_users_provider'] = $fixed_provider['id'];
+            }
 
             // Security: Remove appointment ID if not in manage mode to prevent IDOR attacks
             if (!$manage_mode && isset($appointment['id'])) {
@@ -704,7 +736,7 @@ class Booking extends EA_Controller
      * This method answers to an AJAX request. It calculates the available hours for the given service, provider and
      * date.
      */
-    public function get_available_hours(): void
+    public function get_available_hours(?string $fixed_provider_slug = null): void
     {
         try {
             method('post');
@@ -726,6 +758,20 @@ class Booking extends EA_Controller
             $provider_id = request('provider_id');
             $service_id = request('service_id');
             $selected_date = request('selected_date');
+
+            if ($fixed_provider_slug !== null) {
+                $fixed_provider = $this->find_fixed_booking_provider($fixed_provider_slug);
+                $provider_service_ids = array_map('intval', $fixed_provider['services']);
+
+                if (
+                    ($provider_id !== null && (string) $provider_id !== (string) $fixed_provider['id']) ||
+                    !in_array((int) $service_id, $provider_service_ids, true)
+                ) {
+                    abort(403);
+                }
+
+                $provider_id = (string) $fixed_provider['id'];
+            }
 
             // Do not continue if there was no provider selected (more likely there is no provider in the system).
 
@@ -796,7 +842,7 @@ class Booking extends EA_Controller
      *
      * Outputs a JSON string with the unavailability dates. that are unavailability.
      */
-    public function get_unavailable_dates(): void
+    public function get_unavailable_dates(?string $fixed_provider_slug = null): void
     {
         try {
             method('get');
@@ -823,6 +869,20 @@ class Booking extends EA_Controller
             $selected_date = new DateTime($selected_date_string);
             $number_of_days_in_month = (int) $selected_date->format('t');
             $unavailable_dates = [];
+
+            if ($fixed_provider_slug !== null) {
+                $fixed_provider = $this->find_fixed_booking_provider($fixed_provider_slug);
+                $provider_service_ids = array_map('intval', $fixed_provider['services']);
+
+                if (
+                    ($provider_id !== null && (string) $provider_id !== (string) $fixed_provider['id']) ||
+                    !in_array((int) $service_id, $provider_service_ids, true)
+                ) {
+                    abort(403);
+                }
+
+                $provider_id = (string) $fixed_provider['id'];
+            }
 
             $provider_ids =
                 $provider_id === ANY_PROVIDER ? $this->search_providers_by_service($service_id) : [$provider_id];
@@ -901,5 +961,27 @@ class Booking extends EA_Controller
         }
 
         return $provider_list;
+    }
+
+    /**
+     * Resolve a dedicated booking page to its public provider account.
+     *
+     * @throws Exception
+     */
+    private function find_fixed_booking_provider(string $slug): array
+    {
+        $username = self::FIXED_BOOKING_PROVIDER_USERNAMES[$slug] ?? null;
+
+        if ($username === null) {
+            show_404();
+        }
+
+        foreach ($this->providers_model->get_available_providers(true) as $provider) {
+            if (strcasecmp((string) ($provider['settings']['username'] ?? ''), $username) === 0) {
+                return $provider;
+            }
+        }
+
+        show_404();
     }
 }

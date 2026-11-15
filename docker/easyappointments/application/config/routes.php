@@ -187,5 +187,8 @@ $route['api/v1/availabilities']['get'] = 'api/v1/availabilities_api_v1/get';
 |
 */
 
+$route['booking/(maryna|oksana)'] = 'booking/index/$1';
+$route['booking/(maryna|oksana)/(register|get_available_hours|get_unavailable_dates)'] = 'booking/$2/$1';
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

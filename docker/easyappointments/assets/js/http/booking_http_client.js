@@ -28,6 +28,13 @@ App.Http.Booking = (function () {
 
     const moment = window.moment;
 
+    function bookingEndpoint(endpoint) {
+        const providerSlug = vars('fixed_provider_slug');
+        const route = providerSlug ? `booking/${providerSlug}/${endpoint}` : `booking/${endpoint}`;
+
+        return App.Utils.Url.siteUrl(route);
+    }
+
     let unavailableDatesBackup;
     let selectedDateStringBackup;
     let processingUnavailableDates = false;
@@ -63,7 +70,7 @@ App.Http.Booking = (function () {
         const appointmentId = vars('manage_mode') ? vars('appointment_data').id : null;
 
         // Make ajax post request and get the available hours.
-        const url = App.Utils.Url.siteUrl('booking/get_available_hours');
+        const url = bookingEndpoint('get_available_hours');
 
         const data = {
             csrf_token: vars('csrf_token'),
@@ -205,7 +212,7 @@ App.Http.Booking = (function () {
             data.exclude_appointment_id = vars('appointment_data').id;
         }
 
-        const url = App.Utils.Url.siteUrl('booking/register');
+        const url = bookingEndpoint('register');
 
         const $layer = $('<div/>');
 
@@ -289,7 +296,7 @@ App.Http.Booking = (function () {
 
         const appointmentId = App.Pages.Booking.manageMode ? vars('appointment_data').id : null;
 
-        const url = App.Utils.Url.siteUrl('booking/get_unavailable_dates');
+        const url = bookingEndpoint('get_unavailable_dates');
 
         const data = {
             provider_id: providerId,

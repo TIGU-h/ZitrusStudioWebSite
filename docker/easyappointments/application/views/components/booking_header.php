@@ -17,7 +17,10 @@
 
         <div class="d-flex justify-content-center justify-content-md-start">
             <span class="display-booking-selection small fw-normal text-white-50">
-                <?= lang('category') ?> │ <?= lang('service') ?> │ <?= lang('provider') ?>
+                <?= lang('category') ?> │ <?= lang('service') ?>
+                <?php if (!vars('fixed_provider_id')): ?>
+                    │ <?= lang('provider') ?>
+                <?php endif; ?>
             </span>
         </div>
     </div>
@@ -34,11 +37,13 @@
         ];
         ?>
         <?php foreach ($booking_steps as $index => $step_title): ?>
+            <?php if (!vars('fixed_provider_id') || $index !== 2): ?>
             <div id="step-<?= $index + 1 ?>"
                  class="book-step<?= $index === 0 ? ' active-step' : '' ?>"
                  data-tippy-content="<?= e($step_title) ?>">
-                <strong><?= $index + 1 ?></strong>
+                <strong><?= $index + 1 - (vars('fixed_provider_id') && $index > 2 ? 1 : 0) ?></strong>
             </div>
+            <?php endif; ?>
         <?php endforeach; ?>
     </div>
 </div>

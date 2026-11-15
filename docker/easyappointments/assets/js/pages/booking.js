@@ -353,11 +353,17 @@ App.Pages.Booking = (function () {
     function showAppointmentTimeStep() {
         $('#wizard-frame-1, #wizard-frame-2, #wizard-frame-3').hide();
         $('#wizard-frame-4').show();
-        $('#step-1, #step-2, #step-3').hide();
-        $('#steps .book-step:visible').each((index, element) => {
-            $(element).find('strong').text(index + 1);
-        });
-        $('#button-back-4').css('visibility', 'hidden');
+
+        if (vars('fixed_provider_id')) {
+            $('#button-back-4').css('visibility', 'visible');
+        } else {
+            $('#step-1, #step-2, #step-3').hide();
+            $('#steps .book-step:visible').each((index, element) => {
+                $(element).find('strong').text(index + 1);
+            });
+            $('#button-back-4').css('visibility', 'hidden');
+        }
+
         $('.active-step').removeClass('active-step');
         $('#step-4').addClass('active-step');
         loadAppointmentDates();
@@ -488,11 +494,12 @@ App.Pages.Booking = (function () {
             const services = getAvailableServices();
             const providers = vars('available_providers') || [];
             const requestedServiceId = App.Utils.Url.queryParam('service');
-            const requestedProviderId = App.Utils.Url.queryParam('provider');
+            const requestedProviderId =
+                vars('fixed_provider_id') || App.Utils.Url.queryParam('provider');
             let service = services.find((item) => String(item.id) === String(requestedServiceId));
             const provider = providers.find((item) => String(item.id) === String(requestedProviderId));
 
-            if (!service && provider) {
+            if (!service && provider && !vars('fixed_provider_id')) {
                 service = services.find((item) =>
                     provider.services.some((providerServiceId) => Number(providerServiceId) === Number(item.id)),
                 );
@@ -528,10 +535,17 @@ App.Pages.Booking = (function () {
                 services.length === 1 &&
                 providers.length === 1 &&
                 providers[0].services.some((providerServiceId) => Number(providerServiceId) === Number(services[0].id));
+            const fixedProviderSelectionIsValid =
+                vars('fixed_provider_id') &&
+                service &&
+                provider &&
+                provider.services.some((providerServiceId) => Number(providerServiceId) === Number(service.id));
 
-            if (explicitSelectionIsValid || onlyOneAvailablePair) {
+            if (explicitSelectionIsValid || onlyOneAvailablePair || fixedProviderSelectionIsValid) {
                 if (onlyOneAvailablePair && !$selectProvider.val()) {
                     $selectProvider.val(String(providers[0].id)).trigger('change');
+                } else if (fixedProviderSelectionIsValid && !$selectProvider.val()) {
+                    $selectProvider.val(String(provider.id)).trigger('change');
                 }
 
                 showAppointmentTimeStep();
@@ -617,6 +631,26 @@ App.Pages.Booking = (function () {
 
         if (stepIndex === 2 && !$selectService.val()) {
             $('#service-selection-prompt').prop('hidden', false);
+            return;
+        }
+
+        if (stepIndex === 2 && vars('fixed_provider_id')) {
+            const providerId = String(vars('fixed_provider_id'));
+            const provider = (vars('available_providers') || []).find(
+                (item) => String(item.id) === providerId,
+            );
+
+            const providerCanServeService = provider?.services.some(
+                (serviceId) => Number(serviceId) === Number($selectService.val()),
+            );
+
+            if (!providerCanServeService) {
+                $('#service-selection-prompt').prop('hidden', false);
+                return;
+            }
+
+            $selectProvider.val(providerId).trigger('change');
+            showAppointmentTimeStep();
             return;
         }
 
@@ -770,7 +804,11 @@ App.Pages.Booking = (function () {
          * book wizard.
          */
         $('.button-back').on('click', (event) => {
-            const prevTabIndex = parseInt($(event.currentTarget).attr('data-step_index')) - 1;
+            let prevTabIndex = parseInt($(event.currentTarget).attr('data-step_index')) - 1;
+
+            if (vars('fixed_provider_id') && event.currentTarget.id === 'button-back-4') {
+                prevTabIndex = 2;
+            }
 
             // Update step indicator immediately
             $('.active-step').removeClass('active-step');
@@ -982,7 +1020,11 @@ App.Pages.Booking = (function () {
             .filter(Boolean)
             .join(' │ ');
 
-        $displayBookingSelection.text(selectionSummary || `${lang('category')} │ ${lang('service')} │ ${lang('provider')}`);
+        const defaultSelectionSummary = vars('fixed_provider_id')
+            ? `${lang('category')} │ ${lang('service')}`
+            : `${lang('category')} │ ${lang('service')} │ ${lang('provider')}`;
+
+        $displayBookingSelection.text(selectionSummary || defaultSelectionSummary);
 
         if (!$availableHours.find('.selected-hour').text()) {
             return; // No time is selected, skip the rest of this function...
