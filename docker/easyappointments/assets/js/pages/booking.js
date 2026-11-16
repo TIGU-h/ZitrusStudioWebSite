@@ -80,6 +80,17 @@ App.Pages.Booking = (function () {
             : String(service.service_category_id);
     }
 
+    function getGermanDescription(description) {
+        const text = String(description || '').trim();
+        const germanDescription = text.match(
+            /(?:^|\r?\n)\s*DE:\s*([\s\S]*?)(?=\r?\n\s*[A-Z]{2,3}:\s*|$)/i,
+        );
+
+        return germanDescription
+            ? germanDescription[1].trim()
+            : text.replace(/(?:^|\r?\n)\s*EN:\s*[\s\S]*$/i, '').trim();
+    }
+
     function getBookingCategories() {
         const categories = new Map();
 
@@ -88,7 +99,9 @@ App.Pages.Booking = (function () {
             const category = categories.get(id) || {
                 id,
                 name: service.service_category_name || lang('uncategorized'),
-                description: service.service_category_description || service.description || '',
+                description: getGermanDescription(
+                    service.service_category_description || service.description || '',
+                ),
                 imageUrl: service.service_category_image_url || service.image_url || '',
             };
 
@@ -99,7 +112,16 @@ App.Pages.Booking = (function () {
             categories.set(id, category);
         });
 
-        return Array.from(categories.values());
+        return Array.from(categories.values()).sort((first, second) => {
+            const firstOrder = Number(first.id);
+            const secondOrder = Number(second.id);
+
+            if (Number.isFinite(firstOrder) && Number.isFinite(secondOrder)) {
+                return firstOrder - secondOrder;
+            }
+
+            return Number.isFinite(firstOrder) ? -1 : Number.isFinite(secondOrder) ? 1 : 0;
+        });
     }
 
     function appendChoiceImage($card, imageUrl, icon = 'fa-spa') {

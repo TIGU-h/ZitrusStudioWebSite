@@ -18,3 +18,4 @@ docker/easyappointments/storage/uploads/*
 !docker/easyappointments/storage/**/index.html
 
 docker/db_data/
+fastURLs.txt
